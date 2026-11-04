@@ -2,7 +2,7 @@
 //
 // # One directory, one flag
 //
-// The playable page at `caerjar.github.io/projects/correspondences/` is not a fork of
+// The playable page at `eonmeridian.github.io/projects/correspondences/` is not a fork of
 // this directory and must never become one. `publish.py` copies `web/` verbatim and sets
 // `data-published` on `<html>`; this module reads that attribute and nothing else. So the
 // published page and the instrument are the same code, and a change made here lands in

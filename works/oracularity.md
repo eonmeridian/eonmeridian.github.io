@@ -12,8 +12,8 @@ src = "assets/img/plate-oracularity.svg"
 caption = "Sign, reading, decision."
 
 [[links]]
-label = "Machine as Medium at Yale CCAM"
-url = "https://ccam.yale.edu/programs/machine-medium"
+label = "Yale Center for Collaborative Arts and Media"
+url = "https://ccam.yale.edu/"
 
 [[side]]
 label = "Published in"
