@@ -154,9 +154,9 @@ SUBSTACK = "https://substack.com/@33eon"
 # Works someone can open and use right now. Fly apps here stop when idle and start on a visit;
 # never list one whose fly.toml keeps a machine running (hauntology, as of 2026-11-02).
 LIVE = {
-    "breath": "https://caerjar.github.io/breath/",
-    "palimpsest": "https://caerjar.github.io/Palimpsest/",
-    "sigil-studio": "https://caerjar.github.io/SigilStudio/",
+    "breath": "https://eonmeridian.github.io/breath/",
+    "palimpsest": "https://eonmeridian.github.io/Palimpsest/",
+    "sigil-studio": "https://eonmeridian.github.io/SigilStudio/",
     "bloomcast": "https://bloomcast.fly.dev/",
     "palimpsest-studio": "https://palimpsest-studio.fly.dev/",
 }

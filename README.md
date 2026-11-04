@@ -61,7 +61,7 @@ it.
 - **Real documentation**: plates from `machinic-hymns`, string diagrams from
   `diagrammatic-immanence`, screenshots from `dream`, sample inputs from `SigilStudio`, the
   Evertunes stills, and `app-*.jpg` screenshots of the two apps that have live demos
-  (Palimpsest, Sigil Studio) captured from caerjar.github.io.
+  (Palimpsest, Sigil Studio) captured from eonmeridian.github.io.
 - **Generated plates** (`plate-<slug>.svg`), for works with no documentation image. These are
   marks, not photographs: deterministic diagrams drawn in the site's own visual language, seeded
   from the slug. Two generators make them `tools/plates.py` in ink only, and
