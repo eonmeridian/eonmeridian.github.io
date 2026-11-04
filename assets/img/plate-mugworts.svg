@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Diagram plate for PLANT / PART / DOSE">
+<rect width="800" height="600" fill="#f3f0e8"/>
+<path d="M190 158 C242 208 236 290 190 336 C144 290 138 208 190 158 Z" fill="#5c6b3a" fill-opacity="0.10" stroke="#5c6b3a" stroke-width="1.2"/>
+<line x1="190" y1="158" x2="190" y2="336" stroke="#5c6b3a" stroke-width="1"/>
+<line x1="190" y1="183" x2="164" y2="196" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="190" y1="183" x2="216" y2="196" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="190" y1="208" x2="157" y2="221" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="190" y1="208" x2="223" y2="221" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="190" y1="233" x2="154" y2="246" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="190" y1="233" x2="226" y2="246" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="190" y1="258" x2="157" y2="271" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="190" y1="258" x2="223" y2="271" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="190" y1="283" x2="164" y2="296" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="190" y1="283" x2="216" y2="296" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="190" y1="308" x2="174" y2="321" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="190" y1="308" x2="206" y2="321" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<path d="M340 158 C392 208 386 290 340 336 C294 290 288 208 340 158 Z" fill="#5c6b3a" fill-opacity="0.15" stroke="#5c6b3a" stroke-width="1.2"/>
+<line x1="340" y1="158" x2="340" y2="336" stroke="#5c6b3a" stroke-width="1"/>
+<line x1="340" y1="183" x2="314" y2="196" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="340" y1="183" x2="366" y2="196" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="340" y1="208" x2="307" y2="221" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="340" y1="208" x2="373" y2="221" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="340" y1="233" x2="304" y2="246" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="340" y1="233" x2="376" y2="246" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="340" y1="258" x2="307" y2="271" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="340" y1="258" x2="373" y2="271" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="340" y1="283" x2="314" y2="296" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="340" y1="283" x2="366" y2="296" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="340" y1="308" x2="324" y2="321" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="340" y1="308" x2="356" y2="321" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<path d="M490 158 C542 208 536 290 490 336 C444 290 438 208 490 158 Z" fill="#5c6b3a" fill-opacity="0.20" stroke="#5c6b3a" stroke-width="1.2"/>
+<line x1="490" y1="158" x2="490" y2="336" stroke="#5c6b3a" stroke-width="1"/>
+<line x1="490" y1="183" x2="464" y2="196" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="490" y1="183" x2="516" y2="196" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="490" y1="208" x2="457" y2="221" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="490" y1="208" x2="523" y2="221" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="490" y1="233" x2="454" y2="246" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="490" y1="233" x2="526" y2="246" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="490" y1="258" x2="457" y2="271" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="490" y1="258" x2="523" y2="271" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="490" y1="283" x2="464" y2="296" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="490" y1="283" x2="516" y2="296" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="490" y1="308" x2="474" y2="321" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="490" y1="308" x2="506" y2="321" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<path d="M640 158 C692 208 686 290 640 336 C594 290 588 208 640 158 Z" fill="#5c6b3a" fill-opacity="0.25" stroke="#5c6b3a" stroke-width="1.2"/>
+<line x1="640" y1="158" x2="640" y2="336" stroke="#5c6b3a" stroke-width="1"/>
+<line x1="640" y1="183" x2="614" y2="196" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="640" y1="183" x2="666" y2="196" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="640" y1="208" x2="607" y2="221" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="640" y1="208" x2="673" y2="221" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="640" y1="233" x2="604" y2="246" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="640" y1="233" x2="676" y2="246" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="640" y1="258" x2="607" y2="271" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="640" y1="258" x2="673" y2="271" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="640" y1="283" x2="614" y2="296" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="640" y1="283" x2="666" y2="296" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="640" y1="308" x2="624" y2="321" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="640" y1="308" x2="656" y2="321" stroke="#5c6b3a" stroke-width="1" stroke-opacity=".55"/>
+<line x1="150" y1="370" x2="656" y2="370" stroke="#7f7b73" stroke-width="1"/>
+<line x1="150" y1="396" x2="656" y2="396" stroke="#7f7b73" stroke-width="1"/>
+<line x1="150" y1="422" x2="656" y2="422" stroke="#7f7b73" stroke-width="1"/>
+<line x1="150" y1="448" x2="656" y2="448" stroke="#7f7b73" stroke-width="1"/>
+<line x1="150" y1="474" x2="656" y2="474" stroke="#7f7b73" stroke-width="1"/>
+<line x1="150" y1="370" x2="150" y2="474" stroke="#7f7b73" stroke-width="1"/>
+<line x1="302" y1="370" x2="302" y2="474" stroke="#7f7b73" stroke-width="1"/>
+<line x1="454" y1="370" x2="454" y2="474" stroke="#7f7b73" stroke-width="1"/>
+<line x1="606" y1="370" x2="606" y2="474" stroke="#7f7b73" stroke-width="1"/>
+<line x1="656" y1="370" x2="656" y2="474" stroke="#7f7b73" stroke-width="1"/>
+<g font-family="Courier New, monospace" font-size="10" fill="#514e48"><text x="158" y="364">PART</text><text x="310" y="364">PREPARATION</text><text x="462" y="364">DOSE</text><text x="614" y="364">NOTE</text></g>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">PLANT / PART / DOSE</text><text x="720" y="560" text-anchor="end">MATERIA 01</text></g>
+</svg>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Aion Apparatus: Eon Meridian</title>
+<meta name="description" content="An instrument for examining the ethics of made things, which analyzes source code." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">41 / project</div>
+    <h1>The Aion Apparatus</h1>
+    <div class="smallcaps" style="margin-top:9px">An instrument for examining the ethics of made things</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / command line / research instrument</div>
+</section>
+
+<p class="lead">An instrument for examining the ethics of made things, which analyzes source code. You point <code>aion</code> at a piece of work and it writes an audit bundle, a directory in which every finding cites the evidence that triggered it, the rule that interpreted it, and the ethical framework under which it counts as a finding. A finding without all three is treated as a bug.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/shot-the-aion-apparatus.jpg" alt="A report of 329 findings loaded, with one finding open beside the list." loading="lazy" /></div>
+      <figcaption class="smallcaps">A report of 329 findings loaded, with one finding open beside the list.</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>What a finding carries</h2>
+<p>Each finding names three things, so it can be defended or disputed.</p>
+<ul>
+<li><b>Evidence</b>: the file and line span, plus a hash that resolves to the exact snippet the check looked at.</li>
+<li><b>Interpreter</b>: which check and which rule produced it, so it can be replayed.</li>
+<li><b>Framework lens</b>: which framework it belongs to, cited in the shape that framework declares (a NIST clause, a vMeme).</li>
+</ul>
+<p>When a claim is about something missing (no license, no lint config), the finding records what was searched instead of pointing at an arbitrary file.</p>
+<h2>The bundle</h2>
+<p>The bundle is the primary output, and any readable report is a view of it. Everything except the manifest is content-addressed, so the same inputs produce a byte-identical bundle, and <code>aion verify</code> recomputes the hashes and replays the checks. <code>aion diff</code> lists the net-new findings between two bundles, and <code>--fail-on high</code> turns a run into a gate for a project's own build. A bundle can be opened in a static, server-free explorer in the browser, with a severity filter and the evidence, citation and provenance for each finding.</p>
+<h2>Capabilities before frameworks</h2>
+<p>The default voice is not any framework's vocabulary. The apparatus first asks what the code can <i>do</i>: findings add up to a vector of capabilities, and that vector puts pressure on named tensions such as transparency against exploitability. Frameworks read from that vector as interpretive overlays.</p>
+<h2>Frameworks, with their limits stated</h2>
+<p>Frameworks live in a registry, each with a source, a declared scope and declared limits; the apparatus does not invent its own. The registry includes consequentialist, deontological, virtue, care and justice ethics, a published taxonomy of harms, Datasheets for Datasets and Data Statements, and Spiral Dynamics and Integral (AQAL), which run only when opted into. A person can also bring a rubric of their own.</p>
+<p>The refusals are part of the design:</p>
+<ul>
+<li>No single ethics score, because adding up frameworks without attribution is the opacity the instrument is meant to refuse.</li>
+<li>No hidden disagreement: when two frameworks judge the same evidence differently, both are recorded.</li>
+<li>No rubber stamp: a clean report means only that the current frameworks and checks found nothing within their stated scope.</li>
+</ul>
+<h2>Reproducible first</h2>
+<p>The checks themselves are deterministic and are the spine of the instrument. An optional written-reasoning pass is off by default, bounded by a budget, and every call it makes is logged and replayable, and the bundle's manifest declares whether it was used. Secrets found in the code are masked before they are written into a bundle.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Reads</span><br>source code, then datasets</div>
+    <div class="side"><span class="smallcaps">Writes</span><br>a byte-reproducible audit bundle</div>
+    <div class="side"><span class="smallcaps">Built with</span><br>Rust, with a browser explorer in WebAssembly</div>
+    <div class="side"><span class="smallcaps">License</span><br>Apache 2.0 (code), CC BY 4.0 (framework texts)</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../screenplay-formatter/">← Screenplay Formatter</a></span>
+  <span><a href="../the-oracle-lab/">The Oracle Lab →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

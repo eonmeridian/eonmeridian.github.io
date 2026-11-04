@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Diagram plate for PLATFORM / LIGHT / FIGURE">
+<rect width="800" height="600" fill="#f3f0e8"/>
+<circle cx="612" cy="150" r="34" fill="#c8912f" fill-opacity=".22" stroke="#c8912f" stroke-width="1"/>
+<line x1="650.0" y1="150.0" x2="670.0" y2="150.0" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="648.7" y1="159.8" x2="685.4" y2="169.7" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="644.9" y1="169.0" x2="693.4" y2="197.0" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="638.9" y1="176.9" x2="653.0" y2="191.0" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="631.0" y1="182.9" x2="650.0" y2="215.8" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="621.8" y1="186.7" x2="636.3" y2="240.8" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="612.0" y1="188.0" x2="612.0" y2="208.0" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="602.2" y1="186.7" x2="592.3" y2="223.4" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="593.0" y1="182.9" x2="565.0" y2="231.4" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="585.1" y1="176.9" x2="571.0" y2="191.0" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="579.1" y1="169.0" x2="546.2" y2="188.0" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="575.3" y1="159.8" x2="521.2" y2="174.3" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="574.0" y1="150.0" x2="554.0" y2="150.0" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="575.3" y1="140.2" x2="538.6" y2="130.3" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="579.1" y1="131.0" x2="530.6" y2="103.0" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="585.1" y1="123.1" x2="571.0" y2="109.0" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="593.0" y1="117.1" x2="574.0" y2="84.2" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="602.2" y1="113.3" x2="587.7" y2="59.2" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="612.0" y1="112.0" x2="612.0" y2="92.0" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="621.8" y1="113.3" x2="631.7" y2="76.6" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="631.0" y1="117.1" x2="659.0" y2="68.6" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="638.9" y1="123.1" x2="653.0" y2="109.0" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="644.9" y1="131.0" x2="677.8" y2="112.0" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<line x1="648.7" y1="140.2" x2="702.8" y2="125.7" stroke="#c8912f" stroke-width="1" stroke-opacity=".45"/>
+<rect x="120" y="430" width="200" height="11" fill="#1d5c66" fill-opacity=".82"/>
+<rect x="250" y="372" width="140" height="11" fill="#1d5c66" fill-opacity=".82"/>
+<rect x="392" y="402" width="120" height="11" fill="#1d5c66" fill-opacity=".82"/>
+<rect x="150" y="316" width="96" height="11" fill="#1d5c66" fill-opacity=".82"/>
+<rect x="470" y="340" width="150" height="11" fill="#1d5c66" fill-opacity=".82"/>
+<rect x="300" y="268" width="110" height="11" fill="#1d5c66" fill-opacity=".82"/>
+<path d="M110 496 L110 376 Q156.0 350 202 376 L202 496 Z" fill="#171715" fill-opacity=".78"/>
+<path d="M236 496 L236 400 Q273.0 374 310 400 L310 496 Z" fill="#171715" fill-opacity=".78"/>
+<path d="M348 496 L348 346 Q403.0 320 458 346 L458 496 Z" fill="#171715" fill-opacity=".78"/>
+<path d="M500 496 L500 388 Q542.0 362 584 388 L584 496 Z" fill="#171715" fill-opacity=".78"/>
+<path d="M612 496 L612 364 Q660.0 338 708 364 L708 496 Z" fill="#171715" fill-opacity=".78"/>
+<rect x="333" y="242" width="9" height="20" fill="#171715"/>
+<circle cx="337.5" cy="234" r="5" fill="#171715"/>
+<text x="120" y="524" font-family="Courier New, monospace" font-size="10" fill="#514e48">YOU WIN WHEN YOU REALISE IT</text>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">PLATFORM / LIGHT / FIGURE</text><text x="720" y="560" text-anchor="end">DREAM 01</text></g>
+</svg>

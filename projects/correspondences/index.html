@@ -1,0 +1,944 @@
+<!doctype html>
+<html lang="en" data-published>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>monochord</title>
+<link rel="stylesheet" href="monochord.css">
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: var(--field); }
+  /* `touch-action: none` or the browser claims every drag for scroll and pinch for page
+     zoom, and the atlas never sees a gesture. This one line is the whole difference
+     between "works with a mouse" and "works with a finger". */
+  #scene { position: fixed; inset: 0; display: block; touch-action: none; }
+
+  .panel {
+    position: fixed; z-index: 2; color: var(--ink);
+    font: 0.72rem/1.5 var(--mono); letter-spacing: 0.08em;
+  }
+  #where { top: 22px; left: 24px; max-width: 34ch; }
+  #where .label { font: italic 1.35rem/1.25 var(--serif); letter-spacing: 0; display: block; }
+  #where .addr { color: var(--meridian); }
+  #where .gloss { color: var(--dim); letter-spacing: 0; font-family: var(--serif); font-style: italic; }
+
+  #piece {
+    bottom: 120px; right: 24px; text-align: right; max-width: 34ch;
+  }
+  #piece .head { font: italic 1.05rem var(--serif); letter-spacing: 0; }
+  #piece .addr { color: var(--meridian); }
+  #piece .gloss { color: var(--dim); font-family: var(--serif); font-style: italic; letter-spacing: 0; }
+  #piece button {
+    background: transparent; border: 1px solid rgba(244,244,242,0.18); border-radius: 3px;
+    color: var(--ink); font: 0.68rem var(--mono); padding: 1px 6px; cursor: pointer;
+  }
+  #piece button:hover { border-color: var(--meridian); color: var(--meridian); }
+  #where .drift { color: var(--dim); }
+  #where .cited { color: var(--meridian); font-style: normal; }
+
+  #fault {
+    top: 0; left: 0; right: 0; z-index: 9; padding: 10px 24px;
+    background: rgba(226,86,77,0.14); border-bottom: 1px solid var(--mark);
+    color: var(--ink); white-space: pre-wrap;
+  }
+  #fault b { color: var(--mark); font-weight: normal; }
+
+  /* The score is now a pane: the staves, and the hand that changes them. */
+  #scorepane {
+    /* `bottom: 56px`, not 0: the transport is `z-index: 7` and would otherwise sit on
+       top of the mix row, which is how the first build hid three knobs behind it. */
+    position: fixed; z-index: 5; left: 0; right: 0; bottom: 56px;
+    /* Bounded, or the pane is as tall as its contents want to be and runs off the top of
+       the screen — on an 800x480 panel that swallowed the atlas whole and clipped the
+       first stave. The staves give way, not the controls: the rack keeps its natural
+       height and the canvas shrinks into whatever is left. */
+    max-height: calc(100vh - 56px);
+    display: flex; flex-direction: column;
+    background: var(--field); border-top: 1px solid rgba(244,244,242,0.14);
+  }
+  /* Setting `display` on an element BEATS the user-agent's `[hidden] { display: none }`,
+     so without this the pane is `display: flex` from the first paint and the score is
+     open before anybody asks for it. */
+  #scorepane[hidden] { display: none; }
+  #scoreview {
+    /* `left: 0; right: 0` does not stretch a canvas: it is a replaced element and keeps
+       an intrinsic width, so the score drew into the left third of the screen and looked
+       clipped. An explicit size is required, hence `width: 100%` and a fixed height
+       rather than `flex: 1`, which would leave the backing store one frame behind. */
+    display: block; width: 100%; height: 34vh;
+    /* `flex: 1 1 auto` with `min-height` so it can be squeezed by the bound above but
+       never to nothing. `resize()` measures `clientHeight`, so the backing store follows
+       whatever flex settles on. */
+    flex: 1 1 auto; min-height: 90px;
+    /* The staves are a control surface now — tapping one selects that shape — so the
+       browser must not claim the gesture for a scroll. */
+    touch-action: manipulation;
+  }
+
+  /* ---- the rack ---- */
+  #rack {
+    flex: 0 0 auto; max-height: 60vh; overflow-y: auto;
+    border-top: 1px solid rgba(244,244,242,0.10);
+    padding: 8px 12px 12px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch;
+  }
+  .rackrow {
+    display: flex; align-items: center; gap: 14px;
+    padding: 6px 0; min-height: 62px;
+  }
+  .rackrow.mix { border-top: 1px dashed rgba(244,244,242,0.10); }
+  .rackrow.empty { opacity: 0.45; }
+  .rackwho {
+    min-width: 15ch; display: flex; flex-direction: column; gap: 2px;
+    font: 0.72rem var(--mono); letter-spacing: 0.06em;
+  }
+  .rackwho b { color: var(--ink); font-weight: normal; }
+  .rackwho span { color: var(--dim); font-size: 0.66rem; }
+
+  .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+  .chip {
+    min-height: 40px; padding: 0 10px;
+    background: transparent; border: 1px solid rgba(244,244,242,0.18); border-radius: 3px;
+    color: var(--dim); font: 0.70rem var(--mono); letter-spacing: 0.08em;
+    cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    display: inline-flex; align-items: center; justify-content: center; white-space: nowrap;
+  }
+  .chip.wide { min-width: 44px; }
+  .chip:active { border-color: var(--meridian); color: var(--meridian); }
+  /* The chosen voice, and never on `:hover` — a finger has none. */
+  .chip[aria-pressed="true"] { border-color: var(--meridian); color: var(--meridian); }
+  .chip[disabled] { opacity: 0.3; cursor: default; }
+  .stepper { display: flex; align-items: center; gap: 6px; }
+  .rateout {
+    min-width: 5ch; text-align: center;
+    font: 0.72rem var(--mono); color: var(--ink);
+  }
+
+  /* ---- knobs ----
+     The dial is turned by one custom property; see `knob.js` for why that matters. */
+  .knob {
+    display: grid; justify-items: center; gap: 2px;
+    /* A grid rather than a flex column so the readout cannot shove the dial around as
+       the number changes width. */
+    grid-template-rows: auto auto auto;
+  }
+  .knob .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  .dial-hit {
+    width: 46px; height: 46px; display: grid; place-items: center;
+    cursor: ns-resize; touch-action: none; -webkit-tap-highlight-color: transparent;
+  }
+  .dial {
+    width: 34px; height: 34px; border-radius: 50%;
+    border: 1px solid rgba(244,244,242,0.22);
+    background: rgba(244,244,242,0.03);
+    transform: rotate(var(--ang, 0deg));
+    display: grid; justify-items: center;
+  }
+  .dial i {
+    width: 1px; height: 12px; margin-top: 3px;
+    background: var(--meridian); display: block;
+  }
+  .dial-hit:active .dial { border-color: var(--meridian); }
+  .knob .sr-only:focus-visible + .dial-hit .dial { border-color: var(--meridian); }
+  .kname { font: 0.62rem var(--mono); letter-spacing: 0.10em; color: var(--dim); }
+  .kval { font: 0.62rem var(--mono); color: var(--ink); }
+
+  #pane {
+    position: fixed; z-index: 6; inset: 6vh 6vw; overflow: auto;
+    background: rgba(7,7,11,0.96); border: 1px solid rgba(244,244,242,0.16);
+    padding: 18px 22px; color: var(--ink);
+  }
+  #pane header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font: 0.72rem var(--mono); letter-spacing: 0.16em; color: var(--dim);
+    margin-bottom: 14px;
+  }
+  #pane header b { color: var(--ink); font-weight: normal; }
+  #pane pre {
+    font: 11.5px/1.55 var(--mono); white-space: pre-wrap; margin: 0 0 20px;
+    color: var(--ink);
+  }
+  #pane #note { color: var(--meridian); }
+
+  #keys {
+    bottom: 76px; left: 50%; transform: translateX(-50%);
+    color: var(--dim); letter-spacing: 0.16em;
+  }
+  #keys.muted { color: var(--mark); }
+
+  #graph { bottom: 76px; left: 24px; color: var(--dim); }
+  #graph b { color: var(--ink); font-weight: normal; }
+
+  #tuning { bottom: 76px; right: 24px; text-align: right; color: var(--dim); }
+  #tuning .cited { color: var(--meridian); }
+  #tuning .authored { color: var(--mark); }
+
+  #find { top: 22px; right: 24px; width: 22ch; }
+  #find input {
+    width: 100%; background: transparent; color: var(--ink);
+    border: 1px solid rgba(244,244,242,0.18); border-radius: 3px;
+    padding: 6px 8px; font: 0.72rem var(--mono); letter-spacing: 0.08em;
+  }
+  #find input:focus { outline: none; border-color: var(--meridian); }
+  #hits { margin-top: 6px; max-height: 46vh; overflow-y: auto; }
+  #hits button {
+    display: block; width: 100%; text-align: left; background: transparent;
+    border: 0; color: var(--ink); padding: 4px 0; cursor: pointer;
+    font: 0.72rem var(--mono); letter-spacing: 0.06em;
+  }
+  #hits button:hover { color: var(--meridian); }
+  #hits .a { color: var(--dim); }
+
+  #neighbours { position: fixed; z-index: 2; top: 40%; left: 24px; max-width: 30ch; }
+  #neighbours button {
+    display: block; background: transparent; border: 0; cursor: pointer;
+    color: var(--ink); padding: 3px 0; text-align: left;
+    font: 0.72rem var(--mono); letter-spacing: 0.06em;
+  }
+  #neighbours button:hover { color: var(--meridian); }
+  #neighbours .rel { color: var(--dim); }
+  #neighbours .contested { color: var(--mark); }
+
+  #hint {
+    position: fixed; z-index: 3; inset: 0; display: grid; place-items: center;
+    background: rgba(7,7,11,0.82); cursor: pointer;
+  }
+  #hint p { font: italic 1.3rem var(--serif); color: var(--ink); max-width: 30ch; text-align: center; }
+  #hint small { display: block; margin-top: 1.2rem; font: 0.72rem var(--mono); color: var(--dim); letter-spacing: 0.16em; }
+
+  /* ------------------------------------------------------------------ *
+     The transport, for a screen with no keyboard.
+
+     Every action this instrument had was a key — M, S, P, Backspace — which on a kiosk
+     panel with no keyboard is no action at all. These are the same verbs with a surface
+     you can hit with a thumb.
+
+     44px is the floor for every target, from Apple's HIG and Google's 48dp; the old
+     `#hits button` was 14px tall, which is a target you hit by luck. On an 800x480 panel
+     the bar costs 56px of 480, which is the cheapest 12% this interface spends.
+   * ------------------------------------------------------------------ */
+  #transport {
+    position: fixed; z-index: 7; left: 0; right: 0; bottom: 0; height: 56px;
+    display: flex; align-items: center; gap: 8px; padding: 0 10px;
+    background: rgba(7,7,11,0.88); border-top: 1px solid rgba(244,244,242,0.14);
+    /* The bar is chrome; the atlas behind it is the work. Only the buttons take events. */
+    pointer-events: none;
+  }
+  #transport > * { pointer-events: auto; }
+  .tbtn {
+    min-width: 44px; height: 44px; padding: 0 12px;
+    background: transparent; border: 1px solid rgba(244,244,242,0.20); border-radius: 3px;
+    color: var(--ink); font: 0.72rem var(--mono); letter-spacing: 0.10em;
+    cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    display: inline-flex; align-items: center; justify-content: center; white-space: nowrap;
+  }
+  /* `:active` and `[aria-pressed]`, never `:hover` — a finger has no hover, so a
+     hover-only affordance is invisible on this screen. */
+  .tbtn:active { border-color: var(--meridian); color: var(--meridian); }
+  .tbtn[aria-pressed="true"] { border-color: var(--meridian); color: var(--meridian); }
+  .tbtn[disabled] { opacity: 0.32; }
+  #tnow {
+    flex: 1; min-width: 0; text-align: right; color: var(--dim);
+    font: 0.72rem var(--mono); letter-spacing: 0.06em;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  #tnow b { color: var(--ink); font-weight: normal; }
+
+  /* ---- The 800x480 panel, and anything else short or narrow ---- *
+     Written on height as well as width: the failure at 480px tall is the bottom-left
+     census colliding with the transport, which a width query never sees. */
+  @media (max-width: 900px), (max-height: 560px) {
+    #where { top: 10px; left: 12px; max-width: 30ch; font-size: 0.68rem; }
+    #where .label { font-size: 1.05rem; }
+    #find { top: 10px; right: 12px; width: 15ch; }
+    #find input { height: 40px; font-size: 0.74rem; }
+    #hits { max-height: 40vh; }
+    #hits button { min-height: 40px; padding: 8px 0; }
+    /* The census and the tuning readout are reference, not controls. They lose to the
+       transport, which is the thing you actually operate. */
+    #graph, #tuning, #keys { display: none; }
+    #piece { display: none; }
+    #scoreview { height: calc(60vh - 56px); bottom: 56px; }
+
+    /* The neighbour list becomes a drawer. At 800px it cannot sit over the atlas and
+       leave the atlas visible at the same time, so it is summoned and dismissed instead
+       of always-on. On a wide screen it stays exactly where it was. */
+    /* `top` clears `#where` rather than starting at 0. The paths are paths *out of the
+       symbol named above them*, so covering that name with the list is the one overlap
+       that costs the reader the thing the list is about.
+       This value is only the resting one — `fitDrawer` measures the real heading and
+       overwrites it, because the heading's height depends on how long the citation is. */
+    #neighbours {
+      top: 112px; bottom: 56px; left: 0; width: 260px; max-width: 62vw;
+      background: rgba(7,7,11,0.94); border-right: 1px solid rgba(244,244,242,0.14);
+      border-top: 1px solid rgba(244,244,242,0.14);
+      padding: 12px 14px; overflow-y: auto; -webkit-overflow-scrolling: touch; z-index: 6;
+    }
+    /* Above the drawer, and given a ground so the atlas does not show through the type.
+       Never clipped: the citation is the load-bearing line on this panel, and half a
+       citation is worse than none — it names a source you cannot check. The drift goes
+       instead, which is a diagnostic the published build already hides. */
+    #where { z-index: 8; background: rgba(7,7,11,0.86); padding: 6px 10px 8px; }
+    #where .drift { display: none; }
+    #neighbours button { min-height: 40px; padding: 8px 0; }
+  }
+</style>
+</head>
+<body>
+<canvas id="scene"></canvas>
+
+<div id="where" class="panel"></div>
+<div id="neighbours" class="panel"></div>
+<div id="find" class="panel">
+  <input id="q" placeholder="a name, or an address" autocomplete="off" spellcheck="false">
+  <div id="hits"></div>
+</div>
+<div id="graph" class="panel"></div>
+<div id="tuning" class="panel"></div>
+<div id="fault" class="panel" hidden></div>
+<div id="scorepane" hidden>
+  <canvas id="scoreview"></canvas>
+  <div id="rack"></div>
+</div>
+<div id="pane" hidden><header><b>the piece, as Strudel</b><span id="panehint">S closes · select the text to copy</span></header><pre id="patch"></pre><pre id="note"></pre></div>
+<div id="keys" class="panel">M mute · S score · P the piece</div>
+
+<!-- The transport. Same verbs the keys had, reachable with a thumb. `aria-pressed` is
+     both the state and the styling hook, so there is one source for "is it on". -->
+<div id="transport">
+  <button class="tbtn" id="tnear" aria-pressed="false" title="neighbours">paths</button>
+  <button class="tbtn" id="tmute" aria-pressed="false" title="mute">mute</button>
+  <button class="tbtn" id="tscore" aria-pressed="false" title="score">score</button>
+  <span id="tnow"></span>
+  <button class="tbtn" id="tslower" title="slower">&minus;</button>
+  <button class="tbtn" id="tfaster" title="faster">+</button>
+  <button class="tbtn" id="tdrop" title="remove">&times;</button>
+</div>
+<div id="piece" class="panel"></div>
+
+<div id="hint"><p>The atlas, as an instrument.<small>click to begin — audio needs a gesture</small></p></div>
+
+<script type="module">
+import init, { Corpus } from './pkg/monochord_wasm.js';
+import { Stage } from './scene/gl.js';
+import { Motes } from './scene/motes.js';
+import { Field } from './field.js';
+import { Post } from './scene/post.js';
+import { GraphPass } from './graph.js';
+import { index, place, centroid, rings } from './layout.js';
+import { Rings } from './rings.js';
+import { Tuning } from './tuning.js';
+import { Instrument } from './audio.js';
+import { Surface, RATES } from './pieces.js';
+import { PiecePass } from './piecepass.js';
+import { Sequencer } from './sequencer.js';
+import { TextAtlas, letterGlyphs } from './text.js';
+import { TextPass } from './textpass.js';
+import { ScoreView } from './score.js';
+import { Rack } from './rack.js';
+import { DIAGNOSTIC } from './diagnostic.js';
+import { toStrudel } from './strudel.js';
+import { programmeNote } from './note.js';
+
+const el = (id) => document.getElementById(id);
+
+/// A failure that shows itself.
+///
+/// This exists because of a bug that took a working instrument down to nothing and left no
+/// trace on screen: a renamed property made `standAt` throw halfway through, so the shape
+/// was placed, the pitch line was written, and then the neighbours list and the sound never
+/// happened. An exception in an event handler goes to a console nobody is reading, and the
+/// surface simply went quiet — which is indistinguishable from a quiet piece.
+///
+/// `diagrammatic-immanence` states the rule this broke: *skipping loudly beats guessing
+/// quietly.* So anything that throws says so, here, in the room.
+function fault(where, err) {
+  const box = el('fault');
+  box.hidden = false;
+  box.innerHTML = `<b>${where} failed.</b> ${String(err && err.message ? err.message : err)}`;
+  console.error(where, err);
+}
+
+/// Wrap a handler so a throw inside it is seen rather than swallowed.
+const guard = (where, fn) => (...args) => {
+  try {
+    return fn(...args);
+  } catch (err) {
+    fault(where, err);
+    return undefined;
+  }
+};
+
+addEventListener('error', (ev) => fault('the page', ev.error ?? ev.message));
+addEventListener('unhandledrejection', (ev) => fault('a promise', ev.reason));
+
+await init();
+const corpus = new Corpus();
+const version = JSON.parse(corpus.version());
+const census = JSON.parse(corpus.census());
+const idx = index(census);
+
+// Which (system, kind) pairs have a source recorded as printing no figure. The atlas
+// draws those as rings rather than discs -- a hole with an edge, never a mark that
+// could pass for a drawn figure.
+const silentKinds = new Set();
+for (const s of census) {
+  for (const k of s.kinds) if (k.no_figure) silentKinds.add(`${s.id}:${k.kind}`);
+}
+
+// Every proportion the graph licenses, with its citation. Empty until Agrippa's p. 262
+// was read; two entries now, and they are the only pitches here that are not mine.
+const proportions = JSON.parse(corpus.proportions());
+
+// D3. Mine, and the panel says so.
+const tuning = new Tuning({ tonicCents: 5000, proportions });
+const instrument = new Instrument(tuning);
+const surface = new Surface();
+const sequencer = new Sequencer(surface, instrument, tuning);
+
+// No sky. machinic-hymns' is a horizon under a sun, built for a room with a wall in
+// it; its god rays are the best thing on that screen and the wrong thing on this one.
+// An atlas is a cosmos seen from the inside — there is no horizon to put a sun over,
+// and borrowing the image because it is beautiful would be borrowing what it means.
+// The field colour, the motes and the post chain's vignette carry the depth instead.
+const stage = new Stage(el('scene'));
+stage.add(new Field()); // first, and it is what clears -- see field.js
+const graph = stage.add(new GraphPass());
+stage.add(new Rings(rings(census, idx))); // after GraphPass: it uses that camera
+stage.add(new Motes());
+const piecePass = stage.add(new PiecePass(surface));
+// Glyphs, and names inside empty frames. After the shapes, so text sits over them.
+const atlas = new TextAtlas(stage.gl);
+stage.add(new TextPass(surface, atlas, letterGlyphs(corpus)));
+// `onStep` is assigned once, below, where the lucidity it also drives is defined.
+
+// The spin, and the sound it makes.
+//
+// **`setInterval`, never `requestAnimationFrame`.** `sounds-like`'s scheduler says why and
+// this ignored it on the first attempt, at the cost of an instrument that made no sound at
+// all: *"rAF pauses in background tabs, which would silently stop a performance the moment
+// you switched windows."* It pauses in an unfocused tab too, so the surface was mute
+// whenever it was not the frontmost window — and mute is indistinguishable from a quiet
+// piece, which is why it took a counter on `createOscillator` to find.
+//
+// Drawing may pause when nobody is looking. Sound may not.
+//
+// Real elapsed time rather than a fixed step, so a throttled interval moves the pieces by
+// what actually passed instead of running them slow.
+let last = performance.now();
+setInterval(() => {
+  const now = performance.now();
+  const dt = Math.min(0.25, (now - last) / 1000);
+  last = now;
+  sequencer.tick(dt);
+}, 16);
+stage.setPost(new Post());
+
+/// The room wakes as it is played.
+///
+/// The murk in machinic-hymns is the week's arc, and there is no week here — so this sat
+/// at a constant 0.82 and the whole post chain, which scales every one of its terms by
+/// `murk = 1 - lucidity`, was tuned and then frozen. Grain, aberration, vignette, wobble
+/// and smear were all being computed every frame at a value that never moved.
+///
+/// It now follows **how much is sounding**: the count of voices the sequencer is
+/// articulating and drones it is holding. An atlas nobody has placed anything on is at
+/// rest and looks it; one playing six shapes has settled and sharpened.
+///
+/// **This is not a ranking and cannot become one.** It counts voices, and a voice is a
+/// voice whatever licenses it — `established` and `speculative` move this number by
+/// exactly one each. Nothing here reads a label, a provenance or a citation. What would
+/// violate §Interface rule 2 is a picture that sharpened for better-supported claims;
+/// this one sharpens for a busier instrument, which is a fact about the performance.
+///
+/// FLOOR is the other half of that rule, from the other direction: the original comment
+/// warned that *"an atlas whose lines you have to squint at"* makes a cited edge look
+/// uncertain. So the murk never returns far enough to obscure an edge — the range is
+/// felt, not squinted through. At rest it is very near where the constant was.
+const LUCID_FLOOR = 0.78;
+const LUCID_CEIL = 0.97;
+const LUCID_FULL = 5;      // shapes at which the room is fully awake
+
+stage.lucidity = LUCID_FLOOR;
+let shimmer = 0;           // decays; each articulated step tops it back up
+
+sequencer.onStep = (piece) => {
+  piecePass.flare(piece);
+  shimmer = Math.min(1, shimmer + 0.25);
+};
+
+stage.onFrame = (dt) => {
+  // **Counted as a state, not as a rate.** Counting steps was the obvious way and it is
+  // wrong: a figure articulates its marks in bursts, so a single hexagram pinned the
+  // room fully awake within a second and every shape after it was invisible. What the
+  // optics should follow is how much is *playing*, which is a property of the surface,
+  // and a shape holding one drone is as much a voice as a shape spelling eight marks.
+  let voices = 0;
+  for (const p of surface.pieces) {
+    if (p.muted) continue;
+    if (p.playable || tuning.pitch(p.node)) voices++;
+  }
+  // The steps are still worth something — they are the only thing that distinguishes a
+  // shape articulating from a shape holding — but as a shimmer on top, worth one voice
+  // at most, rather than as the whole signal.
+  shimmer = Math.max(0, shimmer - dt * 0.9);
+  const want = LUCID_FLOOR + (LUCID_CEIL - LUCID_FLOOR) *
+    Math.min(1, (voices + shimmer) / LUCID_FULL);
+  // Slew, never jump. The optics are a room waking up, and a room that snapped between
+  // two states every time a note landed would read as a flicker, not as breath.
+  stage.lucidity += (want - stage.lucidity) * Math.min(1, dt * 1.4);
+};
+
+stage.start();
+
+// The whole graph, placed once. This is the world the neighbourhood sits inside, and
+// drawing it is what makes a cross-system correspondence legible as a line across the
+// cosmos rather than a line to somewhere off-screen.
+//
+// Deterministic by construction: `place` is a pure function of system, kind and
+// ordinal, so this is the same armillary every load.
+const world = [];
+for (const system of census) {
+  for (const k of system.kinds) {
+    let symbols;
+    try {
+      symbols = JSON.parse(corpus.symbols_of(system.id, k.kind));
+    } catch (err) {
+      continue; // a declared kind holding nothing is a fact, not a failure
+    }
+    for (const node of symbols) {
+      world.push({
+        pos: place(node, idx),
+        noFigure: silentKinds.has(`${system.id}:${k.kind}`),
+      });
+    }
+  }
+}
+graph.setContext(stage, world);
+
+el('graph').innerHTML =
+  `<b>${version.symbols}</b> symbols &nbsp; <b>${version.edges}</b> edges &nbsp; ` +
+  `${census.length} systems` + (DIAGNOSTIC ? `<br>${version.hash}` : '');
+
+/// The key legend, written once. The markup carries the same text so the bar is not
+/// blank before this runs; `P` is only offered when the pane it opens exists.
+const LEGEND = `M mute · S score${DIAGNOSTIC ? ' · P the piece' : ''}`;
+el('keys').textContent = LEGEND;
+
+let here = null;
+
+/// What licenses this pitch, said plainly.
+///
+/// `sounds-like`'s tuning panel argues the case and is right: naming a thing is not
+/// decoration when the thing is a decision somebody else made for you. So a cited pitch
+/// names its page, and the **drift from equal temperament** is shown at the keyboard —
+/// because the drift is the tuning, and a fifth that reads +2¢ is audibly not a piano's.
+///
+/// An authored pitch says nothing. It used to read `this pitch is mine, not the
+/// tradition's`, which was accurate and, on a line that appears under most symbols in the
+/// graph, insistent. What marks an authored pitch now is the **absence** of a source
+/// under it — the same fact, stated by omission, and the census keeps the tally
+/// (`n cited · n authored · n unpitched`) so the split is still on the page.
+///
+/// This is not a published-only cut: the instrument does not say it either, so there is
+/// one behaviour to reason about rather than two. See `diagnostic.js` for what the
+/// published copy does hide.
+function pitchLine(pitch) {
+  if (!pitch) return `<br><span class="gloss">nothing licenses a pitch here</span>`;
+  const drift = pitch.drift >= 0 ? `+${pitch.drift.toFixed(0)}` : pitch.drift.toFixed(0);
+  // Published: the ratio alone. `tuning.js` builds it as `4:3 ×2^-1`, so the octave
+  // exponent is stripped here rather than upstream — the value keeps it, the reader
+  // does not.
+  const head = DIAGNOSTIC
+    ? ` &nbsp; ${pitch.ratio} &nbsp; ${pitch.cents.toFixed(0)}¢ ` +
+      `<span class="drift">${drift}¢ from a piano</span>`
+    : ` &nbsp; ${pitch.ratio.replace(/\s*×2\^[-+]?\d+/, '')}`;
+  // A citation speaks; authorship is silent and read from the gap where one would be.
+  const gloss =
+    pitch.provenance === 'cited'
+      ? `<span class="cited">${pitch.title}${pitch.locus ? `, ${pitch.locus}` : ''}</span> licenses this pitch`
+      : '';
+  return gloss ? `${head}<br><span class="gloss">${gloss}</span>` : head;
+}
+
+/// The selected piece: what it is, what it will play, and whose silence it is if it
+/// cannot be played at all.
+function describe(piece) {
+  if (!piece) { el('piece').innerHTML = ''; return; }
+  const silence = piece.playable
+    ? ''
+    : `<div class="gloss">no figure to read — ${piece.node.system}:${piece.node.kind} is a kind ` +
+      `its source prints nothing for, so this shape can be held and not played</div>`;
+  el('piece').innerHTML =
+    `<div class="head">${piece.node.label}</div>` +
+    `<div class="addr">${piece.address}</div>` +
+    `<div>${piece.steps.length} step${piece.steps.length === 1 ? '' : 's'} · ` +
+    `<button data-act="slower">−</button> ${piece.rate.toFixed(2)}× <button data-act="faster">+</button>` +
+    ` · <button data-act="mute">${piece.muted ? 'unmute' : 'mute'}</button>` +
+    ` · <button data-act="drop">remove</button></div>` +
+    (DIAGNOSTIC ? `<div class="gloss">the rate is mine; the pattern is the figure</div>` : '') +
+    silence;
+
+  for (const b of el('piece').querySelectorAll('button')) {
+    b.onclick = () => act(piece, b.dataset.act);
+  }
+  syncTransport();
+}
+
+/// One verb, two surfaces.
+///
+/// The piece panel and the transport must not each own a copy of what `faster` means:
+/// the panel is a desktop affordance and the transport is the only one on a kiosk
+/// screen, and a rate that stepped differently depending on which you pressed would be
+/// a bug nobody could see in either one alone.
+function act(piece, what) {
+  if (!piece) return;
+  if (what === 'drop') { surface.remove(piece); describe(null); return; }
+  if (what === 'mute') piece.muted = !piece.muted;
+  if (what === 'faster' || what === 'slower') {
+    const i = RATES.indexOf(piece.rate);
+    const at = i < 0 ? RATES.indexOf(1) : i;
+    piece.rate = RATES[Math.max(0, Math.min(RATES.length - 1, at + (what === 'faster' ? 1 : -1)))];
+  }
+  describe(piece);
+}
+
+/// The transport reads the selection; it never holds its own copy of it.
+function syncTransport() {
+  const p = surface.selected;
+  el('tnow').innerHTML = p
+    ? `<b>${p.node.label}</b> · ${p.rate.toFixed(2)}×${p.muted ? ' · muted' : ''}`
+    : 'nothing placed';
+  for (const id of ['tslower', 'tfaster', 'tdrop']) el(id).disabled = !p;
+  el('tnear').setAttribute('aria-pressed', String(!el('neighbours').hidden));
+}
+
+/// Stand somewhere: draw its cited neighbourhood, and sustain it.
+const standAt = guard('standing somewhere', function standAt(address, { play = true, place_ = true } = {}) {
+  let hood;
+  try {
+    hood = JSON.parse(corpus.neighbourhood(address, 1));
+  } catch (err) {
+    el('where').innerHTML = `<span class="label">${address}</span><span class="addr">not in this graph</span>`;
+    return;
+  }
+  here = hood;
+
+  const positions = new Map();
+  const nodes = hood.nodes.map((n) => {
+    const pos = place(n, idx);
+    positions.set(n.address, pos);
+    return {
+      pos,
+      distance: n.distance,
+      noFigure: silentKinds.has(`${n.system}:${n.kind}`),
+    };
+  });
+
+  // Only edges the kernel returned, and both endpoints are guaranteed present because
+  // `neighbourhood` returns the induced subgraph.
+  const edges = hood.edges.map((e) => ({
+    from: positions.get(e.from),
+    to: positions.get(e.to),
+    confidence: e.confidence,
+  }));
+
+  graph.setNeighbourhood(stage, nodes, edges);
+  // The world stays put; the camera turns to face you. See `GraphPass.faceToward`.
+  graph.faceToward(positions.get(hood.centre) ?? centroid([...positions.values()]));
+
+  const centre = hood.nodes.find((n) => n.address === hood.centre);
+  const pitch = centre ? tuning.pitch(centre) : null;
+  el('where').innerHTML =
+    `<span class="label">${centre?.label ?? hood.centre}</span>` +
+    `<span class="addr">${hood.centre}</span>` +
+    pitchLine(pitch);
+
+  // Placing is what makes the walk a composition: the trail you leave is the piece.
+  if (place_ && centre) {
+    const piece = surface.place(centre, {
+      silentKind: silentKinds.has(`${centre.system}:${centre.kind}`) ? centre.kind : null,
+    });
+    describe(piece);
+  }
+
+  // The account: how much of what you are hearing is yours.
+  const tally = tuning.account(hood.nodes);
+  el('tuning').innerHTML =
+    `tonic <b>${tuning.tonicHz.toFixed(2)} Hz</b> — mine<br>` +
+    `<span class="cited">${tally.cited} cited</span> · ` +
+    `<span class="authored">${tally['authored:degree']} authored</span> · ` +
+    `${tally.unpitched} unpitched`;
+
+  // Walk to play: the edges out of here, each labelled, each playable.
+  const out = hood.edges.filter((e) => e.from === hood.centre || e.to === hood.centre);
+  el('neighbours').innerHTML = out
+    .map((e, i) => {
+      const other = e.from === hood.centre ? e.to : e.from;
+      const node = hood.nodes.find((n) => n.address === other);
+      const cls = e.confidence === 'contested' ? ' contested' : '';
+      return `<button data-to="${other}" data-i="${i}">` +
+        `<span class="rel${cls}">${e.relation}</span> ${node?.label ?? other}</button>`;
+    })
+    .join('');
+
+  for (const b of el('neighbours').querySelectorAll('button')) {
+    b.onclick = () => {
+      const e = out[Number(b.dataset.i)];
+      // Moving articulates the hop, with its own label's timbre.
+      const to = hood.nodes.find((n) => n.address === b.dataset.to);
+      const p = to ? tuning.pitch(to) : null;
+      if (instrument.ctx) {
+        if (p) instrument.tone(p.hz, e.confidence, instrument.now);
+        else instrument.struck(instrument.now);
+      }
+      standAt(b.dataset.to);
+    };
+  }
+
+  if (play && instrument.ctx) instrument.sustain(hood.nodes);
+});
+
+// Reaching an address directly. Never ranked: the kernel returns address order and
+// this does not re-sort it.
+el('q').oninput = guard('search', () => {
+  const q = el('q').value;
+  if (!q.trim()) { el('hits').innerHTML = ''; return; }
+  const hits = JSON.parse(corpus.search(q, 24));
+  el('hits').innerHTML = hits
+    .map((h) => `<button data-to="${h.address}">${h.label} <span class="a">${h.address}</span></button>`)
+    .join('');
+  for (const b of el('hits').querySelectorAll('button')) {
+    b.onclick = () => { el('q').value = ''; el('hits').innerHTML = ''; standAt(b.dataset.to); };
+  }
+});
+
+// Selecting and moving a piece. Surface coordinates, aspect-corrected the same way the
+// shader is, so what you grab is what you see.
+function toSurface(ev) {
+  const w = innerWidth;
+  const h = innerHeight;
+  const aspect = w / h;
+  const nx = (ev.clientX / w) * 2 - 1;
+  const ny = 1 - (ev.clientY / h) * 2;
+  return aspect > 1 ? [nx * aspect, ny] : [nx, ny / aspect];
+}
+
+let dragging = null;
+const canvas = el('scene');
+
+let orbiting = null;
+
+canvas.addEventListener('pointerdown', guard('pointer', (ev) => {
+  const [x, y] = toSurface(ev);
+  const hit = surface.at(x, y);
+  canvas.setPointerCapture(ev.pointerId);
+
+  // Empty space turns the camera; a shape moves. `Surface.at` already draws that line.
+  if (!hit) {
+    orbiting = { x: ev.clientX, y: ev.clientY };
+    return;
+  }
+  surface.selected = hit;
+  dragging = { piece: hit, dx: hit.x - x, dy: hit.y - y };
+  describe(hit);
+  // Selecting a piece points the map at its symbol, without placing a second copy.
+  standAt(hit.address, { place_: false });
+}));
+
+canvas.addEventListener('pointermove', guard('pointer', (ev) => {
+  if (orbiting) {
+    graph.orbit((ev.clientX - orbiting.x) / innerWidth, (ev.clientY - orbiting.y) / innerHeight);
+    orbiting = { x: ev.clientX, y: ev.clientY };
+    return;
+  }
+  if (!dragging) return;
+  const [x, y] = toSurface(ev);
+  dragging.piece.x = x + dragging.dx;
+  dragging.piece.y = y + dragging.dy;
+}));
+
+canvas.addEventListener('pointerup', (ev) => {
+  dragging = null;
+  orbiting = null;
+  if (canvas.hasPointerCapture(ev.pointerId)) canvas.releasePointerCapture(ev.pointerId);
+});
+
+canvas.addEventListener('wheel', (ev) => {
+  ev.preventDefault();
+  graph.dolly(ev.deltaY * 0.0012);
+}, { passive: false });
+
+/// Pinch to dolly, on a screen where there is no wheel.
+///
+/// `wheel` was the only way to change the distance, and a touch panel does not have one.
+/// Two fingers is the gesture everyone already knows, and the ratio of the spread to what
+/// it was last frame maps onto the same `dolly` the wheel drives, so there is one camera
+/// and not a touch camera beside it.
+///
+/// Live pointers are tracked here rather than in `pointerdown` because the second finger
+/// has to *cancel* a drag already in progress: you put one finger down on a shape, add a
+/// second to zoom, and without this the shape follows the first finger across the screen
+/// while the camera moves under it.
+const live = new Map();
+let spread = 0;
+
+function spreadOf() {
+  const [a, b] = [...live.values()];
+  return Math.hypot(a.x - b.x, a.y - b.y);
+}
+
+canvas.addEventListener('pointerdown', (ev) => {
+  live.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+  if (live.size === 2) {
+    // A pinch is not a drag that grew a finger. Drop both, or the shape rides along.
+    dragging = null;
+    orbiting = null;
+    spread = spreadOf();
+  }
+});
+
+canvas.addEventListener('pointermove', (ev) => {
+  if (!live.has(ev.pointerId)) return;
+  live.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+  if (live.size !== 2) return;
+  const now = spreadOf();
+  if (spread > 0 && now > 0) {
+    // Log ratio, so a pinch feels the same at every distance: closing the gap by half
+    // moves the camera as far as doubling it does, in the other direction.
+    graph.dolly(-Math.log(now / spread) * 1.6);
+  }
+  spread = now;
+});
+
+for (const kind of ['pointerup', 'pointercancel', 'pointerleave']) {
+  canvas.addEventListener(kind, (ev) => {
+    live.delete(ev.pointerId);
+    // Going 2 -> 1 must not resume a drag with a stale anchor, and must re-arm cleanly
+    // if a third finger lands. The remaining finger simply does nothing until it lifts.
+    if (live.size < 2) spread = 0;
+  });
+}
+
+
+const score = new ScoreView(el('scoreview'), surface, tuning, el('scorepane'), (piece) => {
+  // A stave was tapped. Everything that shows a selection is refreshed from the one
+  // place, so the score, the piece panel, the rack and the transport cannot disagree
+  // about which shape is in hand.
+  describe(piece);
+});
+const rack = new Rack(el('rack'), surface, instrument, act);
+// The score is a panel of rules and text, so it redraws on its own timer rather than
+// riding the WebGL frame — and on `setInterval`, for the same reason the sequencer does.
+setInterval(() => { score.draw(); if (score.visible) rack.sync(); }, 60);
+
+/// The drawer starts closed on a tight screen and open on a wide one.
+///
+/// Same element, same toggle, different resting state: on 800x480 the paths list covers
+/// a third of the atlas, so it is summoned; on a desktop there is room for it to simply
+/// be there, which is how this instrument has always read.
+const TIGHT = matchMedia('(max-width: 900px), (max-height: 560px)');
+el('neighbours').hidden = TIGHT.matches;
+
+/// Sit the drawer under the heading, whatever height the heading turned out to be.
+///
+/// A constant does not work here and the reason is in the corpus rather than in the CSS:
+/// Agrippa's *Three Books of Occult Philosophy, Book II, ch. XXVI, p. 262* wraps to two
+/// lines where `iching:hexagram/41` does not, so the heading is 128px for one symbol and
+/// 78px for the next. Pick the tall number and every short symbol wastes 50px of a
+/// 480px screen; pick the short one and the citation is covered exactly when it is long
+/// enough to matter.
+///
+/// `ResizeObserver` rather than a call after each place: the heading is rewritten from
+/// several paths — placing, selecting, walking an edge — and one of them will eventually
+/// forget to call this. The box measuring itself cannot forget.
+function fitDrawer() {
+  const n = el('neighbours');
+  if (!TIGHT.matches) { n.style.top = ''; return; }
+  n.style.top = `${Math.ceil(el('where').getBoundingClientRect().bottom) + 8}px`;
+}
+new ResizeObserver(fitDrawer).observe(el('where'));
+TIGHT.addEventListener('change', () => { el('neighbours').hidden = TIGHT.matches; fitDrawer(); });
+
+/// The transport, wired to the same verbs the keys drive.
+el('tmute').onclick = () => {
+  const muted = instrument.toggleMute();
+  el('tmute').setAttribute('aria-pressed', String(muted));
+  el('tmute').textContent = muted ? 'muted' : 'mute';
+  el('keys').classList.toggle('muted', muted);
+  el('keys').textContent = muted ? `MUTED — M to unmute · S score` : LEGEND;
+};
+el('tscore').onclick = () => {
+  score.toggle();
+  el('tscore').setAttribute('aria-pressed', String(score.visible));
+};
+el('tnear').onclick = () => {
+  const n = el('neighbours');
+  n.hidden = !n.hidden;
+  el('tnear').setAttribute('aria-pressed', String(!n.hidden));
+};
+el('tslower').onclick = () => act(surface.selected, 'slower');
+el('tfaster').onclick = () => act(surface.selected, 'faster');
+el('tdrop').onclick = () => act(surface.selected, 'drop');
+syncTransport();
+
+/// The piece, as text you can take away. Rebuilt on open rather than kept live: it is a
+/// snapshot of an arrangement, and a patch that rewrote itself under the cursor while you
+/// were reading it would be useless for copying.
+function showPane() {
+  el('patch').textContent = toStrudel(surface, tuning, version);
+  el('note').textContent = programmeNote(surface, tuning, version);
+  el('pane').hidden = false;
+}
+
+addEventListener('keydown', guard('a key', (ev) => {
+  if (ev.target instanceof HTMLInputElement) return; // typing in the search box
+
+  if ((ev.key === 'Backspace' || ev.key === 'Delete') && surface.selected) {
+    surface.remove(surface.selected);
+    describe(null);
+    return;
+  }
+  const k = ev.key.toLowerCase();
+  if (k === 'm') {
+    // Everything, at once. See `Instrument.mute`: a ramp on the master gain, so what was
+    // already scheduled is caught too.
+    const muted = instrument.toggleMute();
+    el('keys').classList.toggle('muted', muted);
+    el('keys').textContent = muted
+      ? `MUTED — M to unmute · S score${DIAGNOSTIC ? ' · P the piece' : ''}`
+      : LEGEND;
+  }
+  if (k === 's') {
+    score.toggle();
+    if (el('pane').hidden === false) el('pane').hidden = true;
+  }
+  if (k === 'p' && DIAGNOSTIC) {
+    if (el('pane').hidden) showPane();
+    else el('pane').hidden = true;
+  }
+  if (ev.key === 'Escape') el('pane').hidden = true;
+}));
+
+/// A handle on the live instrument, for the console.
+///
+/// Deliberate and kept. This surface has now twice gone silent in a way that looked like
+/// a quiet piece — once from a renamed property, once from a sequencer that was not
+/// ticking — and in both cases the fastest question to answer was "is anything running at
+/// all", which needs a reference to ask. Nothing reads this; it exists to be poked.
+window.__mono = { surface, sequencer, instrument, tuning, graph, stage, corpus };
+
+el('hint').onclick = () => {
+  instrument.start();
+  sequencer.start();
+  el('hint').remove();
+};
+
+// Somewhere to begin. The busiest junction in the graph is the decan, so start beside
+// one rather than in a corner.
+standAt('astro:decan/leo-2', { play: false, place_: false });
+</script>
+</body>
+</html>

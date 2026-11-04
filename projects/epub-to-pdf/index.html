@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>epub-to-pdf: Eon Meridian</title>
+<meta name="description" content="A shell script that converts an EPUB to a PDF using Calibre&#x27;s ebook-convert with fixed settings, so every book comes out the same way." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">48 / project</div>
+    <h1>epub-to-pdf</h1>
+    <div class="smallcaps" style="margin-top:9px">Turn an e-book into a PDF for printing, with one fixed set of settings</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / shell script</div>
+</section>
+
+<p class="lead">A shell script that converts an EPUB to a PDF using Calibre's <code>ebook-convert</code> with fixed settings, so every book comes out the same way. It takes either an <code>.epub</code> file or an unpacked EPUB folder, which is how Apple Books keeps its books.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/shot-epub-to-pdf.jpg" alt="Two pages of the PDF made from Project Gutenberg&#x27;s The Great God Pan by Arthur Machen: the cover and the contents." loading="lazy" /></div>
+      <figcaption class="smallcaps">Two pages of the PDF made from Project Gutenberg's The Great God Pan by Arthur Machen: the cover and the contents.</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>Using it</h2>
+<p><code>epub-to-pdf book.epub</code> writes <code>book.pdf</code> in the current folder, or to a path given as the second argument, and prints where the PDF went. <code>make pdf EPUB=~/book.epub</code> does the same and puts the result in Downloads by default.</p>
+<h2>The fixed settings</h2>
+<ul>
+<li>Letter paper and a 12-point default font, both changeable through environment variables.</li>
+<li>Margins of 54 points on every side.</li>
+<li>Page numbers, and the cover kept at its own proportions.</li>
+</ul>
+<h2>Unpacked books</h2>
+<p>An Apple Books folder is zipped back into a proper EPUB first, following the format's rule that the <code>mimetype</code> file goes first and uncompressed. A folder that is not an EPUB, or one protected by DRM, is refused with a message rather than converted. If the conversion fails, the last lines of Calibre's log are shown.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Needs</span><br>Calibre's ebook-convert<br>bash</div>
+    <div class="side"><span class="smallcaps">Reads</span><br>an .epub file, or an unpacked EPUB folder as Apple Books stores them</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../eon-inventory/">← eon-inventory</a></span>
+  <span><a href="../newmusic/">newmusic →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

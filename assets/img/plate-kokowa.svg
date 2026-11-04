@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Diagram plate for GROUND / OBJECT / VIEWER">
+<rect width="800" height="600" fill="#f3f0e8"/>
+<line x1="120" y1="236" x2="680" y2="236" stroke="#7f7b73"/>
+<line x1="120" y1="452" x2="361" y2="236" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="167" y1="452" x2="367" y2="236" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="213" y1="452" x2="374" y2="236" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="260" y1="452" x2="380" y2="236" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="307" y1="452" x2="387" y2="236" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="354" y1="452" x2="393" y2="236" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="400" y1="452" x2="400" y2="236" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="447" y1="452" x2="407" y2="236" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="494" y1="452" x2="413" y2="236" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="540" y1="452" x2="420" y2="236" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="587" y1="452" x2="426" y2="236" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="634" y1="452" x2="433" y2="236" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="680" y1="452" x2="439" y2="236" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="120" y1="387" x2="680" y2="387" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="120" y1="342" x2="680" y2="342" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="120" y1="310" x2="680" y2="310" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="120" y1="288" x2="680" y2="288" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="120" y1="272" x2="680" y2="272" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="120" y1="261" x2="680" y2="261" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<line x1="120" y1="254" x2="680" y2="254" stroke="#4a4a8a" stroke-width="1" stroke-opacity=".42"/>
+<rect x="250" y="354" width="46" height="46" fill="#a3437a" fill-opacity=".16" stroke="#a3437a" stroke-width="1.2"/>
+<rect x="392" y="322" width="34" height="34" fill="#a3437a" fill-opacity=".16" stroke="#a3437a" stroke-width="1.2"/>
+<rect x="516" y="346" width="40" height="40" fill="#a3437a" fill-opacity=".16" stroke="#a3437a" stroke-width="1.2"/>
+<rect x="330" y="278" width="22" height="22" fill="#a3437a" fill-opacity=".16" stroke="#a3437a" stroke-width="1.2"/>
+<rect x="588" y="294" width="26" height="26" fill="#a3437a" fill-opacity=".16" stroke="#a3437a" stroke-width="1.2"/>
+<path d="M400 496 L214 300 L586 300 Z" fill="none" stroke="#171715" stroke-dasharray="4 6"/>
+<circle cx="400" cy="496" r="5" fill="#171715"/>
+<text x="400" y="522" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#514e48">VIEWER</text>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">GROUND / OBJECT / VIEWER</text><text x="720" y="560" text-anchor="end">WORLD 01</text></g>
+</svg>

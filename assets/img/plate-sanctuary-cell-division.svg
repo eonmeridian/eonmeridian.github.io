@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Generated diagram plate for ARCHIVE / GROUND / CITATION">
+<g fill="none" stroke="#7f7b73" stroke-width="1">
+<circle cx="400" cy="300" r="93"/>
+<circle cx="400" cy="300" r="151"/>
+<circle cx="400" cy="300" r="196"/>
+<circle cx="400" cy="300" r="223"/>
+<circle cx="400" cy="300" r="255" stroke-dasharray="4 8"/>
+<line x1="430" y1="303" x2="493" y2="310"/>
+<line x1="493" y1="310" x2="653" y2="329" stroke-dasharray="2 7"/>
+<line x1="420" y1="322" x2="502" y2="412"/>
+<line x1="502" y1="412" x2="572" y2="488" stroke-dasharray="2 7"/>
+<line x1="398" y1="330" x2="386" y2="496"/>
+<line x1="386" y1="496" x2="382" y2="554" stroke-dasharray="2 7"/>
+<line x1="374" y1="315" x2="206" y2="409"/>
+<line x1="206" y1="409" x2="178" y2="425" stroke-dasharray="2 7"/>
+<line x1="372" y1="290" x2="312" y2="269"/>
+<line x1="312" y1="269" x2="159" y2="216" stroke-dasharray="2 7"/>
+<line x1="391" y1="271" x2="356" y2="156"/>
+<line x1="356" y1="156" x2="325" y2="56" stroke-dasharray="2 7"/>
+<line x1="419" y1="277" x2="525" y2="149"/>
+<line x1="525" y1="149" x2="562" y2="103" stroke-dasharray="2 7"/>
+</g>
+<g fill="#171715"><circle cx="400" cy="300" r="5"/><circle cx="493" cy="310" r="4"/><circle cx="502" cy="412" r="4"/><circle cx="386" cy="496" r="4"/><circle cx="206" cy="409" r="4"/><circle cx="312" cy="269" r="4"/><circle cx="356" cy="156" r="4"/><circle cx="525" cy="149" r="4"/></g>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">ARCHIVE / GROUND / CITATION</text><text x="720" y="560" text-anchor="end">SANCTUARY 01</text></g>
+</svg>

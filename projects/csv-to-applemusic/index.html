@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>csv-to-applemusic: Eon Meridian</title>
+<meta name="description" content="A small tool that takes a CSV of tracks and makes a new Apple Music playlist from it, reporting every row that did not match cleanly." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">45 / project</div>
+    <h1>csv-to-applemusic</h1>
+    <div class="smallcaps" style="margin-top:9px">A list of tracks in, a new Apple Music playlist out</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>tool / command line / Python</div>
+</section>
+
+<p class="lead">A small tool that takes a CSV of tracks and makes a new Apple Music playlist from it, reporting every row that did not match cleanly.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-csv-to-applemusic.svg" alt="A list of tracks in, a new Apple Music playlist out" loading="lazy" /></div>
+      <figcaption class="smallcaps">A list of tracks in, a new Apple Music playlist out</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>Use</h2>
+<p>Sign in once with <code>make auth</code>, check a list with <code>make dry-run</code>, which matches and reports and creates nothing, then run <code>make import</code> with a playlist name. The CSV needs an artist column and a track or title column; an album column helps choose between releases, and an ISRC column gives exact matches.</p>
+<h2>Matching</h2>
+<p>Without an ISRC, each row is matched by a catalog search on artist and title and scored. A row is added without review only when its best candidate scores at least 0.88, and a different song scoring within 0.05 of the best makes the row ambiguous. The catalog can hold one recording under two artist spellings (Radigue and Radique), and that is reported as ambiguous by design.</p>
+<h2>The report</h2>
+<p>Every row lands in a report as matched, ambiguous or unmatched, with its confidence and the top candidates, and only matched rows are added. The report is itself valid input: fill in <code>apple_id</code> on the rows you resolved and pass the edited report back to <code>make import</code>, and each id is checked against the catalog before it is used.</p>
+<h2>Three rules</h2>
+<ul>
+<li>It only creates new playlists, and never changes or deletes existing playlists or library items.</li>
+<li>No silent mismatches: every row is matched, ambiguous or unmatched, and reported.</li>
+<li>The signing key and the music user token are never committed or logged.</li>
+</ul>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Runs in</span><br>Docker, driven by make</div>
+    <div class="side"><span class="smallcaps">Reads</span><br>a CSV with artist and track columns</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../vetiver/">← Vetiver</a></span>
+  <span><a href="../daimon-agent/">daimon →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

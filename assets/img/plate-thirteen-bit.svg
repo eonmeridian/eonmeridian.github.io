@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Diagram plate for FRAME / CUT / RELEASE">
+<rect width="800" height="600" fill="#f3f0e8"/>
+<rect x="130" y="168" width="330" height="128" fill="none" stroke="#171715"/>
+<rect x="136" y="175" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="136" y="278" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="163" y="175" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="163" y="278" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="190" y="175" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="190" y="278" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="217" y="175" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="217" y="278" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="244" y="175" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="244" y="278" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="271" y="175" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="271" y="278" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="298" y="175" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="298" y="278" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="325" y="175" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="325" y="278" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="352" y="175" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="352" y="278" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="379" y="175" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="379" y="278" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="406" y="175" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="406" y="278" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="433" y="175" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="433" y="278" width="14" height="11" fill="#171715" fill-opacity=".5"/>
+<rect x="140" y="195" width="70" height="74" fill="#2f6b6b" fill-opacity="0.10" stroke="#2f6b6b" stroke-width="1"/>
+<rect x="219" y="195" width="70" height="74" fill="#2f6b6b" fill-opacity="0.16" stroke="#2f6b6b" stroke-width="1"/>
+<rect x="298" y="195" width="70" height="74" fill="#2f6b6b" fill-opacity="0.22" stroke="#2f6b6b" stroke-width="1"/>
+<rect x="377" y="195" width="70" height="74" fill="#2f6b6b" fill-opacity="0.28" stroke="#2f6b6b" stroke-width="1"/>
+<path d="M219 269 L520 400 M289 269 L700 400" stroke="#7f7b73" stroke-width="1" fill="none" stroke-dasharray="3 5"/>
+<rect x="520" y="290" width="180" height="110" fill="#a8791f" fill-opacity=".12" stroke="#a8791f" stroke-width="1.4"/>
+<text x="610" y="424" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#514e48">ONE FRAME, HELD</text>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">FRAME / CUT / RELEASE</text><text x="720" y="560" text-anchor="end">STRIP 01</text></g>
+</svg>

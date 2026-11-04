@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Diagram plate for PANEL / REPEAT / ORDER">
+<rect width="800" height="600" fill="#f3f0e8"/>
+<rect x="150" y="150" width="120" height="190" fill="none" stroke="#171715" stroke-width="1"/>
+<rect x="157" y="157" width="106" height="176" fill="none" stroke="#7f7b73" stroke-dasharray="3 4"/>
+<rect x="286" y="150" width="96" height="130" fill="none" stroke="#171715" stroke-width="1"/>
+<rect x="293" y="157" width="82" height="116" fill="none" stroke="#7f7b73" stroke-dasharray="3 4"/>
+<rect x="286" y="296" width="96" height="44" fill="none" stroke="#171715" stroke-width="1"/>
+<rect x="293" y="303" width="82" height="30" fill="none" stroke="#7f7b73" stroke-dasharray="3 4"/>
+<rect x="150" y="356" width="120" height="92" fill="none" stroke="#171715" stroke-width="1"/>
+<rect x="157" y="363" width="106" height="78" fill="none" stroke="#7f7b73" stroke-dasharray="3 4"/>
+<rect x="398" y="150" width="74" height="190" fill="none" stroke="#171715" stroke-width="1"/>
+<rect x="405" y="157" width="60" height="176" fill="none" stroke="#7f7b73" stroke-dasharray="3 4"/>
+<rect x="530" y="172" width="40" height="40" fill="#a3437a" fill-opacity="0.09" stroke="#a3437a" stroke-width="1"/>
+<circle cx="550" cy="192" r="9" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="530" y="216" width="40" height="40" fill="#a3437a" fill-opacity="0.14" stroke="#a3437a" stroke-width="1"/>
+<circle cx="550" cy="236" r="9" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="530" y="260" width="40" height="40" fill="#a3437a" fill-opacity="0.19" stroke="#a3437a" stroke-width="1"/>
+<circle cx="550" cy="280" r="9" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="530" y="304" width="40" height="40" fill="#a3437a" fill-opacity="0.09" stroke="#a3437a" stroke-width="1"/>
+<circle cx="550" cy="324" r="9" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="574" y="172" width="40" height="40" fill="#a3437a" fill-opacity="0.14" stroke="#a3437a" stroke-width="1"/>
+<circle cx="594" cy="192" r="9" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="574" y="216" width="40" height="40" fill="#a3437a" fill-opacity="0.19" stroke="#a3437a" stroke-width="1"/>
+<circle cx="594" cy="236" r="12" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="574" y="260" width="40" height="40" fill="#a3437a" fill-opacity="0.09" stroke="#a3437a" stroke-width="1"/>
+<circle cx="594" cy="280" r="15" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="574" y="304" width="40" height="40" fill="#a3437a" fill-opacity="0.14" stroke="#a3437a" stroke-width="1"/>
+<circle cx="594" cy="324" r="9" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="618" y="172" width="40" height="40" fill="#a3437a" fill-opacity="0.19" stroke="#a3437a" stroke-width="1"/>
+<circle cx="638" cy="192" r="9" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="618" y="216" width="40" height="40" fill="#a3437a" fill-opacity="0.09" stroke="#a3437a" stroke-width="1"/>
+<circle cx="638" cy="236" r="15" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="618" y="260" width="40" height="40" fill="#a3437a" fill-opacity="0.14" stroke="#a3437a" stroke-width="1"/>
+<circle cx="638" cy="280" r="12" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="618" y="304" width="40" height="40" fill="#a3437a" fill-opacity="0.19" stroke="#a3437a" stroke-width="1"/>
+<circle cx="638" cy="324" r="9" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="662" y="172" width="40" height="40" fill="#a3437a" fill-opacity="0.09" stroke="#a3437a" stroke-width="1"/>
+<circle cx="682" cy="192" r="9" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="662" y="216" width="40" height="40" fill="#a3437a" fill-opacity="0.14" stroke="#a3437a" stroke-width="1"/>
+<circle cx="682" cy="236" r="9" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="662" y="260" width="40" height="40" fill="#a3437a" fill-opacity="0.19" stroke="#a3437a" stroke-width="1"/>
+<circle cx="682" cy="280" r="9" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<rect x="662" y="304" width="40" height="40" fill="#a3437a" fill-opacity="0.09" stroke="#a3437a" stroke-width="1"/>
+<circle cx="682" cy="324" r="9" fill="none" stroke="#2f5d7a" stroke-width="1" stroke-opacity=".7"/>
+<text x="210" y="472" font-family="Courier New, monospace" font-size="10" fill="#514e48">CUT</text>
+<text x="590" y="368" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#514e48">REPEAT · PRINTED TO ORDER</text>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">PANEL / REPEAT / ORDER</text><text x="720" y="560" text-anchor="end">GARMENT 01</text></g>
+</svg>

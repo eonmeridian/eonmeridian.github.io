@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1456" height="735" viewBox="0 0 1456 735" font-family="ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace">
+<title>labor — codex</title>
+<style>svg{--bg:#07070b; --ink:#f4f4f2; --black:#f4f4f2; --red:#e2564d; --gold:#34e08a; --dim:#8b8b93;}
+  .wire{fill:none;stroke:#f4f4f2}
+  .wire.fam{stroke:#34e08a}
+  .box{fill:#07070b}
+  .box.active{stroke:#e2564d;fill:#e2564d;fill-opacity:.10}
+  .box.modulation{stroke:#34e08a;fill:#34e08a;fill-opacity:.10}
+  .lbl{font:600 29px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#f4f4f2}
+  .sm{font:27px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#8b8b93}
+  .it{font:italic 27px ui-serif,Georgia,'Times New Roman',serif;fill:#f4f4f2}
+  .ser{font:27px ui-serif,Georgia,'Times New Roman',serif;fill:#f4f4f2}
+  .cross{fill:none;stroke:#f4f4f2}
+  .region{fill:none;stroke:#34e08a;stroke-dasharray:8 4}
+  .feedback{fill:none;stroke:#34e08a;stroke-dasharray:8 4}
+  .band{stroke:none}
+  .grid{stroke:#8b8b93;stroke-width:1;opacity:.07}
+  .echo{fill:none;stroke:#f4f4f2}
+  .stave{stroke:#8b8b93;stroke-width:1;opacity:.35}
+  .mark{stroke:none;fill:#e2564d}
+  .axis{stroke:#f4f4f2;stroke-width:2;fill:none}
+  .tick{stroke:#8b8b93;stroke-width:1;fill:none}
+  .bore{stroke:#f4f4f2;stroke-width:1;stroke-dasharray:5 5;fill:none}
+  .lead{stroke:#8b8b93;stroke-width:1;fill:none}
+  .lead-dot{fill:#e2564d;stroke:none}
+  .rhiz{stroke:#f4f4f2;stroke-width:2;fill:none;opacity:.75}
+  .rhiz.fam{stroke:#34e08a}
+  .flight{stroke:#e2564d;stroke-width:2;fill:none;stroke-dasharray:2 6}
+  .entrance{stroke:#34e08a;stroke-width:1;fill:none;stroke-dasharray:4 4}
+  .sheet{fill:none;stroke:#8b8b93;stroke-width:1}
+  .cut{fill:none;stroke:#e2564d;stroke-width:2;stroke-dasharray:6 4}
+  .cut.even{stroke:#e2564d}
+  .cut.odd{stroke:#34e08a;fill:#34e08a;fill-opacity:.05}
+  .ident{stroke:#f4f4f2;fill:none;stroke-linecap:round}
+  .spot{fill:#f4f4f2;stroke:none}
+  .bed{fill:#34e08a;fill-opacity:.30;stroke:#f4f4f2;stroke-width:1}
+  .leg{fill:none;stroke:#f4f4f2;stroke-width:2;opacity:.85}
+  .faultline{fill:none;stroke:#e2564d;stroke-width:2;stroke-dasharray:6 3}
+  .strand{fill:none;stroke:#f4f4f2;stroke-linecap:round}
+  .strand.fam{stroke:#34e08a}
+  .strand.over{stroke-width:4}
+  .strand.under{stroke-width:3;opacity:.65}
+  .closure{fill:none;stroke:#34e08a;stroke-width:2;stroke-dasharray:4 3}
+  .rule{stroke:#f4f4f2;stroke-width:1.5;fill:none}
+  .relief{fill:#34e08a;fill-opacity:.35;stroke:none}
+  .ridge{fill:none;stroke:#f4f4f2;stroke-width:2}
+  .contour{stroke:#8b8b93;stroke-width:1;opacity:.4;fill:none}
+  .flood{fill:#8b8b93;fill-opacity:.10;stroke:none}
+  .corr{fill:none;stroke:#8b8b93;stroke-width:1;opacity:.55}
+  .panel{fill:none;stroke:#8b8b93;stroke-width:1;opacity:.55}
+  .quad{font:600 84px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#34e08a;opacity:.55}
+  .mapln{fill:none;stroke:#34e08a;stroke-width:1;stroke-dasharray:6 6;opacity:.55}
+  .door{stroke:#07070b;stroke-width:3;fill:none}
+  .pinch{fill:none;stroke:#8b8b93;stroke-width:1}
+  .smoothfield{fill:#07070b;stroke:#34e08a;stroke-width:2}
+  .striated{fill:#8b8b93;opacity:.25}
+  .nomad{stroke:#34e08a;stroke-width:1;fill:none;opacity:.7}
+  .fan{stroke:#e2564d;stroke-width:1;fill:none;opacity:.8}
+  .pt{fill:#e2564d;stroke:none}
+</style>
+<rect x="0" y="0" width="1456" height="735" fill="#07070b"/>
+<defs>
+<marker id="arw" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f4f4f2"/></marker>
+<marker id="arwg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#34e08a"/></marker>
+<symbol id="g-dot" overflow="visible"><circle r="7" class="mark"/></symbol>
+<symbol id="g-open" overflow="visible"><circle r="7" fill="none" stroke="#e2564d" stroke-width="2"/></symbol>
+<symbol id="g-bar" overflow="visible"><rect x="-7" y="-14" width="14" height="28" class="mark"/></symbol>
+</defs>
+<defs><pattern id="spine" patternUnits="userSpaceOnUse" width="112" height="112" patternTransform="rotate(0)"><path d="M 0 0 V 112 M 0 0 H 112" stroke="#8b8b93" stroke-width="1" fill="none"/></pattern></defs>
+<rect x="0" y="0" width="1456" height="735" fill="url(#spine)" opacity="0.061"/>
+<text x="56" y="84" class="lbl" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">LABOR</text><text x="56" y="84" class="lbl">LABOR</text>
+<text x="56" y="116" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">scot-1665 · Forneus · f27d83d03385… · lexicon v3 · codex · 7 rows · 7 cycles · 3 lanes</text><text x="56" y="116" class="sm">scot-1665 · Forneus · f27d83d03385… · lexicon v3 · codex · 7 rows · 7 cycles · 3 lanes</text>
+<text x="168" y="252" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">OBJECTS</text><text x="168" y="252" class="sm">OBJECTS</text>
+<text x="459" y="252" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">RITE TEXT</text><text x="459" y="252" class="sm">RITE TEXT</text>
+<text x="1041" y="252" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">CUES</text><text x="1041" y="252" class="sm">CUES</text>
+<path d="M 174 260 H 160 V 567 H 174" stroke="#e2564d" fill="none" stroke-width="2"/>
+<path d="M 1346 260 H 1332 V 567 H 1346" stroke="#e2564d" fill="none" stroke-width="2"/>
+<text x="168" y="308" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">Account</text><text x="168" y="308" class="sm">Account</text>
+<text x="168" y="338" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">Hand</text><text x="168" y="338" class="sm">Hand</text>
+<text x="168" y="368" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">Summary</text><text x="168" y="368" class="sm">Summary</text>
+<text x="168" y="398" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">Unnamed</text><text x="168" y="398" class="sm">Unnamed</text>
+<text x="459" y="308" class="ser" data-span="62..98" data-name="offer" data-node="b1" data-kind="speech" data-quote="he maketh men wonderful in Rhetorick" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">offer · he maketh men wonderful in Rhetorick</text><text x="459" y="308" class="ser" data-span="62..98" data-name="offer" data-node="b1" data-kind="speech" data-quote="he maketh men wonderful in Rhetorick">offer · he maketh men wonderful in Rhetorick</text>
+<text x="459" y="343" class="ser" data-span="100..134" data-name="summarise" data-node="b3" data-kind="taking" data-quote="he adorneth a man with a good name" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">summarise · he adorneth a man with a good name</text><text x="459" y="343" class="ser" data-span="100..134" data-name="summarise" data-node="b3" data-kind="taking" data-quote="he adorneth a man with a good name">summarise · he adorneth a man with a good name</text>
+<text x="459" y="378" class="ser" data-span="170..215" data-name="forget" data-node="b8" data-kind="silencing" data-quote="maketh one beloved as well of foes as friends" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">forget · maketh one beloved as well of foes as friends</text><text x="459" y="378" class="ser" data-span="170..215" data-name="forget" data-node="b8" data-kind="silencing" data-quote="maketh one beloved as well of foes as friends">forget · maketh one beloved as well of foes as friends</text>
+<text x="459" y="413" class="ser" data-span="140..164" data-name="name" data-node="b10" data-kind="appearance" data-quote="the knowledge of tongues" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">name · the knowledge of tongues</text><text x="459" y="413" class="ser" data-span="140..164" data-name="name" data-node="b10" data-kind="appearance" data-quote="the knowledge of tongues">name · the knowledge of tongues</text>
+<text x="459" y="448" class="ser" data-span="123..134" data-name="release" data-node="b13" data-kind="departure" data-quote="a good name" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">release · a good name</text><text x="459" y="448" class="ser" data-span="123..134" data-name="release" data-node="b13" data-kind="departure" data-quote="a good name">release · a good name</text>
+<text x="1041" y="308" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">speech · 0→1 · 36ch</text><text x="1041" y="308" class="sm">speech · 0→1 · 36ch</text>
+<text x="1041" y="339" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">taking · 1→2 · 34ch</text><text x="1041" y="339" class="sm">taking · 1→2 · 34ch</text>
+<text x="1041" y="370" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">silencing · 1→0 · 45ch</text><text x="1041" y="370" class="sm">silencing · 1→0 · 45ch</text>
+<text x="1041" y="401" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">appearance · 1→2 · 24ch</text><text x="1041" y="401" class="sm">appearance · 1→2 · 24ch</text>
+<text x="1041" y="432" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">departure · 1→0 · 11ch</text><text x="1041" y="432" class="sm">departure · 1→0 · 11ch</text>
+<text x="459" y="595" class="it" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">trace ×1 — a good name</text><text x="459" y="595" class="it">trace ×1 — a good name</text>
+<text x="84" y="651" class="it" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">4 objects · 5 generators · 150 characters cited</text><text x="84" y="651" class="it">4 objects · 5 generators · 150 characters cited</text>
+<text x="1288" y="707" class="it" text-anchor="end" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">no terminal.</text><text x="1288" y="707" class="it" text-anchor="end">no terminal.</text>
+</svg>

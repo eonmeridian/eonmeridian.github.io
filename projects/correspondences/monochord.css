@@ -1,0 +1,129 @@
+/* The reconciled palette. --field, --ink, --mark and --dim are meridian-dark's
+   own values, so this page and the pre-rendered plates are visibly one work.
+   --meridian is new and only ours.
+
+   Red is one colour for two things on purpose: the named active operation, and
+   the remainder it leaves. They are one event. Machine-red and human-red differ
+   only in hand — the machine draws thin and geometric, the participant marks
+   thick and irregular. */
+:root {
+  --field:    #07070b;   /* structure, law, the given */
+  --ink:      #f4f4f2;
+  --meridian: #34e08a;   /* orientation, passage, permeability */
+  --mark:     #e2564d;   /* the operation, and its remainder */
+  --dim:      #8b8b93;   /* what the operation never looked at */
+
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --mono: ui-monospace, Menlo, "SF Mono", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; height: 100%;
+  background: var(--field);
+  color: var(--ink);
+  font-family: var(--serif);
+  overflow: hidden;
+}
+
+#scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; }
+
+/* The meridian was a drawn line here and is not any more. Over a 3D volume a
+   flat rule reads as chrome, not as an axis of the world. It survives as the
+   path the operation descends, and as --meridian everywhere else. */
+
+#stage {
+  position: fixed; inset: 0;
+  display: grid; place-items: center;
+  pointer-events: none;
+  padding: 6vh 8vw;
+}
+
+.office {
+  max-width: 46ch; text-align: center;
+  text-wrap: balance;
+}
+.office .spirit {
+  font-family: var(--mono);
+  font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--meridian);
+  margin-bottom: 1.6em;
+}
+.office .text {
+  font-size: clamp(1rem, 2.1vw, 1.55rem);
+  line-height: 1.55;
+  /* The office is Scot's words, not ours. Set it as a quotation. */
+  font-style: italic;
+  color: var(--ink);
+  text-shadow: 0 0 40px rgba(7,7,11,0.9);
+}
+.office .citation {
+  margin-top: 2em;
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em;
+  color: var(--dim);
+}
+
+/* Development only. Removed before the room. */
+#dev {
+  position: fixed; bottom: 1rem; left: 1rem;
+  font-family: var(--mono); font-size: 0.68rem; color: var(--dim);
+  pointer-events: auto; display: flex; gap: 0.75rem; align-items: center;
+}
+#dev input { width: 12rem; accent-color: var(--meridian); }
+
+/* ── The rite ───────────────────────────────────────────────────── */
+
+.office { transition: opacity 1.2s ease, transform 1.2s ease; }
+.office.receded { opacity: 0.30; transform: scale(0.86); }
+
+#stage { grid-auto-flow: row; gap: 3.5vh; align-content: center; }
+
+.rite { max-width: 60ch; text-align: center; pointer-events: none; }
+
+.question {
+  font-family: var(--mono); font-size: 0.70rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--meridian); margin-bottom: 1.8em;
+}
+
+/* The transcript. Each word's opacity is the machine's own confidence, so a
+   word it barely believed looks like one. */
+.kept { font-size: clamp(1.05rem, 2.2vw, 1.5rem); line-height: 1.6; color: var(--ink); }
+.kept .word { transition: opacity 0.4s; }
+
+/* Red is the operation and its remainder both. The machine's mark is thin and
+   even; a participant's would be thick and irregular. */
+.remainder {
+  margin-top: 2.2em; padding-top: 1.2em;
+  border-top: 1px solid color-mix(in srgb, var(--mark) 45%, transparent);
+  font-family: var(--mono); font-size: 0.78rem; line-height: 1.7;
+  color: var(--mark);
+}
+
+.gaps { margin-top: 0.9em; display: grid; gap: 0.35em; }
+.gap {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--mark) 72%, var(--dim));
+}
+
+#controls {
+  position: fixed; left: 50%; bottom: 3.2rem; transform: translateX(-50%);
+  display: flex; gap: 0.6rem; align-items: center;
+  font-family: var(--mono);
+}
+
+#controls button {
+  background: transparent; color: var(--ink);
+  border: 1px solid color-mix(in srgb, var(--ink) 28%, transparent);
+  padding: 0.62em 1.3em; border-radius: 2px;
+  font: inherit; font-size: 0.72rem; letter-spacing: 0.10em;
+  cursor: pointer; transition: border-color 0.3s, color 0.3s, opacity 0.3s;
+}
+#controls button:hover:not(:disabled) { border-color: var(--meridian); color: var(--meridian); }
+#controls button:disabled { opacity: 0.28; cursor: default; }
+#controls button.recording { border-color: var(--mark); color: var(--mark); }
+
+#status {
+  font-size: 0.68rem; color: var(--dim); letter-spacing: 0.08em;
+  min-width: 14ch;
+}

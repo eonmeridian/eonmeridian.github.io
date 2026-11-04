@@ -1,0 +1,14 @@
+{
+  "name": "monochord-wasm",
+  "type": "module",
+  "version": "0.1.0",
+  "license": "MIT",
+  "files": [
+    "monochord_wasm_bg.wasm",
+    "monochord_wasm.js"
+  ],
+  "main": "monochord_wasm.js",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}

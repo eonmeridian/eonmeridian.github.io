@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Generated diagram plate for ARCHIVE / NODE / MESH">
+<g fill="none" stroke="#7f7b73" stroke-width="1">
+<line x1="609" y1="322" x2="547" y2="401"/>
+<line x1="609" y1="322" x2="203" y2="235"/>
+<line x1="547" y1="401" x2="394" y2="464"/>
+<line x1="547" y1="401" x2="260" y2="406"/>
+<line x1="547" y1="401" x2="203" y2="235"/>
+<line x1="547" y1="401" x2="317" y2="175"/>
+<line x1="547" y1="401" x2="461" y2="166"/>
+<line x1="547" y1="401" x2="565" y2="212"/>
+<line x1="394" y1="464" x2="203" y2="235"/>
+<line x1="260" y1="406" x2="203" y2="235"/>
+<line x1="226" y1="343" x2="203" y2="235"/>
+<line x1="226" y1="343" x2="317" y2="175"/>
+<line x1="203" y1="235" x2="317" y2="175"/>
+<line x1="203" y1="235" x2="565" y2="212"/>
+<circle cx="400" cy="300" r="256" stroke-dasharray="4 8"/>
+</g>
+<g fill="#171715"><circle cx="609" cy="322" r="4"/><circle cx="547" cy="401" r="4"/><circle cx="394" cy="464" r="4"/><circle cx="260" cy="406" r="4"/><circle cx="226" cy="343" r="4"/><circle cx="203" cy="235" r="4"/><circle cx="317" cy="175" r="4"/><circle cx="461" cy="166" r="4"/><circle cx="565" cy="212" r="4"/></g>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">ARCHIVE / NODE / MESH</text><text x="720" y="560" text-anchor="end">APPLIANCE 01</text></g>
+</svg>

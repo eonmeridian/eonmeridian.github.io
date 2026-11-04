@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1456" height="1456" viewBox="0 0 1456 1456" font-family="ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace">
+<title>knowledge — stratigraphy</title>
+<style>svg{--bg:#07070b; --ink:#f4f4f2; --black:#f4f4f2; --red:#e2564d; --gold:#34e08a; --dim:#8b8b93;}
+  .wire{fill:none;stroke:#f4f4f2}
+  .wire.fam{stroke:#34e08a}
+  .box{fill:#07070b}
+  .box.active{stroke:#e2564d;fill:#e2564d;fill-opacity:.10}
+  .box.modulation{stroke:#34e08a;fill:#34e08a;fill-opacity:.10}
+  .lbl{font:600 29px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#f4f4f2}
+  .sm{font:27px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#8b8b93}
+  .it{font:italic 27px ui-serif,Georgia,'Times New Roman',serif;fill:#f4f4f2}
+  .ser{font:27px ui-serif,Georgia,'Times New Roman',serif;fill:#f4f4f2}
+  .cross{fill:none;stroke:#f4f4f2}
+  .region{fill:none;stroke:#34e08a;stroke-dasharray:8 4}
+  .feedback{fill:none;stroke:#34e08a;stroke-dasharray:8 4}
+  .band{stroke:none}
+  .grid{stroke:#8b8b93;stroke-width:1;opacity:.07}
+  .echo{fill:none;stroke:#f4f4f2}
+  .stave{stroke:#8b8b93;stroke-width:1;opacity:.35}
+  .mark{stroke:none;fill:#e2564d}
+  .axis{stroke:#f4f4f2;stroke-width:2;fill:none}
+  .tick{stroke:#8b8b93;stroke-width:1;fill:none}
+  .bore{stroke:#f4f4f2;stroke-width:1;stroke-dasharray:5 5;fill:none}
+  .lead{stroke:#8b8b93;stroke-width:1;fill:none}
+  .lead-dot{fill:#e2564d;stroke:none}
+  .rhiz{stroke:#f4f4f2;stroke-width:2;fill:none;opacity:.75}
+  .rhiz.fam{stroke:#34e08a}
+  .flight{stroke:#e2564d;stroke-width:2;fill:none;stroke-dasharray:2 6}
+  .entrance{stroke:#34e08a;stroke-width:1;fill:none;stroke-dasharray:4 4}
+  .sheet{fill:none;stroke:#8b8b93;stroke-width:1}
+  .cut{fill:none;stroke:#e2564d;stroke-width:2;stroke-dasharray:6 4}
+  .cut.even{stroke:#e2564d}
+  .cut.odd{stroke:#34e08a;fill:#34e08a;fill-opacity:.05}
+  .ident{stroke:#f4f4f2;fill:none;stroke-linecap:round}
+  .spot{fill:#f4f4f2;stroke:none}
+  .bed{fill:#34e08a;fill-opacity:.30;stroke:#f4f4f2;stroke-width:1}
+  .leg{fill:none;stroke:#f4f4f2;stroke-width:2;opacity:.85}
+  .faultline{fill:none;stroke:#e2564d;stroke-width:2;stroke-dasharray:6 3}
+  .strand{fill:none;stroke:#f4f4f2;stroke-linecap:round}
+  .strand.fam{stroke:#34e08a}
+  .strand.over{stroke-width:4}
+  .strand.under{stroke-width:3;opacity:.65}
+  .closure{fill:none;stroke:#34e08a;stroke-width:2;stroke-dasharray:4 3}
+  .rule{stroke:#f4f4f2;stroke-width:1.5;fill:none}
+  .relief{fill:#34e08a;fill-opacity:.35;stroke:none}
+  .ridge{fill:none;stroke:#f4f4f2;stroke-width:2}
+  .contour{stroke:#8b8b93;stroke-width:1;opacity:.4;fill:none}
+  .flood{fill:#8b8b93;fill-opacity:.10;stroke:none}
+  .corr{fill:none;stroke:#8b8b93;stroke-width:1;opacity:.55}
+  .panel{fill:none;stroke:#8b8b93;stroke-width:1;opacity:.55}
+  .quad{font:600 84px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#34e08a;opacity:.55}
+  .mapln{fill:none;stroke:#34e08a;stroke-width:1;stroke-dasharray:6 6;opacity:.55}
+  .door{stroke:#07070b;stroke-width:3;fill:none}
+  .pinch{fill:none;stroke:#8b8b93;stroke-width:1}
+  .smoothfield{fill:#07070b;stroke:#34e08a;stroke-width:2}
+  .striated{fill:#8b8b93;opacity:.25}
+  .nomad{stroke:#34e08a;stroke-width:1;fill:none;opacity:.7}
+  .fan{stroke:#e2564d;stroke-width:1;fill:none;opacity:.8}
+  .pt{fill:#e2564d;stroke:none}
+</style>
+<rect x="0" y="0" width="1456" height="1456" fill="#07070b"/>
+<defs>
+<pattern id="tx0" patternUnits="userSpaceOnUse" width="12" height="12" fill="#8b8b93"><circle cx="5" cy="0" r="1"/><circle cx="3" cy="3" r="1"/><circle cx="2" cy="10" r="1"/></pattern>
+<pattern id="tx1" patternUnits="userSpaceOnUse" width="14" height="14" fill="#8b8b93"><circle cx="12" cy="5" r="1"/><circle cx="3" cy="3" r="1"/><circle cx="0" cy="5" r="1"/><circle cx="5" cy="5" r="1"/><circle cx="11" cy="8" r="1"/><circle cx="0" cy="6" r="1"/><circle cx="8" cy="6" r="1"/></pattern>
+<pattern id="tx2" patternUnits="userSpaceOnUse" width="16" height="16" fill="#8b8b93"><circle cx="8" cy="12" r="1"/><circle cx="15" cy="7" r="1"/><circle cx="11" cy="7" r="1"/><circle cx="5" cy="8" r="1"/><circle cx="8" cy="1" r="1"/><circle cx="2" cy="9" r="1"/><circle cx="13" cy="0" r="1"/><circle cx="0" cy="12" r="1"/><circle cx="6" cy="15" r="1"/><circle cx="5" cy="6" r="1"/><circle cx="4" cy="11" r="1"/></pattern>
+<pattern id="tx3" patternUnits="userSpaceOnUse" width="18" height="18" fill="#8b8b93"><circle cx="9" cy="9" r="1"/><circle cx="13" cy="13" r="1"/><circle cx="17" cy="3" r="1"/><circle cx="0" cy="17" r="1"/><circle cx="7" cy="15" r="1"/><circle cx="17" cy="15" r="1"/><circle cx="13" cy="12" r="1"/><circle cx="11" cy="10" r="1"/><circle cx="3" cy="14" r="1"/><circle cx="7" cy="14" r="1"/><circle cx="15" cy="4" r="1"/><circle cx="9" cy="1" r="1"/><circle cx="10" cy="4" r="1"/><circle cx="17" cy="5" r="1"/><circle cx="5" cy="13" r="1"/></pattern>
+<path id="bed0" d="M 604 336 L 628 335 L 652 336 L 676 336 L 700 336 L 724 336 L 748 336 L 772 337 L 796 337 L 820 337 L 844 336 L 868 336 L 892 337 L 916 335 L 940 336 L 964 337 L 988 336 L 1012 335 L 1036 335 L 1060 334 L 1084 335 L 1084 650 L 1060 649 L 1036 650 L 1012 650 L 988 649 L 964 647 L 940 649 L 916 649 L 892 648 L 868 648 L 844 646 L 820 648 L 796 647 L 772 646 L 748 648 L 724 648 L 700 646 L 676 647 L 652 646 L 628 646 L 604 646 Z"/>
+<clipPath id="clipbed0" clipPathUnits="userSpaceOnUse"><use href="#bed0"/></clipPath>
+<path id="bed1" d="M 360 649 L 384 649 L 408 649 L 432 649 L 456 649 L 480 648 L 480 766 L 456 765 L 432 767 L 408 768 L 384 770 L 360 769 Z"/>
+<clipPath id="clipbed1" clipPathUnits="userSpaceOnUse"><use href="#bed1"/></clipPath>
+<path id="bed2" d="M 482 767 L 506 767 L 530 769 L 554 766 L 578 762 L 602 765 L 602 891 L 578 892 L 554 888 L 530 886 L 506 886 L 482 886 Z"/>
+<clipPath id="clipbed2" clipPathUnits="userSpaceOnUse"><use href="#bed2"/></clipPath>
+<path id="bed3" d="M 970 887 L 994 888 L 1018 888 L 1042 887 L 1066 889 L 1090 888 L 1090 1009 L 1066 1008 L 1042 1007 L 1018 1007 L 994 1006 L 970 1007 Z"/>
+<clipPath id="clipbed3" clipPathUnits="userSpaceOnUse"><use href="#bed3"/></clipPath>
+</defs>
+<defs>
+<marker id="arw" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#f4f4f2"/></marker>
+<marker id="arwg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#34e08a"/></marker>
+<symbol id="g-dot" overflow="visible"><circle r="7" class="mark"/></symbol>
+<symbol id="g-open" overflow="visible"><circle r="7" fill="none" stroke="#e2564d" stroke-width="2"/></symbol>
+<symbol id="g-bar" overflow="visible"><rect x="-7" y="-14" width="14" height="28" class="mark"/></symbol>
+</defs>
+<defs><pattern id="spine" patternUnits="userSpaceOnUse" width="112" height="112" patternTransform="rotate(0)"><path d="M 0 0 V 112 M 0 0 H 112" stroke="#8b8b93" stroke-width="1" fill="none"/></pattern></defs>
+<rect x="0" y="0" width="1456" height="1456" fill="url(#spine)" opacity="0.065"/>
+<text x="56" y="84" class="lbl" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">KNOWLEDGE</text><text x="56" y="84" class="lbl">KNOWLEDGE</text>
+<text x="56" y="116" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">scot-1665 · Buer · 57568f0ce42f… · lexicon v3 · stratigraphy · 7 rows · 7 cycles · 3 lanes</text><text x="56" y="116" class="sm">scot-1665 · Buer · 57568f0ce42f… · lexicon v3 · stratigraphy · 7 rows · 7 cycles · 3 lanes</text>
+<path d="M 238 325 C 246 326 254 325 262 325 S 278 325 286 325 S 302 325 310 325 S 326 325 334 324 S 350 325 358 325 S 374 325 382 326 S 398 325 406 325 S 422 324 430 325 S 446 326 454 325 S 470 326 478 327 S 494 327 502 327 S 518 327 526 326 S 542 325 550 325 S 566 326 574 326 S 590 326 598 326 S 614 326 622 326 S 638 327 646 327 S 662 327 670 327 S 686 326 694 326 S 710 326 718 326 S 734 326 742 326 S 758 327 766 326 S 782 326 790 327 S 806 327 814 327 S 830 325 838 325 S 854 325 862 326 S 878 326 886 325 S 902 324 910 324 S 926 325 934 326 S 950 325 958 324 S 974 325 982 325 S 998 326 1006 325 S 1022 326 1030 327 S 1046 327 1054 327 S 1070 328 1078 328" class="wire" stroke-width="2"/>
+<text x="1104" y="324" class="it" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">surface</text><text x="1104" y="324" class="it">surface</text>
+<use href="#bed0" fill="#34e08a" fill-opacity="0.110" data-span="54..105" data-name="Profile" data-obj="Profile" data-quote="he absolutely teacheth Philosophy moral and natural"/>
+<g clip-path="url(#clipbed0)"><rect x="604" y="330" width="488" height="324" fill="url(#tx0)" opacity="0.420"/></g>
+<use href="#bed0" fill="none" stroke="#f4f4f2" stroke-width="1"/>
+<text class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none"><textPath href="#bed0" xlink:href="#bed0" startOffset="4%">Profile</textPath></text><text class="sm"><textPath href="#bed0" xlink:href="#bed0" startOffset="4%">Profile</textPath></text>
+<use href="#bed1" fill="#34e08a" fill-opacity="0.165" data-span="149..177" data-name="Plant" data-obj="Plant" data-quote="he giveth the best familiars"/>
+<g clip-path="url(#clipbed1)"><rect x="360" y="642" width="122" height="132" fill="url(#tx1)" opacity="0.420"/></g>
+<use href="#bed1" fill="none" stroke="#f4f4f2" stroke-width="1"/>
+<path d="M 482 648 L 510 708 L 482 768" fill="none" stroke="#8b8b93" stroke-width="1" stroke-dasharray="2 3"/>
+<text class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none"><textPath href="#bed1" xlink:href="#bed1" startOffset="4%">Plant</textPath></text><text class="sm"><textPath href="#bed1" xlink:href="#bed1" startOffset="4%">Plant</textPath></text>
+<use href="#bed2" fill="#34e08a" fill-opacity="0.220" data-span="107..122" data-name="Encounter" data-obj="Encounter" data-quote="and also Logick"/>
+<g clip-path="url(#clipbed2)"><rect x="482" y="762" width="122" height="132" fill="url(#tx2)" opacity="0.420"/></g>
+<use href="#bed2" fill="none" stroke="#f4f4f2" stroke-width="1"/>
+<path d="M 604 768 L 632 828 L 604 888" fill="none" stroke="#8b8b93" stroke-width="1" stroke-dasharray="2 3"/>
+<text class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none"><textPath href="#bed2" xlink:href="#bed2" startOffset="4%">Encounter</textPath></text><text class="sm"><textPath href="#bed2" xlink:href="#bed2" startOffset="4%">Encounter</textPath></text>
+<use href="#bed3" fill="#34e08a" fill-opacity="0.275" data-span="128..147" data-name="Season" data-obj="Season" data-quote="the vertue of Herbs"/>
+<g clip-path="url(#clipbed3)"><rect x="970" y="882" width="122" height="132" fill="url(#tx3)" opacity="0.420"/></g>
+<use href="#bed3" fill="none" stroke="#f4f4f2" stroke-width="1"/>
+<text class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none"><textPath href="#bed3" xlink:href="#bed3" startOffset="4%">Season</textPath></text><text class="sm"><textPath href="#bed3" xlink:href="#bed3" startOffset="4%">Season</textPath></text>
+<path d="M 726 316 V 1018" class="bore"/>
+<text x="732" y="312" class="it" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">core at row 4 · cuts 1 beds</text><text x="732" y="312" class="it">core at row 4 · cuts 1 beds</text>
+<path d="M 216 336 V 1008" class="axis"/>
+<path d="M 207 336 H 216 M 211 560 H 216 M 211 784 H 216 M 211 1008 H 216" class="tick"/>
+<text x="203" y="340" class="sm" text-anchor="end" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">0</text><text x="203" y="340" class="sm" text-anchor="end">0</text>
+<text x="203" y="564" class="sm" text-anchor="end" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">1</text><text x="203" y="564" class="sm" text-anchor="end">1</text>
+<text x="203" y="788" class="sm" text-anchor="end" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">2</text><text x="203" y="788" class="sm" text-anchor="end">2</text>
+<text x="203" y="1012" class="sm" text-anchor="end" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">3</text><text x="203" y="1012" class="sm" text-anchor="end">3</text>
+<text x="170" y="672" class="sm" text-anchor="middle" transform="rotate(-90 170 672)" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">depth of listening (rank)</text><text x="170" y="672" class="sm" text-anchor="middle" transform="rotate(-90 170 672)">depth of listening (rank)</text>
+<path d="M 238 1036 H 1092" class="axis" marker-end="url(#arw)"/>
+<path d="M 238 1036 V 1045 M 360 1036 V 1041 M 482 1036 V 1041 M 604 1036 V 1041 M 726 1036 V 1041 M 848 1036 V 1045 M 970 1036 V 1041 M 1092 1036 V 1041" class="tick"/>
+<text x="238" y="1062" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">deposition → 7 rows</text><text x="238" y="1062" class="sm">deposition → 7 rows</text>
+<circle cx="1084" cy="492" r="2" class="lead-dot"/>
+<path d="M 1084 492 L 1118 492 H 1132" class="lead"/>
+<text x="1136" y="496" class="lbl" text-anchor="start" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">its record</text><text x="1136" y="496" class="lbl" text-anchor="start">its record</text>
+<text x="1136" y="508" class="sm" text-anchor="start" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">lives 4 rows · rows 3–7</text><text x="1136" y="508" class="sm" text-anchor="start">lives 4 rows · rows 3–7</text>
+<circle cx="474" cy="708" r="2" class="lead-dot"/>
+<path d="M 474 708 L 1118 708 H 1132" class="lead"/>
+<text x="1136" y="712" class="lbl" text-anchor="start" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">the plant met</text><text x="1136" y="712" class="lbl" text-anchor="start">the plant met</text>
+<text x="1136" y="724" class="sm" text-anchor="start" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">lives 1 rows · rows 1–2</text><text x="1136" y="724" class="sm" text-anchor="start">lives 1 rows · rows 1–2</text>
+<circle cx="596" cy="828" r="2" class="lead-dot"/>
+<path d="M 596 828 L 1118 828 H 1132" class="lead"/>
+<text x="1136" y="832" class="lbl" text-anchor="start" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">how it was met</text><text x="1136" y="832" class="lbl" text-anchor="start">how it was met</text>
+<text x="1136" y="844" class="sm" text-anchor="start" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">lives 1 rows · rows 2–3</text><text x="1136" y="844" class="sm" text-anchor="start">lives 1 rows · rows 2–3</text>
+<circle cx="1084" cy="948" r="2" class="lead-dot"/>
+<path d="M 1084 948 L 1118 948 H 1132" class="lead"/>
+<text x="1136" y="952" class="lbl" text-anchor="start" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">the season</text><text x="1136" y="952" class="lbl" text-anchor="start">the season</text>
+<text x="1136" y="964" class="sm" text-anchor="start" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">lives 1 rows · rows 6–7</text><text x="1136" y="964" class="sm" text-anchor="start">lives 1 rows · rows 6–7</text>
+<text x="244" y="348" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">S0</text><text x="244" y="348" class="sm">S0</text>
+<text x="244" y="660" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">S1</text><text x="244" y="660" class="sm">S1</text>
+<text x="244" y="780" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">S2</text><text x="244" y="780" class="sm">S2</text>
+<text x="244" y="900" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">S3</text><text x="244" y="900" class="sm">S3</text>
+<g transform="translate(3,3)" opacity="0.024"><use href="#bed0" fill="none" stroke="#f4f4f2" stroke-width="1"/><use href="#bed1" fill="none" stroke="#f4f4f2" stroke-width="1"/><use href="#bed2" fill="none" stroke="#f4f4f2" stroke-width="1"/><use href="#bed3" fill="none" stroke="#f4f4f2" stroke-width="1"/></g>
+<g transform="translate(6,6)" opacity="0.016"><use href="#bed0" fill="none" stroke="#f4f4f2" stroke-width="1"/><use href="#bed1" fill="none" stroke="#f4f4f2" stroke-width="1"/><use href="#bed2" fill="none" stroke="#f4f4f2" stroke-width="1"/><use href="#bed3" fill="none" stroke="#f4f4f2" stroke-width="1"/></g>
+<g transform="translate(9,9)" opacity="0.012"><use href="#bed0" fill="none" stroke="#f4f4f2" stroke-width="1"/><use href="#bed1" fill="none" stroke="#f4f4f2" stroke-width="1"/><use href="#bed2" fill="none" stroke="#f4f4f2" stroke-width="1"/><use href="#bed3" fill="none" stroke="#f4f4f2" stroke-width="1"/></g>
+<text x="84" y="1372" class="it" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">depth = rank(lifespan) · thickness ∝ lifespan · extent = [born, dies) · 4 beds over 7 rows</text><text x="84" y="1372" class="it">depth = rank(lifespan) · thickness ∝ lifespan · extent = [born, dies) · 4 beds over 7 rows</text>
+<g transform="translate(238,1078)">
+<rect x="0" y="0" width="22" height="10" class="bed"/>
+<text x="30" y="4" class="lbl" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">stratum</text><text x="30" y="4" class="lbl">stratum</text>
+<text x="30" y="15" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">laid down between born and dies</text><text x="30" y="15" class="sm">laid down between born and dies</text>
+<path d="M 0 32 H 22" class="pinch" stroke-width="2" stroke-dasharray="2 3"/>
+<text x="30" y="36" class="lbl" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">pinch-out</text><text x="30" y="36" class="lbl">pinch-out</text>
+<text x="30" y="47" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">the object stops being live</text><text x="30" y="47" class="sm">the object stops being live</text>
+<path d="M 0 64 H 22" class="wire" stroke-width="2" stroke-dasharray="1 5"/>
+<text x="30" y="68" class="lbl" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">bore</text><text x="30" y="68" class="lbl">bore</text>
+<text x="30" y="79" class="sm" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">the core sample</text><text x="30" y="79" class="sm">the core sample</text>
+</g>
+<text x="1288" y="1428" class="it" text-anchor="end" style="stroke:#07070b;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">potential sounds not yet heard.</text><text x="1288" y="1428" class="it" text-anchor="end">potential sounds not yet heard.</text>
+</svg>

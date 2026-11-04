@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Generated diagram plate for THREAD / AGENDA / DECISION">
+<g fill="none" stroke="#7f7b73" stroke-width="1">
+<rect x="84" y="111" width="92" height="38" fill="#e6e2d7"/>
+<rect x="84" y="281" width="92" height="38" fill="#e6e2d7"/>
+<rect x="84" y="451" width="92" height="38" fill="#e6e2d7"/>
+<rect x="274" y="171" width="92" height="38" fill="#e6e2d7"/>
+<rect x="274" y="391" width="92" height="38" fill="#e6e2d7"/>
+<path d="M176 130 C225 130 225 190 274 190"/>
+<path d="M176 300 C225 300 225 190 274 190"/>
+<path d="M176 300 C225 300 225 410 274 410"/>
+<path d="M176 470 C225 470 225 410 274 410"/>
+<rect x="464" y="111" width="92" height="38" fill="#e6e2d7"/>
+<rect x="464" y="281" width="92" height="38" fill="#e6e2d7"/>
+<rect x="464" y="451" width="92" height="38" fill="#e6e2d7"/>
+<path d="M366 190 C415 190 415 130 464 130"/>
+<path d="M366 190 C415 190 415 300 464 300"/>
+<path d="M366 410 C415 410 415 300 464 300"/>
+<path d="M366 410 C415 410 415 470 464 470"/>
+<rect x="654" y="171" width="92" height="38" fill="#e6e2d7"/>
+<rect x="654" y="391" width="92" height="38" fill="#e6e2d7"/>
+<path d="M556 130 C605 130 605 190 654 190"/>
+<path d="M556 300 C605 300 605 190 654 190"/>
+<path d="M556 300 C605 300 605 410 654 410"/>
+<path d="M556 470 C605 470 605 190 654 190"/>
+<path d="M556 470 C605 470 605 410 654 410"/>
+</g>
+<g fill="#171715"><circle cx="130" cy="130" r="3"/><circle cx="130" cy="300" r="3"/><circle cx="130" cy="470" r="3"/><circle cx="320" cy="190" r="3"/><circle cx="320" cy="410" r="3"/><circle cx="510" cy="130" r="3"/><circle cx="510" cy="300" r="3"/><circle cx="510" cy="470" r="3"/><circle cx="700" cy="190" r="3"/><circle cx="700" cy="410" r="3"/></g>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">THREAD / AGENDA / DECISION</text><text x="720" y="560" text-anchor="end">WORKBENCH 02</text></g>
+</svg>

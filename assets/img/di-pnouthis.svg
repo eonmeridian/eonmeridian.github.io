@@ -1,0 +1,203 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="912" height="1044" viewBox="0 0 912 1044" font-family="ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace">
+<title>rite — string diagram</title>
+<style>svg{--bg:#ffffff; --ink:#111111; --black:#000000; --red:#8b0000; --gold:#b8860b; --dim:#666666;}
+  .wire{fill:none;stroke:#000000}
+  .wire.fam{stroke:#b8860b}
+  .box{fill:#ffffff}
+  .box.active{stroke:#8b0000;fill:#8b0000;fill-opacity:.10}
+  .box.modulation{stroke:#b8860b;fill:#b8860b;fill-opacity:.10}
+  .lbl{font:600 13px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#111111}
+  .sm{font:11px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#666666}
+  .it{font:italic 11px ui-serif,Georgia,'Times New Roman',serif;fill:#111111}
+  .ser{font:11px ui-serif,Georgia,'Times New Roman',serif;fill:#111111}
+  .cross{fill:none;stroke:#000000}
+  .region{fill:none;stroke:#b8860b;stroke-dasharray:8 4}
+  .feedback{fill:none;stroke:#b8860b;stroke-dasharray:8 4}
+  .band{stroke:none}
+  .grid{stroke:#666666;stroke-width:1;opacity:.07}
+  .echo{fill:none;stroke:#000000}
+  .stave{stroke:#666666;stroke-width:1;opacity:.35}
+  .mark{stroke:none;fill:#8b0000}
+  .axis{stroke:#000000;stroke-width:2;fill:none}
+  .tick{stroke:#666666;stroke-width:1;fill:none}
+  .bore{stroke:#000000;stroke-width:1;stroke-dasharray:5 5;fill:none}
+  .lead{stroke:#666666;stroke-width:1;fill:none}
+  .lead-dot{fill:#8b0000;stroke:none}
+  .rhiz{stroke:#000000;stroke-width:2;fill:none;opacity:.75}
+  .rhiz.fam{stroke:#b8860b}
+  .flight{stroke:#8b0000;stroke-width:2;fill:none;stroke-dasharray:2 6}
+  .entrance{stroke:#b8860b;stroke-width:1;fill:none;stroke-dasharray:4 4}
+  .sheet{fill:none;stroke:#666666;stroke-width:1}
+  .cut{fill:none;stroke:#8b0000;stroke-width:2;stroke-dasharray:6 4}
+  .cut.even{stroke:#8b0000}
+  .cut.odd{stroke:#b8860b;fill:#b8860b;fill-opacity:.05}
+  .ident{stroke:#000000;fill:none;stroke-linecap:round}
+  .spot{fill:#000000;stroke:none}
+  .bed{fill:#b8860b;fill-opacity:.30;stroke:#000000;stroke-width:1}
+  .leg{fill:none;stroke:#000000;stroke-width:2;opacity:.85}
+  .faultline{fill:none;stroke:#8b0000;stroke-width:2;stroke-dasharray:6 3}
+  .strand{fill:none;stroke:#000000;stroke-linecap:round}
+  .strand.fam{stroke:#b8860b}
+  .strand.over{stroke-width:4}
+  .strand.under{stroke-width:3;opacity:.65}
+  .closure{fill:none;stroke:#b8860b;stroke-width:2;stroke-dasharray:4 3}
+  .rule{stroke:#000000;stroke-width:1.5;fill:none}
+  .relief{fill:#b8860b;fill-opacity:.35;stroke:none}
+  .ridge{fill:none;stroke:#000000;stroke-width:2}
+  .contour{stroke:#666666;stroke-width:1;opacity:.4;fill:none}
+  .flood{fill:#666666;fill-opacity:.10;stroke:none}
+  .corr{fill:none;stroke:#666666;stroke-width:1;opacity:.55}
+  .panel{fill:none;stroke:#666666;stroke-width:1;opacity:.55}
+  .quad{font:600 36px ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;fill:#b8860b;opacity:.55}
+  .mapln{fill:none;stroke:#b8860b;stroke-width:1;stroke-dasharray:6 6;opacity:.55}
+  .door{stroke:#ffffff;stroke-width:3;fill:none}
+  .pinch{fill:none;stroke:#666666;stroke-width:1}
+  .smoothfield{fill:#ffffff;stroke:#b8860b;stroke-width:2}
+  .striated{fill:#666666;opacity:.25}
+  .nomad{stroke:#b8860b;stroke-width:1;fill:none;opacity:.7}
+  .fan{stroke:#8b0000;stroke-width:1;fill:none;opacity:.8}
+  .pt{fill:#8b0000;stroke:none}
+</style>
+<rect x="0" y="0" width="912" height="1044" fill="#ffffff"/>
+<defs>
+<marker id="arw" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#000000"/></marker>
+<marker id="arwg" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#b8860b"/></marker>
+<symbol id="g-dot" overflow="visible"><circle r="3" class="mark"/></symbol>
+<symbol id="g-open" overflow="visible"><circle r="3" fill="none" stroke="#8b0000" stroke-width="2"/></symbol>
+<symbol id="g-bar" overflow="visible"><rect x="-3" y="-6" width="6" height="12" class="mark"/></symbol>
+</defs>
+<defs><pattern id="spine" patternUnits="userSpaceOnUse" width="48" height="48" patternTransform="rotate(0)"><path d="M 0 0 V 48 M 0 0 H 48" stroke="#666666" stroke-width="1" fill="none"/></pattern></defs>
+<rect x="0" y="0" width="912" height="1044" fill="url(#spine)" opacity="0.042"/>
+<rect x="0" y="132" width="912" height="60" class="band" fill="#b8860b" fill-opacity="0.055"/>
+<rect x="0" y="192" width="912" height="60" class="band" fill="#b8860b" fill-opacity="0.055"/>
+<rect x="0" y="492" width="912" height="60" class="band" fill="#b8860b" fill-opacity="0.055"/>
+<rect x="0" y="552" width="912" height="60" class="band" fill="#b8860b" fill-opacity="0.055"/>
+<rect x="0" y="612" width="912" height="60" class="band" fill="#b8860b" fill-opacity="0.055"/>
+<rect x="0" y="672" width="912" height="60" class="band" fill="#b8860b" fill-opacity="0.055"/>
+<rect x="0" y="732" width="912" height="60" class="band" fill="#b8860b" fill-opacity="0.055"/>
+<rect x="0" y="792" width="912" height="60" class="band" fill="#b8860b" fill-opacity="0.055"/>
+<rect x="0" y="852" width="912" height="60" class="band" fill="#b8860b" fill-opacity="0.055"/>
+<text x="24" y="36" class="lbl" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">RITE</text><text x="24" y="36" class="lbl">RITE</text>
+<text x="24" y="52" class="sm" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">pgm-i-42-pnouthis.txt · 8698aa5a6c18… · lexicon v3 · string · 14 rows · 44 cycles · 6 lanes</text><text x="24" y="52" class="sm">pgm-i-42-pnouthis.txt · 8698aa5a6c18… · lexicon v3 · string · 14 rows · 44 cycles · 6 lanes</text>
+<rect x="312" y="484" width="144" height="316" class="region" fill="#b8860b" fill-opacity="0.040" stroke-width="2" rx="6"/>
+<path d="M 456 800 C 492 800 492 484 456 484" class="feedback" stroke-width="2" marker-end="url(#arwg)"/>
+<text x="496" y="642" class="sm" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">×7</text><text x="496" y="642" class="sm">×7</text>
+<path d="M 72 72 V 84" fill="none" class="wire" stroke-width="3" data-span="242..285" data-name="Operator" data-obj="Operator" data-quote="you have clothed yourself in a pure garment" marker-end="url(#arw)"><title>Operator — you have clothed yourself in a pure garment</title></path>
+<path d="M 34 108 L 72 132 V 132" fill="none" class="wire" stroke-width="3" data-span="242..285" data-name="Operator" data-obj="Operator" data-quote="you have clothed yourself in a pure garment" marker-end="url(#arw)"><title>Operator — you have clothed yourself in a pure garment</title></path>
+<path d="M 40 168 L 72 192 V 252" fill="none" class="wire" stroke-width="3" data-span="242..285" data-name="Operator" data-obj="Operator" data-quote="you have clothed yourself in a pure garment" marker-end="url(#arw)"><title>Operator — you have clothed yourself in a pure garment</title></path>
+<path d="M 64 288 L 72 312 V 792" fill="none" class="wire" stroke-width="3" data-span="242..285" data-name="Operator" data-obj="Operator" data-quote="you have clothed yourself in a pure garment" marker-end="url(#arw)"><title>Operator — you have clothed yourself in a pure garment</title></path>
+<path d="M 104 828 L 72 852 V 912" fill="none" class="wire" stroke-width="3" data-span="2184..2214" data-name="Adept" data-obj="Adept" data-quote="you will be worshiped as a god" marker-end="url(#arw)"><title>Adept — you will be worshiped as a god</title></path>
+<path d="M 56 108 L 168 132 V 192" fill="none" class="wire fam" stroke-width="3" data-span="324..353" data-name="Dark" data-obj="Dark" data-quote="the sun's orb is disappearing" marker-end="url(#arw)"><title>Dark — the sun's orb is disappearing</title></path>
+<path d="M 72 168 L 168 192 V 252" fill="none" class="wire" stroke-width="3" data-span="212..235" data-name="Roof" data-obj="Roof" data-quote="go up onto a lofty roof" marker-end="url(#arw)"><title>Roof — go up onto a lofty roof</title></path>
+<path d="M 144 288 L 168 312 V 312" fill="none" class="wire" stroke-width="3" data-span="637..685" data-name="Falcon" data-obj="Falcon" data-quote="a falcon will fly down and stand in front of you" marker-end="url(#arw)"><title>Falcon — a falcon will fly down and stand in front of you</title></path>
+<path d="M 152 348 L 168 372 V 372" fill="none" class="wire" stroke-width="3" data-span="731..755" data-name="Stone" data-obj="Stone" data-quote="dropping an oblong stone" marker-end="url(#arw)"><title>Stone — dropping an oblong stone</title></path>
+<path d="M 152 408 L 168 432 V 612" fill="none" class="wire" stroke-width="3" data-span="953..977" data-name="Amulet" data-obj="Amulet" data-quote="wear it around your neck" marker-end="url(#arw)"><title>Amulet — wear it around your neck</title></path>
+<path d="M 160 648 L 168 672 V 792" fill="none" class="wire" stroke-width="2" stroke-dasharray="8 4" data-span="953..977" data-name="Amulet" data-obj="Amulet" data-quote="wear it around your neck" marker-end="url(#arw)"><title>Amulet — wear it around your neck</title></path>
+<path d="M 168 852 V 912" fill="none" class="wire fam" stroke-width="3" data-span="324..353" data-name="Dark" data-obj="Dark" data-quote="the sun's orb is disappearing" marker-end="url(#arw)"><title>Dark — the sun's orb is disappearing</title></path>
+<path d="M 77 108 L 264 132 V 192" fill="none" class="wire fam" stroke-width="3" data-span="324..353" data-name="Dark" data-obj="Dark" data-quote="the sun's orb is disappearing" marker-end="url(#arw)"><title>Dark — the sun's orb is disappearing</title></path>
+<path d="M 248 228 L 264 252 V 432" fill="none" class="wire fam" stroke-width="3" data-span="445..463" data-name="Sunlit" data-obj="Sunlit" data-quote="When
+the sun rises" marker-end="url(#arw)"><title>Sunlit — When
+the sun rises</title></path>
+<path d="M 248 468 L 264 492 V 612" fill="none" class="wire fam" stroke-width="3" data-span="324..353" data-name="Dark" data-obj="Dark" data-quote="the sun's orb is disappearing" marker-end="url(#arw)"><title>Dark — the sun's orb is disappearing</title></path>
+<path d="M 264 612 V 624" fill="none" class="wire" stroke-width="2" stroke-dasharray="8 4" data-span="1278..1303" data-name="Angel" data-obj="Angel" data-quote="you will behold the angel" marker-end="url(#arw)"><title>Angel — you will behold the angel</title></path>
+<path d="M 240 648 L 264 672 V 672" fill="none" class="wire" stroke-width="2" stroke-dasharray="8 4" data-span="1610..1648" data-name="Assistant" data-obj="Assistant" data-quote="a friendly assistant, a beneficent god" marker-end="url(#arw)"><title>Assistant — a friendly assistant, a beneficent god</title></path>
+<path d="M 248 708 L 264 732 V 732" fill="none" class="wire" stroke-width="2" stroke-dasharray="8 4" data-span="1879..1896" data-name="Task" data-obj="Task" data-quote="Perform
+this task" marker-end="url(#arw)"><title>Task — Perform
+this task</title></path>
+<path d="M 264 792 V 852" fill="none" class="wire fam" stroke-width="2" stroke-dasharray="8 4" data-span="324..353" data-name="Dark" data-obj="Dark" data-quote="the sun's orb is disappearing" marker-end="url(#arw)"><title>Dark — the sun's orb is disappearing</title></path>
+<path d="M 360 492 V 504" fill="none" class="wire" stroke-width="2" stroke-dasharray="1 5" data-span="1150..1177" data-name="Star" data-obj="Star" data-quote="a blazing star will descend" marker-end="url(#arw)"><title>Star — a blazing star will descend</title></path>
+<path d="M 322 528 L 360 552 V 612" fill="none" class="wire" stroke-width="2" stroke-dasharray="8 4" data-span="1278..1303" data-name="Angel" data-obj="Angel" data-quote="you will behold the angel" marker-end="url(#arw)"><title>Angel — you will behold the angel</title></path>
+<path d="M 360 612 V 792" fill="none" class="wire fam" stroke-width="2" stroke-dasharray="8 4" data-span="324..353" data-name="Dark" data-obj="Dark" data-quote="the sun's orb is disappearing" marker-end="url(#arw)"><title>Dark — the sun's orb is disappearing</title></path>
+<path d="M 344 528 L 360 552 V 852" fill="none" class="wire" stroke-width="2" stroke-dasharray="8 4" data-span="1150..1177" data-name="Star" data-obj="Star" data-quote="a blazing star will descend" marker-end="url(#arw)"><title>Star — a blazing star will descend</title></path>
+<path d="M 365 528 L 456 552 V 792" fill="none" class="wire" stroke-width="2" stroke-dasharray="8 4" data-span="1150..1177" data-name="Star" data-obj="Star" data-quote="a blazing star will descend" marker-end="url(#arw)"><title>Star — a blazing star will descend</title></path>
+<path d="M 360 552 L 264 612" class="cross" stroke-width="2"/>
+<path d="M 264 552 L 360 612" fill="none" stroke="#ffffff" stroke-width="7"/>
+<path d="M 264 552 L 360 612" class="cross" stroke-width="2"/>
+<g data-span="124..175" data-name="purify" data-node="b2" data-kind="binding" data-quote="abstain from animal food and from all uncleanliness"><rect x="24" y="72" width="64" height="36" rx="4" fill="#ffffff" stroke="none"/><rect x="24" y="72" width="64" height="36" rx="4" class="box active" stroke-width="3"/><title>abstain from animal food and from all uncleanliness</title></g>
+<use href="#g-dot" x="76" y="84"/>
+<g data-span="212..235" data-name="ascend" data-node="b5" data-kind="journey" data-quote="go up onto a lofty roof"><rect x="24" y="132" width="64" height="36" rx="4" fill="#ffffff" stroke="none"/><rect x="24" y="132" width="64" height="36" rx="4" class="box active" stroke-width="3"/><title>go up onto a lofty roof</title></g>
+<use href="#g-dot" x="76" y="144"/>
+<g data-span="445..494" data-name="sunrise" data-node="b9" data-kind="appearance" data-quote="When
+the sun rises, hail it as you shake its head"><rect x="216" y="192" width="64" height="36" rx="4" fill="#ffffff" stroke="none"/><rect x="216" y="192" width="64" height="36" rx="4" class="box active" stroke-width="3"/><title>When
+the sun rises, hail it as you shake its head</title></g>
+<use href="#g-open" x="268" y="204"/>
+<g data-span="500..555" data-name="hail" data-node="b11" data-kind="speech" data-quote="recite this sacred spell as you
+burn uncut frankincense"><rect x="24" y="252" width="160" height="36" rx="4" fill="#ffffff" stroke="none"/><rect x="24" y="252" width="160" height="36" rx="4" class="box active" stroke-width="3"/><title>recite this sacred spell as you
+burn uncut frankincense</title></g>
+<use href="#g-dot" x="172" y="264"/>
+<g data-span="731..755" data-name="drop" data-node="b14" data-kind="taking" data-quote="dropping an oblong stone"><rect x="120" y="312" width="64" height="36" rx="4" fill="#ffffff" stroke="none"/><rect x="120" y="312" width="64" height="36" rx="4" class="box active" stroke-width="3"/><title>dropping an oblong stone</title></g>
+<use href="#g-dot" x="172" y="324"/>
+<g data-span="842..879" data-name="engrave" data-node="b16" data-kind="binding" data-quote="carve it at once and engrave it later"><rect x="120" y="372" width="64" height="36" rx="4" fill="#ffffff" stroke="none"/><rect x="120" y="372" width="64" height="36" rx="4" class="box active" stroke-width="3"/><title>carve it at once and engrave it later</title></g>
+<use href="#g-dot" x="172" y="384"/>
+<g data-span="980..1028" data-name="sunset" data-node="b18" data-kind="silencing" data-quote="But in the evening, go up to your housetop again"><rect x="216" y="432" width="64" height="36" rx="4" fill="#ffffff" stroke="none"/><rect x="216" y="432" width="64" height="36" rx="4" class="box modulation" stroke-width="3"/><title>But in the evening, go up to your housetop again</title></g>
+<use href="#g-bar" x="268" y="444"/>
+<g data-span="1232..1276" data-name="descend" data-node="b21" data-kind="appearance" data-quote="when the star has dissolved
+before your eyes"><rect x="312" y="492" width="64" height="36" rx="4" fill="#ffffff" stroke="none"/><rect x="312" y="492" width="64" height="36" rx="4" class="box active" stroke-width="3"/><title>when the star has dissolved
+before your eyes</title></g>
+<use href="#g-open" x="364" y="504"/>
+<g data-span="1468..1537" data-name="adjure" data-node="b26" data-kind="binding" data-quote="you adjure him with this oath that he meet you and remain inseparable"><rect x="120" y="612" width="160" height="36" rx="4" fill="#ffffff" stroke="none"/><rect x="120" y="612" width="160" height="36" rx="4" class="box active" stroke-width="3"/><title>you adjure him with this oath that he meet you and remain inseparable</title></g>
+<use href="#g-dot" x="268" y="624"/>
+<g data-span="1879..1920" data-name="command" data-node="b29" data-kind="command" data-quote="Perform
+this task, and he does it at once"><rect x="216" y="672" width="64" height="36" rx="4" fill="#ffffff" stroke="none"/><rect x="216" y="672" width="64" height="36" rx="4" class="box active" stroke-width="3"/><title>Perform
+this task, and he does it at once</title></g>
+<use href="#g-dot" x="268" y="684"/>
+<g data-span="2060..2088" data-name="dismiss" data-node="b31" data-kind="departure" data-quote="Go, lord, and he will depart"><rect x="216" y="732" width="64" height="36" rx="4" fill="#ffffff" stroke="none"/><rect x="216" y="732" width="64" height="36" rx="4" class="box modulation" stroke-width="3"/><title>Go, lord, and he will depart</title></g>
+<use href="#g-bar" x="268" y="744"/>
+<g data-span="2184..2247" data-name="deify" data-node="b35" data-kind="union" data-quote="you will be worshiped as a god since you have a god as a friend"><rect x="24" y="792" width="160" height="36" rx="4" fill="#ffffff" stroke="none"/><rect x="24" y="792" width="160" height="36" rx="4" class="box active" stroke-width="3"/><title>you will be worshiped as a god since you have a god as a friend</title></g>
+<use href="#g-dot" x="172" y="804"/>
+<circle cx="88" cy="90" r="2" class="lead-dot"/>
+<path d="M 88 90 L 730 132 H 744" class="lead"/>
+<text x="748" y="136" class="lbl" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">purify</text><text x="748" y="136" class="lbl" text-anchor="start">purify</text>
+<text x="748" y="148" class="sm" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">binding · 1→2</text><text x="748" y="148" class="sm" text-anchor="start">binding · 1→2</text>
+<circle cx="88" cy="150" r="2" class="lead-dot"/>
+<path d="M 88 150 L 730 204 H 744" class="lead"/>
+<text x="748" y="208" class="lbl" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">ascend</text><text x="748" y="208" class="lbl" text-anchor="start">ascend</text>
+<text x="748" y="220" class="sm" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">journey · 1→2</text><text x="748" y="220" class="sm" text-anchor="start">journey · 1→2</text>
+<circle cx="280" cy="210" r="2" class="lead-dot"/>
+<path d="M 280 210 L 730 276 H 744" class="lead"/>
+<text x="748" y="280" class="lbl" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">sunrise</text><text x="748" y="280" class="lbl" text-anchor="start">sunrise</text>
+<text x="748" y="292" class="sm" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">appearance · 1→1</text><text x="748" y="292" class="sm" text-anchor="start">appearance · 1→1</text>
+<circle cx="184" cy="270" r="2" class="lead-dot"/>
+<path d="M 184 270 L 730 348 H 744" class="lead"/>
+<text x="748" y="352" class="lbl" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">hail</text><text x="748" y="352" class="lbl" text-anchor="start">hail</text>
+<text x="748" y="364" class="sm" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">speech · 2→2</text><text x="748" y="364" class="sm" text-anchor="start">speech · 2→2</text>
+<circle cx="184" cy="330" r="2" class="lead-dot"/>
+<path d="M 184 330 L 730 420 H 744" class="lead"/>
+<text x="748" y="424" class="lbl" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">drop</text><text x="748" y="424" class="lbl" text-anchor="start">drop</text>
+<text x="748" y="436" class="sm" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">taking · 1→1</text><text x="748" y="436" class="sm" text-anchor="start">taking · 1→1</text>
+<circle cx="184" cy="390" r="2" class="lead-dot"/>
+<path d="M 184 390 L 730 492 H 744" class="lead"/>
+<text x="748" y="496" class="lbl" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">engrave</text><text x="748" y="496" class="lbl" text-anchor="start">engrave</text>
+<text x="748" y="508" class="sm" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">binding · 1→1</text><text x="748" y="508" class="sm" text-anchor="start">binding · 1→1</text>
+<circle cx="280" cy="450" r="2" class="lead-dot"/>
+<path d="M 280 450 L 730 564 H 744" class="lead"/>
+<text x="748" y="568" class="lbl" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">sunset</text><text x="748" y="568" class="lbl" text-anchor="start">sunset</text>
+<text x="748" y="580" class="sm" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">silencing · 1→1</text><text x="748" y="580" class="sm" text-anchor="start">silencing · 1→1</text>
+<circle cx="376" cy="510" r="2" class="lead-dot"/>
+<path d="M 376 510 L 730 636 H 744" class="lead"/>
+<text x="748" y="640" class="lbl" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">descend</text><text x="748" y="640" class="lbl" text-anchor="start">descend</text>
+<text x="748" y="652" class="sm" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">appearance · 1→2</text><text x="748" y="652" class="sm" text-anchor="start">appearance · 1→2</text>
+<circle cx="280" cy="630" r="2" class="lead-dot"/>
+<path d="M 280 630 L 730 708 H 744" class="lead"/>
+<text x="748" y="712" class="lbl" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">adjure</text><text x="748" y="712" class="lbl" text-anchor="start">adjure</text>
+<text x="748" y="724" class="sm" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">binding · 2→2</text><text x="748" y="724" class="sm" text-anchor="start">binding · 2→2</text>
+<circle cx="280" cy="690" r="2" class="lead-dot"/>
+<path d="M 280 690 L 730 780 H 744" class="lead"/>
+<text x="748" y="784" class="lbl" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">command</text><text x="748" y="784" class="lbl" text-anchor="start">command</text>
+<text x="748" y="796" class="sm" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">command · 1→1</text><text x="748" y="796" class="sm" text-anchor="start">command · 1→1</text>
+<circle cx="280" cy="750" r="2" class="lead-dot"/>
+<path d="M 280 750 L 730 852 H 744" class="lead"/>
+<text x="748" y="856" class="lbl" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">dismiss</text><text x="748" y="856" class="lbl" text-anchor="start">dismiss</text>
+<text x="748" y="868" class="sm" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">departure · 1→0</text><text x="748" y="868" class="sm" text-anchor="start">departure · 1→0</text>
+<circle cx="184" cy="810" r="2" class="lead-dot"/>
+<path d="M 184 810 L 730 924 H 744" class="lead"/>
+<text x="748" y="928" class="lbl" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">deify</text><text x="748" y="928" class="lbl" text-anchor="start">deify</text>
+<text x="748" y="940" class="sm" text-anchor="start" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">union · 2→1</text><text x="748" y="940" class="sm" text-anchor="start">union · 2→1</text>
+<text x="76" y="68" class="sm" text-anchor="middle" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">Operator</text><text x="76" y="68" class="sm" text-anchor="middle">Operator</text>
+<text x="172" y="68" class="sm" text-anchor="middle" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">Dark</text><text x="172" y="68" class="sm" text-anchor="middle">Dark</text>
+<text x="268" y="68" class="sm" text-anchor="middle" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">Dark</text><text x="268" y="68" class="sm" text-anchor="middle">Dark</text>
+<text x="364" y="68" class="sm" text-anchor="middle" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">Star</text><text x="364" y="68" class="sm" text-anchor="middle">Star</text>
+<text x="460" y="68" class="sm" text-anchor="middle" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">Star</text><text x="460" y="68" class="sm" text-anchor="middle">Star</text>
+<text x="36" y="1008" class="it" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">rite = deify ∘ dismiss ∘ command ∘ adjure ∘ descend ∘ sunset ∘ …</text><text x="36" y="1008" class="it">rite = deify ∘ dismiss ∘ command ∘ adjure ∘ descend ∘ sunset ∘ …</text>
+<text x="840" y="1032" class="it" text-anchor="end" style="stroke:#ffffff;stroke-width:4px;stroke-linejoin:round;stroke-opacity:.92;fill:none">no terminal.</text><text x="840" y="1032" class="it" text-anchor="end">no terminal.</text>
+</svg>

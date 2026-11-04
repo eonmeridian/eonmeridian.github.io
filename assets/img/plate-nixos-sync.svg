@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Generated diagram plate for REPOSITORY / COPY / MACHINE">
+<g fill="none" stroke="#7f7b73" stroke-width="1">
+<line x1="539" y1="333" x2="403" y2="437"/>
+<line x1="539" y1="333" x2="474" y2="143"/>
+<line x1="547" y1="423" x2="247" y2="225"/>
+<line x1="547" y1="423" x2="343" y2="157"/>
+<line x1="547" y1="423" x2="474" y2="143"/>
+<line x1="403" y1="437" x2="303" y2="428"/>
+<line x1="403" y1="437" x2="247" y2="225"/>
+<line x1="403" y1="437" x2="343" y2="157"/>
+<line x1="403" y1="437" x2="594" y2="228"/>
+<line x1="303" y1="428" x2="186" y2="326"/>
+<line x1="303" y1="428" x2="247" y2="225"/>
+<line x1="303" y1="428" x2="474" y2="143"/>
+<line x1="186" y1="326" x2="247" y2="225"/>
+<line x1="247" y1="225" x2="594" y2="228"/>
+<line x1="474" y1="143" x2="594" y2="228"/>
+<circle cx="400" cy="300" r="241" stroke-dasharray="4 8"/>
+</g>
+<g fill="#171715"><circle cx="539" cy="333" r="4"/><circle cx="547" cy="423" r="4"/><circle cx="403" cy="437" r="4"/><circle cx="303" cy="428" r="4"/><circle cx="186" cy="326" r="4"/><circle cx="247" cy="225" r="4"/><circle cx="343" cy="157" r="4"/><circle cx="474" cy="143" r="4"/><circle cx="594" cy="228" r="4"/></g>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">REPOSITORY / COPY / MACHINE</text><text x="720" y="560" text-anchor="end">TOOL 05</text></g>
+</svg>

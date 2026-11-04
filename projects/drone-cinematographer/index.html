@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Drone Cinematographer: Eon Meridian</title>
+<meta name="description" content="A crew of five planners turns a film description into a shot list, previsualizes it, and holds every move a fixed distance from the plant it films." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">35 / project</div>
+    <h1>Drone Cinematographer</h1>
+    <div class="smallcaps" style="margin-top:9px">A small drone that plans and flies documentary shots of plants without harming them</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / film / flight</div>
+</section>
+
+<p class="lead">A drone cinematographer for documentary work: it gets the shots a filmmaker cannot physically get, and asks whether an autonomous flier can compose cinema that respects its subject. The subjects follow the season; mullein and comfrey were the first worked example.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/drone-cinematographer-contact_sheet.png" alt="Contact sheet from a previsualized run of Elecampane, a study: one frame per shot." loading="lazy" /></div>
+      <figcaption class="smallcaps">Contact sheet from a previsualized run of Elecampane, a study: one frame per shot.</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>A crew of five</h2>
+<p>A script, director, cinematographer, lighting and editor plan and previsualize a documentary end to end. The creative side can only ask for a shot by name, subject and length; turning that into flight geometry is fixed, checked code below it, so nothing creative can command a motion directly. The director arranges the film in one of two arcs: a documentary arc (establish the place, introduce and study each subject, contrast them, resolve), or a study arc that moves from the plant to each of its parts in detail, its neighbours and its visitors. Lighting puts the drone on the sun side of the subject, so the light rakes rather than flares. The editor picks the best stretch of each take by how well it is composed.</p>
+<h2>Previsualization</h2>
+<p>Describe a film in film.toml (title, sun, plants with their parts and stand-offs, visitors such as bees, and optional hand-written beats) and the system renders a watchable synthetic cut, a contact sheet and a full record of every creative and safety decision in order. The renderer is deterministic, so the same film description gives the same frames every time, and the contact sheet works as a diff between runs. A browser panel edits the description, takes a location photo as a backdrop, and adds a plant from tape-measure numbers.</p>
+<h2>Rules it will not break</h2>
+<ul>
+<li>Visual line of sight at all times.</li>
+<li>No motion below the battery level needed to return.</li>
+<li>Emergency landing reachable in under 100 ms.</li>
+<li>A dropped frame over a corrupted take.</li>
+<li>No propwash on the subject: 1.5 m horizontal and 1.0 m vertical from any plant, checked along the whole path of a move, not just its ends, so a move cannot fly through a plant that both endpoints clear.</li>
+</ul>
+<p>That stand-off shapes the craft. At its closest legal distance a comfrey fills only about half the frame, so close shots of it are physically impossible, and the cinematographer chooses the tightest size it can reach and says so.</p>
+<h2>Flying it</h2>
+<p>A guarded flight console sends each command through the same battery and stand-off checks; a refused move is not attempted, and Ctrl-C lands the drone.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Camera</span><br>DJI Tello, 720p, about 13 minutes a flight</div>
+    <div class="side"><span class="smallcaps">Shots</span><br>establishing, push-in, pull-out, orbit, reveal, rise, descend, tracking, detail, dolly zoom, hold</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../daimon/">← Daimon</a></span>
+  <span><a href="../earshot/">Earshot →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

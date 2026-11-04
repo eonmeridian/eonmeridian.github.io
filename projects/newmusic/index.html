@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>newmusic: Eon Meridian</title>
+<meta name="description" content="Eight switches name qualities of music; the instrument aims at the combinations your own listening has never held together, and writes them out as scores." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">49 / project</div>
+    <h1>newmusic</h1>
+    <div class="smallcaps" style="margin-top:9px">An instrument whose controls are aesthetic markers rather than parameters</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / score / sound</div>
+</section>
+
+<p class="lead">Most recommenders converge: they model your ear and return more of what it already recognises. This one builds that model precisely and then runs it backwards, to find and play the combinations your ear has never had to hold.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/shot-newmusic.jpg" alt="Eight marker switches, each with what the analyzer measures for it." loading="lazy" /></div>
+      <figcaption class="smallcaps">Eight marker switches, each with what the analyzer measures for it.</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>The eight controls</h2>
+<p>Drone and modal grounding, improvisation as composition, polyphony and counterpoint, the sacred, archival and historical, voice as instrument, bass and low end forward, long-form patience, and variety and development. They come from a taste profile built around eleven anchors: Matana Roberts, Hildegard von Bingen, the motet repertoire, Dylan, live Dead, classical guitar, Miles, Cecil Taylor, jazz bass, Joni and Eno. Each marker is a score from 0 to 1, measured in plain code from the notes themselves.</p>
+<p>The eighth was not part of the original seven. It was added after the loop produced 654 notes over 602 seconds on a single pitch, a single duration and a single velocity, and the other seven scored that metronome a success.</p>
+<h2>Blind spots</h2>
+<p>Eight on-or-off markers give 256 cells, and the eleven anchors occupy 10 of them. A blind spot is an empty cell whose markers are each well supported across the corpus but which no single anchor holds together: bass-forward and sacred but not long-form, say. This instrument plays it. Blind spots are ranked by support times distance from anything occupied, so a distant cell built from familiar materials outranks a near one, and the instrument only aims at cells it has been seen to reach.</p>
+<h2>The loop</h2>
+<p>You set the controls; a generator running on your own machine proposes a score specification; plain code expands it into notes; analyzers measure what was actually produced; and an adjudicator checks whether it landed in the cell you aimed at, feeding the signed error on each marker back if it did not. The generator never declares its own output successful. Code measures it.</p>
+<h2>The interface</h2>
+<p>A page in your browser shows the controls, each with what its analyzer actually reads, and a map of all 256 cells: cells holding one of your anchors, cells the grammar has been seen to produce, and cells nothing has reached. Flipping a switch moves a cursor across the map, and clicking a cell sets the switches. Attempts stream in as they happen, showing where each one landed and how far off each marker was. Every attempt can be played back and rated on two separate sliders, would you listen to this, and does it sound like what was asked for, and the ratings are evidence about the analyzers, never an input to them. The audio is a preview from plain oscillators tuned in cents; the MIDI and MusicXML files are the output, and they go to your own instruments.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Output</span><br>MIDI (MPE) and MusicXML, for your own instruments</div>
+    <div class="side"><span class="smallcaps">Pitch</span><br>in cents, so microtonal material stays microtonal</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../epub-to-pdf/">← epub-to-pdf</a></span>
+  <span><a href="../nixos-sync/">nixos-sync →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

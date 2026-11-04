@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Diagram plate for STAGE / ROBOT / CUE">
+<rect width="800" height="600" fill="#f3f0e8"/>
+<rect x="150" y="140" width="420" height="290" fill="none" stroke="#171715"/>
+<line x1="150" y1="392" x2="570" y2="392" stroke="#7f7b73" stroke-dasharray="4 6"/>
+<circle cx="232" cy="214" r="19" fill="#a33327" fill-opacity=".14" stroke="#a33327" stroke-width="1.4"/>
+<circle cx="232" cy="214" r="3.5" fill="#171715"/>
+<path d="M232 233 C232 284 640 254 640 300" fill="none" stroke="#4a6f88" stroke-width="1" stroke-opacity=".55"/>
+<text x="232" y="188" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#514e48">R1</text>
+<circle cx="350" cy="190" r="19" fill="#a33327" fill-opacity=".14" stroke="#a33327" stroke-width="1.4"/>
+<circle cx="350" cy="190" r="3.5" fill="#171715"/>
+<path d="M350 209 C350 260 640 230 640 300" fill="none" stroke="#4a6f88" stroke-width="1" stroke-opacity=".55"/>
+<text x="350" y="164" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#514e48">R2</text>
+<circle cx="470" cy="226" r="19" fill="#a33327" fill-opacity=".14" stroke="#a33327" stroke-width="1.4"/>
+<circle cx="470" cy="226" r="3.5" fill="#171715"/>
+<path d="M470 245 C470 296 640 266 640 300" fill="none" stroke="#4a6f88" stroke-width="1" stroke-opacity=".55"/>
+<text x="470" y="200" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#514e48">R3</text>
+<circle cx="286" cy="320" r="19" fill="#a33327" fill-opacity=".14" stroke="#a33327" stroke-width="1.4"/>
+<circle cx="286" cy="320" r="3.5" fill="#171715"/>
+<path d="M286 339 C286 390 640 360 640 300" fill="none" stroke="#4a6f88" stroke-width="1" stroke-opacity=".55"/>
+<text x="286" y="294" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#514e48">R4</text>
+<circle cx="438" cy="336" r="19" fill="#a33327" fill-opacity=".14" stroke="#a33327" stroke-width="1.4"/>
+<circle cx="438" cy="336" r="3.5" fill="#171715"/>
+<path d="M438 355 C438 406 640 376 640 300" fill="none" stroke="#4a6f88" stroke-width="1" stroke-opacity=".55"/>
+<text x="438" y="310" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#514e48">R5</text>
+<rect x="612" y="272" width="56" height="56" fill="none" stroke="#171715"/>
+<text x="640" y="350" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#514e48">CONTROL</text>
+<text x="360" y="452" text-anchor="middle" font-family="Courier New, monospace" font-size="10" fill="#514e48">HOUSE</text>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">STAGE / ROBOT / CUE</text><text x="720" y="560" text-anchor="end">PLOT 01</text></g>
+</svg>
