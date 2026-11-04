@@ -2,16 +2,16 @@
 
 > Old practices, new instruments. Ritual technologies for futures held in common: art, infrastructures and herbal practice at the intersections of memory, networks, value, care and the more-than-human.
 
-Portfolio site for **Eon Meridian**, with the **Caerjar** landing page kept alongside it. Designed to live on GitHub Pages and grow into a place to publish code and writing.
+Portfolio site for **Eon Meridian**. The **Caerjar** landing page now lives in its own repo at https://caerjar.github.io/. Designed to live on GitHub Pages and grow into a place to publish code and writing.
 
-Two visual languages live here: the portfolio is editorial (paper, monospace, serif headings, hairline rules); Caerjar is a Klein-blue blueprint (cream paper, technical coordinate diagram, survey marks).
+The portfolio is editorial (paper, monospace, serif headings, hairline rules).
 
 ## Structure
 
 ```
 caerjar/
 ├── index.html            # Eon Meridian portfolio: hero, work cards, collaborations, about
-├── caerjar.html          # Caerjar landing page (a vessel for care), self-contained
+├── caerjar.html          # redirect to https://caerjar.github.io/ (kept so old links work)
 ├── projects/<slug>/      # one page per work, 21 of them
 │   └── index.html
 ├── assets/
@@ -23,7 +23,7 @@ caerjar/
 ```
 
 No framework, no build, no dependencies: plain static HTML served as-is. Edit a file directly and
-refresh. `caerjar.html` keeps its own inline CSS; the portfolio pages share `assets/site.css`,
+refresh. The portfolio pages share `assets/site.css`,
 because fifteen copies of one stylesheet is fifteen places to forget.
 
 ### Where the content comes from
@@ -117,8 +117,7 @@ After editing `tools/build.py`, run `python3 tools/build.py` and reload the page
 ## Publishing code alongside the site
 
 Drop projects in subfolders (e.g. `projects/<name>/`) and link them from the
-Selected Work list in `index.html` (or the Current Vessels panel in
-`caerjar.html`). Anything committed to the repo is served by Pages, so code,
+Selected Work list in `index.html`. Anything committed to the repo is served by Pages, so code,
 write-ups, and demos can all live here.
 
 ## Credit

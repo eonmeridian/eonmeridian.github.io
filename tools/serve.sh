@@ -15,7 +15,7 @@ echo "  Eon Meridian: local preview"
 echo "  ----------------------------"
 echo "  http://localhost:$PORT/                      the portfolio"
 echo "  http://localhost:$PORT/projects/heddatron/   any work page"
-echo "  http://localhost:$PORT/caerjar.html          the Caerjar page"
+echo "  http://localhost:$PORT/caerjar.html          redirects to caerjar.github.io"
 echo
 echo "  A plain file:// open will NOT work: the projects/<slug>/ links"
 echo "  need a server to resolve to their index.html. Use this."
