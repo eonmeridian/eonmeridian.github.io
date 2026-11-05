@@ -487,7 +487,7 @@ def build_index():
     <p>Eon Meridian is an artist, writer, technologist and herbalist working across computation,
     medicinal plants, ritual, sound, diagrams and resilient infrastructure. This site is an evolving
     record of works, collaborations, institutions and experiments. Its sibling,
-    <a href="caerjar.html">Caerjar</a>, is the vessel much of this work is built inside.</p>
+    <a href="https://caerjar.com">Caerjar</a>, is the vessel much of this work is built inside.</p>
     <p class="venues">Shown at {", ".join(VENUE_STRIP)}.</p>
     <p class="contact">Get in touch via Caerjar: <a href="mailto:hi@caerjar.com">hi@caerjar.com</a>
     <span class="place">New York</span></p>
