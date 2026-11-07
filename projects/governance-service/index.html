@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>governance-service: Eon Meridian</title>
+<meta name="description" content="Keeps a git commons&#x27; visibility matching what its admins actually decided." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">73 / project</div>
+    <h1>governance-service</h1>
+    <div class="smallcaps" style="margin-top:9px">A service that keeps a shared git commons' visibility matching what its admins decided</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / git / governance</div>
+</section>
+
+<p class="lead">Keeps a git commons' visibility matching what its admins actually decided. Members publish freely; what becomes readable beyond the member layer is a decision written in the governance repository, and this service makes that record true of the server.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-governance-service.svg" alt="A service that keeps a shared git commons&#x27; visibility matching what its admins decided" loading="lazy" /></div>
+      <figcaption class="smallcaps">A service that keeps a shared git commons' visibility matching what its admins decided</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>Two halves</h2>
+<p>The reconciler runs on a timer. It reads every record, compares it with what the git server has, and corrects the difference, catching anything the webhook missed, anything changed while the service was down, and anything changed by hand in the web interface. The webhook only adds speed: seconds instead of a quarter of an hour. A bug in the webhook degrades the system without breaking it.</p>
+<p>A repository with no record stays members-only. It becomes public to the commons only when its record says both that public is intended and that the rubric passed; a sanction in force keeps it members-only whatever else the record says. Repositories that were public before the gate existed are marked grandfathered, reported, and left alone.</p>
+<h2>What the webhook handles</h2>
+<ul>
+<li>an issue opened on the governance repository: it runs the rubric and posts the results</li>
+<li>a label applied: it re-runs the required checks first, since a label is an instruction and not evidence</li>
+<li>a repository created public: failing checks put it straight back with an issue explaining why; passing checks honour it and write the record</li>
+<li>a push to a ratified repository: it re-checks, and on failure opens an issue instead of taking the repository private mid-work</li>
+</ul>
+<h2>Failing safe</h2>
+<p>Dry run is on unless the setting is exactly <code>"false"</code>, so a typo leaves the safety on. The service holds a non-admin account's token, because an admin account reads every private repository whatever its token is scoped to. Its client has no delete method: a sanctioned repository loses visibility and is never deleted.</p>
+<p>The policy module is pure, with no network and no clock, so it can be tested exhaustively; the whole suite of 34 tests runs in about a tenth of a second. One checks that reconciling twice changes nothing the second time; another checks that if the records cannot be read, the service refuses to run instead of taking every repository private. It does not decide anything and does not automate the judgement checks, which are reported as unchecked every time.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Parts</span><br>a reconciler on a timer, and a webhook</div>
+    <div class="side"><span class="smallcaps">Holds</span><br>a non-admin token, with no delete method</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../commons-governance/">← governance</a></span>
+  <span><a href="../invite-service/">invite-service →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

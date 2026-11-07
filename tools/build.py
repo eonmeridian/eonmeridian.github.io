@@ -169,23 +169,27 @@ THEMES = [
     ("ritual", "Ritual & divination", [
         "order-of-the-meridian", "six-rites", "sigil-studio", "divinatory-os", "breath", "dream",
         "bardo", "daimon", "playing-together", "the-oracle-lab", "geomancy", "pgm-diagrams",
-        "prayer-coin"]),
+        "prayer-coin", "daimon-og"]),
     ("sound", "Sound & instruments", [
         "diagrammatic-immanence", "sounds-like", "monochord", "newmusic", "bloomcast",
-        "palimpsest-studio", "earshot"]),
+        "palimpsest-studio", "earshot", "spoken-word", "recommender"]),
     ("writing", "Writing, film & performance", [
         "ladder-for-constance", "lesbians-for-proust", "surregional-sangha", "oracularity",
         "three-circuits-for-breath", "emu-butch", "botmatrix", "thirteen-bit",
-        "evertunes", "drone-cinematographer"]),
+        "evertunes", "drone-cinematographer", "persona-forge", "fieldkit",
+        "language-technology-human"]),
     ("infra", "Infrastructure & research", [
         "caer-stack", "meridian", "palimpsest", "research-manager", "daimon-agent", "corpusmith",
-        "vetiver", "the-aion-apparatus", "haunted-geography"]),
+        "vetiver", "the-aion-apparatus", "haunted-geography", "agent-factory", "assay",
+        "awakening-agent", "vetiver-sources", "mattermost-stack", "work-harness", "space-lab"]),
     ("care", "Care, commons & ventures", [
         "mugworts", "peat-and-repeat", "ethical-imagination", "kokowa", "paom",
-        "unpaid-labor-coin"]),
+        "unpaid-labor-coin", "sanctuary-cell-division", "the-rev", "herbal-science", "compute-club",
+        "commons-git", "commons-governance", "governance-service", "invite-service",
+        "project-discovery", "grant-agent"]),
     ("tools", "Small tools", [
         "eon-inventory", "epub-to-pdf", "nixos-sync", "screenplay-formatter", "training",
-        "csv-to-applemusic"]),
+        "csv-to-applemusic", "coach", "spica", "moneymachine", "prediction", "cryptoagent"]),
 ]
 THEME_OF = {s: (k, label) for k, label, slugs in THEMES for s in slugs}
 

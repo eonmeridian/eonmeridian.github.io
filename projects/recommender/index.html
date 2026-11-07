@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Recommender: Eon Meridian</title>
+<meta name="description" content="A cross-domain recommender: one taste model, many corpora." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">54 / project</div>
+    <h1>Recommender</h1>
+    <div class="smallcaps" style="margin-top:9px">A design for one taste profile that ranks music, art, film, text and people together</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / music / film / text</div>
+</section>
+
+<p class="lead">A cross-domain recommender: one taste model, many corpora. Music, art, film, text and people are ranked against a single taste profile written by a person, and the edges between domains, such as a film that rhymes with a herbal preoccupation or a musician who shares an apparatus with a filmmaker, are the point of the system.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-recommender.svg" alt="A design for one taste profile that ranks music, art, film, text and people together" loading="lazy" /></div>
+      <figcaption class="smallcaps">A design for one taste profile that ranks music, art, film, text and people together</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>The taste profile</h2>
+<p>The profile is the source of truth and is written by hand. The pipeline may propose additions; only a person commits them. The first taste file is a hand-written list of about fifty films, grouped by axis: ecological, plant and land; material, texture and colour; apparatus and machine vision; ritual, occult and non-human perception.</p>
+<h2>The rules</h2>
+<p>The design sets six rules; four of them are:</p>
+<ul>
+<li>Every recommendation must carry where it came from, when it was retrieved, and why it was ranked.</li>
+<li>Ranking is to be done by deterministic, tested code; the model writes the rationale and never the number.</li>
+<li>An edge between domains needs a stated basis (a shared artist, a cited influence, a documented lineage, or co-occurrence in a corpus), and edges without one are to be dropped.</li>
+<li>Every recommendation and every accept or reject is to be a new timestamped entry in an append-only ledger.</li>
+</ul>
+<h2>Local by default</h2>
+<p>Embedding a whole corpus, and re-embedding on every ingest, is most of the work, which is where a local model costs least. A taste profile with a reading, listening and viewing history is about as identifying as a document gets, so it stays on the machine, and pinned local weights keep the ranking reproducible. Everything is meant to run in containers; the host needs only Docker, Make and git.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Domains</span><br>music, art, film, text, people</div>
+    <div class="side"><span class="smallcaps">Runs on</span><br>Docker on your own machine, with local open-weight models</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../prediction/">← Prediction</a></span>
+  <span><a href="../sanctuary-cell-division/">Sanctuary Cell Division →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

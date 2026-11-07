@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Generated diagram plate for COMPUTE / COMMONS / CREDITS">
+<g fill="none" stroke="#7f7b73" stroke-width="1">
+<circle cx="400" cy="300" r="97"/>
+<circle cx="400" cy="300" r="103"/>
+<circle cx="400" cy="300" r="112"/>
+<circle cx="400" cy="300" r="221"/>
+<circle cx="400" cy="300" r="255" stroke-dasharray="4 8"/>
+<line x1="430" y1="296" x2="496" y2="286"/>
+<line x1="496" y1="286" x2="652" y2="262" stroke-dasharray="2 7"/>
+<line x1="421" y1="321" x2="473" y2="373"/>
+<line x1="473" y1="373" x2="580" y2="481" stroke-dasharray="2 7"/>
+<line x1="395" y1="330" x2="380" y2="411"/>
+<line x1="380" y1="411" x2="355" y2="551" stroke-dasharray="2 7"/>
+<line x1="375" y1="317" x2="217" y2="424"/>
+<line x1="217" y1="424" x2="189" y2="443" stroke-dasharray="2 7"/>
+<line x1="373" y1="286" x2="314" y2="256"/>
+<line x1="314" y1="256" x2="173" y2="183" stroke-dasharray="2 7"/>
+<line x1="393" y1="271" x2="377" y2="200"/>
+<line x1="377" y1="200" x2="342" y2="52" stroke-dasharray="2 7"/>
+<line x1="417" y1="275" x2="463" y2="207"/>
+<line x1="463" y1="207" x2="543" y2="89" stroke-dasharray="2 7"/>
+</g>
+<g fill="#171715"><circle cx="400" cy="300" r="5"/><circle cx="496" cy="286" r="4"/><circle cx="473" cy="373" r="4"/><circle cx="380" cy="411" r="4"/><circle cx="217" cy="424" r="4"/><circle cx="314" cy="256" r="4"/><circle cx="377" cy="200" r="4"/><circle cx="463" cy="207" r="4"/></g>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">COMPUTE / COMMONS / CREDITS</text><text x="720" y="560" text-anchor="end">COMMONS 06</text></g>
+</svg>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Persona Forge: Eon Meridian</title>
+<meta name="description" content="Paste a piece of your own writing and the desk sets it as a numbered sheet with one native draft per platform, each made from your own sentences." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">51 / project</div>
+    <h1>Persona Forge</h1>
+    <div class="smallcaps" style="margin-top:9px">A desk that sets one piece of writing as a draft for each social platform, from its own sentences</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / text / video</div>
+</section>
+
+<p class="lead">Paste a piece of your own writing and the desk sets it as a numbered sheet with one native draft per platform, each made from your own sentences. Circle a draft to approve it, strike it to reject it, edit it in place, or click a quoted line and then a sentence in the source to swap it in.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-persona-forge.svg" alt="A desk that sets one piece of writing as a draft for each social platform, from its own sentences" loading="lazy" /></div>
+      <figcaption class="smallcaps">A desk that sets one piece of writing as a draft for each social platform, from its own sentences</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>The sheet</h2>
+<p>The source text sits on top and the drafts sit below it, one per platform in that platform's shape: a Mastodon post, a Bluesky thread, a LinkedIn post, an Instagram carousel, a 9:16 plate with its caption. The marks are taken from a photographer's contact sheet, where a single red circle made by hand selects a frame. Swapping a sentence in the source replaces it in every draft that quoted it.</p>
+<h2>How a draft is made</h2>
+<p>A model chooses, per platform, which of the writer's sentences carry the piece, in what order and where to cut. Every draft is then checked by code: each quoted line must be a verbatim substring of the source, connective text is at most 20% by characters, and the platform's length, part-count and hashtag limits apply. Errors go back for up to two retries, and a draft that still fails falls back to a deterministic picker, which the sheet names.</p>
+<p>An edit stores the text before and after and the distance between them. Edits are turned into voice rules, such as "use 'plate', not 'post'", which are proposals the writer accepts or rejects.</p>
+<h2>Sending</h2>
+<p>Approving is human only. A circled draft goes out through the official API where the platform allows it, in dry run until the account goes live, and as a copy-and-open handoff everywhere else. Which route a draft takes is decided by a capability matrix built from each platform's developer docs, one row per platform and action. A kill switch at the top right of the desk halts all sending.</p>
+<h2>Plates and recordings</h2>
+<p>Make plate scores the writing (verbatim fragments, one noun, an arc of fixed verbs), and a render step on the host draws it at 9:16, 4:5 and 1:1 and checks that each clip loops. A recording of the writer reading the piece is transcribed locally, aligned to the source by code and cut per platform, with captions in the source's wording, never the transcript's.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Runs on</span><br>Docker on your own machine, in the browser on localhost</div>
+    <div class="side"><span class="smallcaps">Sends to</span><br>Mastodon through its API; copy-and-open handoffs for the other platforms</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../moneymachine/">← MoneyMachine</a></span>
+  <span><a href="../playing-together/">Playing Together →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

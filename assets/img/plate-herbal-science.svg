@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Generated diagram plate for HERB / PLATE / LIGHT">
+<g fill="none" stroke="#7f7b73" stroke-width="1">
+<line x1="96" y1="110" x2="672" y2="110"/>
+<rect x="342" y="84" width="176" height="26"/>
+<line x1="111" y1="182" x2="706" y2="182"/>
+<rect x="280" y="156" width="90" height="26"/>
+<line x1="115" y1="254" x2="714" y2="254"/>
+<rect x="320" y="228" width="188" height="26"/>
+<line x1="92" y1="326" x2="728" y2="326"/>
+<rect x="397" y="300" width="152" height="26"/>
+<line x1="138" y1="398" x2="681" y2="398"/>
+<rect x="318" y="372" width="183" height="26"/>
+<line x1="105" y1="470" x2="684" y2="470"/>
+<rect x="441" y="444" width="99" height="26"/>
+<line x1="348" y1="80" x2="348" y2="530" stroke-dasharray="3 6"/>
+</g>
+<g fill="#171715"><circle cx="342" cy="110" r="3"/><circle cx="280" cy="182" r="3"/><circle cx="320" cy="254" r="3"/><circle cx="397" cy="326" r="3"/><circle cx="318" cy="398" r="3"/><circle cx="441" cy="470" r="3"/></g>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">HERB / PLATE / LIGHT</text><text x="720" y="560" text-anchor="end">BENCH 01</text></g>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Generated diagram plate for DAIMON / DIALOGUE / COMMIT">
+<g fill="none" stroke="#7f7b73" stroke-width="1">
+<circle cx="400" cy="300" r="64"/>
+<circle cx="400" cy="300" r="70"/>
+<circle cx="400" cy="300" r="164"/>
+<circle cx="400" cy="300" r="204"/>
+<circle cx="400" cy="300" r="255" stroke-dasharray="4 8"/>
+<line x1="430" y1="299" x2="463" y2="298"/>
+<line x1="463" y1="298" x2="655" y2="292" stroke-dasharray="2 7"/>
+<line x1="418" y1="324" x2="443" y2="355"/>
+<line x1="443" y1="355" x2="556" y2="502" stroke-dasharray="2 7"/>
+<line x1="390" y1="328" x2="345" y2="455"/>
+<line x1="345" y1="455" x2="314" y2="540" stroke-dasharray="2 7"/>
+<line x1="373" y1="312" x2="213" y2="383"/>
+<line x1="213" y1="383" x2="167" y2="404" stroke-dasharray="2 7"/>
+<line x1="371" y1="291" x2="339" y2="281"/>
+<line x1="339" y1="281" x2="157" y2="223" stroke-dasharray="2 7"/>
+<line x1="392" y1="271" x2="382" y2="232"/>
+<line x1="382" y1="232" x2="335" y2="53" stroke-dasharray="2 7"/>
+<line x1="421" y1="278" x2="514" y2="181"/>
+<line x1="514" y1="181" x2="576" y2="116" stroke-dasharray="2 7"/>
+</g>
+<g fill="#171715"><circle cx="400" cy="300" r="5"/><circle cx="463" cy="298" r="4"/><circle cx="443" cy="355" r="4"/><circle cx="345" cy="455" r="4"/><circle cx="213" cy="383" r="4"/><circle cx="339" cy="281" r="4"/><circle cx="382" cy="232" r="4"/><circle cx="514" cy="181" r="4"/></g>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">DAIMON / DIALOGUE / COMMIT</text><text x="720" y="560" text-anchor="end">COMPANION 02</text></g>
+</svg>

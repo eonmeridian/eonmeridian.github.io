@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Prediction: Eon Meridian</title>
+<meta name="description" content="Prediction is designed as an independent forecaster for prediction-market questions." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">53 / project</div>
+    <h1>Prediction</h1>
+    <div class="smallcaps" style="margin-top:9px">A design for a forecaster that answers prediction-market questions and keeps score of itself</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / forecasting / text</div>
+</section>
+
+<p class="lead">Prediction is designed as an independent forecaster for prediction-market questions. It builds a base rate from comparable cases, works out the current procedural state of the specific question, produces a probability, updates only on cited evidence, and keeps a ledger against which its own calibration can be scored. It is meant to inform a trade and never place one.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-prediction.svg" alt="A design for a forecaster that answers prediction-market questions and keeps score of itself" loading="lazy" /></div>
+      <figcaption class="smallcaps">A design for a forecaster that answers prediction-market questions and keeps score of itself</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>Three design rules</h2>
+<ul>
+<li>The ledger is to be append-only: every forecast and revision is to be a new timestamped entry with the prior probability, the new one and the reason, so past forecasts cannot be rewritten.</li>
+<li>No probability is to move without a named, dated, resolvable source, such as a bill action, a vote record, a published statement or a calendar change.</li>
+<li>The base rate is to come first: each question is to start from a recorded reference class and its historical rate, kept visible next to the final number.</li>
+</ul>
+<h2>What a revision records</h2>
+<p>Each revision is designed to list the previous and new probability, the reason, the evidence, the market probability and the difference between the two. Over resolved questions the ledger is designed to give a Brier score and a reliability curve, so the track record can be checked.</p>
+<h2>Calibration in code</h2>
+<p>The design uses a model's reasoning plus an explicit statistical layer, with no fine-tuning: calibration is a correction fitted over the ledger after the fact, kept in code where it can be audited. To keep the forecast independent of the market, the design is to forecast first and fetch market odds second. The design holds no exchange credentials and has no order path; market data is read only.</p>
+  </div>
+  <div>
+
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../playing-together/">← Playing Together</a></span>
+  <span><a href="../recommender/">Recommender →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

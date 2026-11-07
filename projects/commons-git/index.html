@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>cyborg-support-git-mcp: Eon Meridian</title>
+<meta name="description" content="A private git server that several people share, each driving it with their own assistant." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">67 / project</div>
+    <h1>cyborg-support-git-mcp</h1>
+    <div class="smallcaps" style="margin-top:9px">A private shared git server, and a small connector that lets each person's assistant work on it</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / git / tools</div>
+</section>
+
+<p class="lead">A private git server that several people share, each driving it with their own assistant. The server is an ordinary git host with repositories, issues and pull requests, private and invite-only, and nothing to do with assistants runs on it.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-commons-git.svg" alt="A private shared git server, and a small connector that lets each person&#x27;s assistant work on it" loading="lazy" /></div>
+      <figcaption class="smallcaps">A private shared git server, and a small connector that lets each person's assistant work on it</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>How it works</h2>
+<p>The connector is a small translator that runs on each person's own laptop. It turns the git server's REST API into 32 tools an assistant can call, and it talks to the server over plain HTTPS using that person's own access token. There is no hosted endpoint and no place where everyone's tokens are collected, so if one laptop is off, only that person is affected. The connector has no permissions of its own: it can do only what the token it was handed can do.</p>
+<h2>Who can do what</h2>
+<p>Access is decided on the git server by three controls: the account, which an admin creates by hand with registration disabled; the token's scopes, which the person sets; and each repository's visibility, set by its owner. A token scoped to reading repositories gives an assistant that can read and never commit, because the API rejects the write. Testing showed that an admin account still reads every private repository when its token's scopes are narrowed, because the check is on the user and not the token, so a day-to-day assistant runs as a separate non-admin account.</p>
+<h2>Built to install once</h2>
+<p>The connector uses only the Python standard library, with about 120 lines of hand-written JSON-RPC tested against the official SDK client, so it ships as one file instead of one bundle per platform and Python version. It comes as a double-clickable bundle or a standalone Python file; with the bundle, connecting means a double-click and pasting a token into a dialog. Git runs over HTTPS only, so people authenticate with a token instead of a key. A bridge script connects a local model runtime that does not speak the tool protocol.</p>
+<p>The source is a package, and a script concatenates it into the single file that ships; every wire-protocol test runs against both, so the build step cannot quietly change behaviour.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Runs on</span><br>each person's own laptop, talking to one hosted git server over HTTPS</div>
+    <div class="side"><span class="smallcaps">Gives an assistant</span><br>32 tools for repositories, issues and pull requests</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../csv-to-applemusic/">← csv-to-applemusic</a></span>
+  <span><a href="../daimon-agent/">daimon →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

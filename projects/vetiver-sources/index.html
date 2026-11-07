@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>mcp-vetiver: Eon Meridian</title>
+<meta name="description" content="mcp-vetiver puts free scholarly databases behind a small set of narrowly scoped tools, so the Vetiver paper-appraisal pipeline can search for, resolve and appraise papers without touching the open web directly." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">75 / project</div>
+    <h1>mcp-vetiver</h1>
+    <div class="smallcaps" style="margin-top:9px">A tool server that lets an agent search, resolve and check scholarly papers through free public sources</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / research / scholarly data</div>
+</section>
+
+<p class="lead">mcp-vetiver puts free scholarly databases behind a small set of narrowly scoped tools, so the Vetiver paper-appraisal pipeline can search for, resolve and appraise papers without touching the open web directly. It is a Python server that an agent calls over the Model Context Protocol on standard input and output.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-vetiver-sources.svg" alt="A tool server that lets an agent search, resolve and check scholarly papers through free public sources" loading="lazy" /></div>
+      <figcaption class="smallcaps">A tool server that lets an agent search, resolve and check scholarly papers through free public sources</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>Tools</h2>
+<ul>
+<li><code>search_papers</code> returns candidate papers for a topic</li>
+<li><code>get_metadata</code> returns a normalized title, authors, year, venue and type for a DOI</li>
+<li><code>get_references</code> lists the works a paper cites</li>
+<li><code>get_citations</code> lists the works that cite it</li>
+<li><code>check_retraction</code> reports whether a paper has been retracted</li>
+</ul>
+<p>Every tool returns the same paper record: DOI, title, authors with affiliations, year, venue, type, citation count, retraction flag, provider ID and source. A retraction check on a paper the database does not know returns an unknown value, which is kept distinct from "not retracted". The sources are free and most need no key.</p>
+<h2>Only allowlisted hosts</h2>
+<p>Its one invariant: no compromising downloads. Every fetch must pass a host check, and only six scholarly hosts can be reached. The host is checked again on every redirect, with at most three redirects; responses are capped at 25 MB and must be JSON. Fetched content is never executed, and adding a host is meant to be a deliberate, reviewed change. Vetiver relies on this: it trusts that anything the server returns came from an allowlisted scholarly source.</p>
+<h2>Tests</h2>
+<p>The test suite runs offline: the network call is replaced in tests, and the fixtures copy the shapes of real OpenAlex and Crossref responses.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Sources</span><br>OpenAlex and Crossref, with PubMed, Europe PMC, Unpaywall and Retraction Watch on the allowlist</div>
+    <div class="side"><span class="smallcaps">Tools</span><br>search papers, get metadata, get references, get citations, check retraction</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../invite-service/">← invite-service</a></span>
+  <span><a href="../project-discovery/">mcp.cyborg.support →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Assay: Eon Meridian</title>
+<meta name="description" content="Assay reads a corpus of notes and extracts, for each claim, its supporting evidence, contradicting evidence, assumptions, citation chain and a confidence." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">33 / project</div>
+    <h1>Assay</h1>
+    <div class="smallcaps" style="margin-top:9px">A claim-and-evidence compiler for a folder of notes</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / research / text</div>
+</section>
+
+<p class="lead">Assay reads a corpus of notes and extracts, for each claim, its supporting evidence, contradicting evidence, assumptions, citation chain and a confidence. From that it answers three questions a topic-and-summary catalogue cannot: which claims rest on a single source, where the notes contradict each other, and which citation chains are circular.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-assay.svg" alt="A claim-and-evidence compiler for a folder of notes" loading="lazy" /></div>
+      <figcaption class="smallcaps">A claim-and-evidence compiler for a folder of notes</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>Refusing to report absence from a bad run</h2>
+<p>Its main output is "no support was found for this claim", which to a reader looks the same as "retrieval was broken". So the compiler refuses to report unsupported claims when a run is degraded: a stale index, unreadable documents, or a model that errored. Contradictions, single-source claims and citation cycles are still reported, because a contradiction that was found is still found, and a cycle is a fact about the corpus rather than about retrieval. Overriding the refusal has to be written at the call site, so the override is visible in the code that wanted it.</p>
+<h2>How it reads a corpus</h2>
+<ul>
+<li>documents are split into passages on blank lines and long blocks, and retrieval works per passage, so text past a document's opening can still be found</li>
+<li>both wikilinks and Markdown links are parsed; on the first real corpus, a wikilink-only parser reported 0 cycles where there were 4</li>
+<li>every piece of evidence must quote its source, and the quote is checked against the cited document before it is kept; failures are discarded and counted</li>
+<li>the corpus is frozen by a fingerprint of its ids and contents and mounted read-only, rather than copied into the repository</li>
+<li>confidence is high, medium or low, because a 0.0–1.0 score from a model is false precision</li>
+</ul>
+<h2>Testing against known answers</h2>
+<p>A small fixture corpus has known answers: a claim supported by exactly one other document, two documents that contradict each other, an unsupported speculation, and a deliberate three-document citation cycle. A labels file states what a correct run must find, and <code>make eval</code> scores against it, matching by keyword overlap rather than exact wording. Health checks and cycle detection need no model; extraction and adjudication run on a local model.</p>
+<h2>Known limits</h2>
+<p>Retrieval is lexical only, so a claim supported in different words can read as unsupported, and the health check cannot see this. The single-source count counts documents, not independent sources: two notes copied from the same paper count as two.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Finds</span><br>single-source claims, contradictions between notes, circular citation chains</div>
+    <div class="side"><span class="smallcaps">Runs on</span><br>Python in Docker, with a local model for extraction</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../agent-factory/">← Agent factory</a></span>
+  <span><a href="../awakening-agent/">Awakening Agent →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

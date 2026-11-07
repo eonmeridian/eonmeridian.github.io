@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Generated diagram plate for TASTE / CORPUS / EDGE">
+<g fill="none" stroke="#7f7b73" stroke-width="1">
+<line x1="610" y1="312" x2="442" y2="179"/>
+<line x1="494" y1="389" x2="411" y2="436"/>
+<line x1="494" y1="389" x2="294" y2="387"/>
+<line x1="494" y1="389" x2="209" y2="322"/>
+<line x1="494" y1="389" x2="304" y2="143"/>
+<line x1="411" y1="436" x2="304" y2="143"/>
+<line x1="411" y1="436" x2="549" y2="242"/>
+<line x1="294" y1="387" x2="223" y2="221"/>
+<line x1="294" y1="387" x2="442" y2="179"/>
+<line x1="209" y1="322" x2="442" y2="179"/>
+<line x1="209" y1="322" x2="549" y2="242"/>
+<line x1="223" y1="221" x2="442" y2="179"/>
+<line x1="223" y1="221" x2="549" y2="242"/>
+<line x1="304" y1="143" x2="442" y2="179"/>
+<line x1="304" y1="143" x2="549" y2="242"/>
+<circle cx="400" cy="300" r="259" stroke-dasharray="4 8"/>
+</g>
+<g fill="#171715"><circle cx="610" cy="312" r="4"/><circle cx="494" cy="389" r="4"/><circle cx="411" cy="436" r="4"/><circle cx="294" cy="387" r="4"/><circle cx="209" cy="322" r="4"/><circle cx="223" cy="221" r="4"/><circle cx="304" cy="143" r="4"/><circle cx="442" cy="179" r="4"/><circle cx="549" cy="242" r="4"/></g>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">TASTE / CORPUS / EDGE</text><text x="720" y="560" text-anchor="end">INSTRUMENT 05</text></g>
+</svg>

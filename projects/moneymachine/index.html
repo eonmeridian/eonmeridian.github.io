@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MoneyMachine: Eon Meridian</title>
+<meta name="description" content="MoneyMachine analyzes a journal of options trades and grows in stages into a daily watch-sheet, then an alert engine, then automated execution." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">50 / project</div>
+    <h1>MoneyMachine</h1>
+    <div class="smallcaps" style="margin-top:9px">A trade journal and daily options sheet with a margin budget checked before every idea</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / finance / data</div>
+</section>
+
+<p class="lead">MoneyMachine analyzes a journal of options trades and grows in stages into a daily watch-sheet, then an alert engine, then automated execution. Each stage gates money: no code path can place an order before the paper stage, and live trading would need an explicit per-strategy switch plus hard limits enforced in code before any order call.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-moneymachine.svg" alt="A trade journal and daily options sheet with a margin budget checked before every idea" loading="lazy" /></div>
+      <figcaption class="smallcaps">A trade journal and daily options sheet with a margin budget checked before every idea</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>The journal</h2>
+<p>The broker's activity statement is imported into an append-only journal; a correction is a new entry, never an edit. Every subtotal row must equal the sum of its fills exactly, or nothing is written. Money uses decimal types, never floating point, and a mismatch is a failure rather than a warning. Fills are grouped into lifecycles from flat to open to flat and scored by cash result, and option legs opened within ten minutes of an opposite-direction leg on the same underlying are marked as spread legs.</p>
+<h2>The daily sheet</h2>
+<p>The strategy is to sell short-dated puts on names worth owning, close them early, add protection only when it reduces margin, and let a margin budget decide whether a trade can be placed at all. The budget has eight rules, covering margin use, total short-put and stock exposure, assignment on one name, whether an assignment is survivable, counting only settled cash, choosing what to cut before the broker does, a crash test where every name gaps down at once, and exposure to one sector. The rules apply to the day's ideas together, so taking every idea on the sheet still fits. Ideas a rule turns away are kept, with the rule they break and by how much, so the rules themselves can be judged.</p>
+<p>The broker connection uses only the broker's own client and answers read-only requests; tests ban every order, cancel and exercise call. Two further strategies, condors around the open-interest peak and structures chosen from market signals, run on paper only.</p>
+<h2>Learning without fooling itself</h2>
+<p>Patterns found in the journal are written down as hypotheses, not rules, and scored only on trades opened after the date they were registered. A strategy change needs at least 30 closed trades in each group, one change a week at most, and a logged entry; contradicted hypotheses stay on the register, and the risk rules are never loosened on this evidence alone.</p>
+<h2>Dashboard</h2>
+<p>A local dashboard shows the day's ideas with a "Would breach" section, the rules and what each stopped, risk and positions, what changed since the last scan, and the archive. It has no JavaScript and makes no external requests, and it answers only GET: scanning, importing and reviewing stay on the command line.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Stages</span><br>analysis, daily sheet, alerts, paper, live</div>
+    <div class="side"><span class="smallcaps">Runs on</span><br>Rust and Python in Docker, with a read-only local dashboard</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../mattermost-stack/">← Mattermost Stack</a></span>
+  <span><a href="../persona-forge/">Persona Forge →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

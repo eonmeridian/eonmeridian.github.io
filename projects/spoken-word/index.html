@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Spoken Word: Eon Meridian</title>
+<meta name="description" content="A curated audio archive of radical voices: one canonical recording per person, of them speaking or reading their own work, chosen for political weight rather than literary award status." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">59 / project</div>
+    <h1>Spoken Word</h1>
+    <div class="smallcaps" style="margin-top:9px">An audio archive of writers, poets and revolutionaries speaking, cut into short clips</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>archive / sound / speech</div>
+</section>
+
+<p class="lead">A curated audio archive of radical voices: one canonical recording per person, of them speaking or reading their own work, chosen for political weight rather than literary award status. A pipeline turns each recording into a small set of clips ready for a mix.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-spoken-word.svg" alt="An audio archive of writers, poets and revolutionaries speaking, cut into short clips" loading="lazy" /></div>
+      <figcaption class="smallcaps">An audio archive of writers, poets and revolutionaries speaking, cut into short clips</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>The roster</h2>
+<p>Toni Morrison, Audre Lorde, Octavia Butler, Anohni, James Baldwin, Edward Said, Arundhati Roy, Angela Davis, June Jordan, Assata Shakur, Refaat Alareer, Ali Abunimah, Batool Abu Akleen, Bisan Owda, David Graeber, David Wojnarowicz, Judith Butler, Etel Adnan and Shirley Chisholm. Each person has a catalog file holding the source address, the licence and the reason for the pick. Sources come first from the Internet Archive, PennSound, the Pacifica Radio Archives and the channels of broadcasters and universities. The archive is for personal listening and educational reference, with no redistribution.</p>
+<h2>From recording to clip</h2>
+<p>Each recording is downloaded and checked against a sha256 checksum, transcribed with a timestamp for every word, and split into the main speaker and everyone else. Lines are then picked twice: once by a heuristic and once by a model, each writing its own file. The heuristic looks for commitment markers ("from now on"), first-person declarations, possessives that name a stake ("my body / your silence") and parallelism. It scores "I am the wrong sex" and "I am hungry" the same, because both open with "I am"; the model reads where a line sits in the arc, and for June Jordan it picked "My name is my own, my own, my own."</p>
+<h2>What makes a clip</h2>
+<p>A clip starts at the head of a word, ends on the end of a sentence or a pause of at least half a second, is speech for at least 80% of its length, makes sense lifted out of context, and runs 2.5 to 8 seconds, or up to 12 seconds for a longer phrase. The cutter walks forward through the word timestamps until it finds a sentence end or a pause, or reaches the cap; across the archive, 21% of clips were extended this way, by 2.66 seconds on average. There is no automated test suite: checking a clip means listening to it and reading the transcript.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Voices</span><br>19 people, each with one canonical recording</div>
+    <div class="side"><span class="smallcaps">Out</span><br>short clips, cut at the end of a sentence or a pause</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../spica/">← Spica</a></span>
+  <span><a href="../the-aion-apparatus/">The Aion Apparatus →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

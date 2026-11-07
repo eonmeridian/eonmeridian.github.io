@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Work Harness: Eon Meridian</title>
+<meta name="description" content="A back office for time-and-materials work done through a coding assistant." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">65 / project</div>
+    <h1>Work Harness</h1>
+    <div class="smallcaps" style="margin-top:9px">A back office for time-and-materials work done through a coding assistant: a time ledger, a review screen and cited client documents</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / time / text</div>
+</section>
+
+<p class="lead">A back office for time-and-materials work done through a coding assistant. It keeps a time ledger, backed by evidence, that keeps the consultant's time apart from the agent's time, and two assistant commands turn the same evidence into client documents with every line cited.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-work-harness.svg" alt="A back office for time-and-materials work done through a coding assistant: a time ledger, a review screen and cited client documents" loading="lazy" /></div>
+      <figcaption class="smallcaps">A back office for time-and-materials work done through a coding assistant: a time ledger, a review screen and cited client documents</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>Two clocks</h2>
+<p>Agent time is a turn of the session minus the spans where the agent was waiting for the consultant and any long stretch with nothing recorded, such as a sleeping machine. Consultant time is the gap before each of their actions, up to a cap; where sessions overlap, attention is split and never counted twice. Calls, which never appear in a transcript, are logged by hand, and a logged call takes its time whole. The two clocks are never added into one number, and the ledger is append-only.</p>
+<h2>The review screen</h2>
+<p>The screen opens on one engagement's week laid out like a photographer's contact sheet. Each day has a two-staff strip, consultant time above and agent time below on one time axis, and a frame for each session or call. Each frame shows its times, the minutes on both clocks, the opening prompt or call note, and a milestone and one-line description proposed by a model that has read the activity's evidence. The consultant goes through the week by keyboard: a number sets the milestone, <code>x</code> marks a frame not billable, <code>e</code> edits the line and <code>space</code> shows the evidence, and every key has a button. Two agreeing marks on one project folder become a rule, applied before the model is asked again. The marked week becomes the draft invoice, with each line's evidence and agent time on its own lines.</p>
+<h2>The citation gate</h2>
+<p>The model never states a figure: hours, amounts and status come from code, and a proposed line that states a figure is refused. Before a status report or recap can go to a client, a gate fails it when:</p>
+<ul>
+<li>a claim has no citation to a session, call, logged entry, commit or document</li>
+<li>a citation points at another engagement's work, a cancelled call, or a turn that does not exist</li>
+<li>a figure does not appear in the week's evidence pack</li>
+</ul>
+<p>A document that passes is rendered as a client copy, with each citation turned into a numbered source the client can read.</p>
+<h2>Kept apart</h2>
+<p>Engagements are sealed from each other, and client data never enters git or a container image. The containers have no network, read transcripts read-only, and write only to the ledger and output folders; the commit hook refuses those folders.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Runs on</span><br>Docker on your own machine; the review screen is served on localhost only</div>
+    <div class="side"><span class="smallcaps">Out</span><br>timesheets, CSV, draft invoices, status reports and meeting recaps</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../vetiver/">← Vetiver</a></span>
+  <span><a href="../csv-to-applemusic/">csv-to-applemusic →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

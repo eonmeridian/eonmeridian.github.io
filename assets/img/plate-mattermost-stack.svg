@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Generated diagram plate for CHAT / SERVER / BACKUPS">
+<g fill="none" stroke="#7f7b73" stroke-width="1">
+<line x1="545" y1="322" x2="529" y2="398"/>
+<line x1="545" y1="322" x2="283" y2="235"/>
+<line x1="545" y1="322" x2="340" y2="193"/>
+<line x1="545" y1="322" x2="536" y2="243"/>
+<line x1="529" y1="398" x2="298" y2="405"/>
+<line x1="529" y1="398" x2="283" y2="235"/>
+<line x1="529" y1="398" x2="468" y2="177"/>
+<line x1="298" y1="405" x2="283" y2="235"/>
+<line x1="298" y1="405" x2="468" y2="177"/>
+<line x1="298" y1="405" x2="536" y2="243"/>
+<line x1="340" y1="193" x2="468" y2="177"/>
+<line x1="468" y1="177" x2="536" y2="243"/>
+<circle cx="400" cy="300" r="251" stroke-dasharray="4 8"/>
+</g>
+<g fill="#171715"><circle cx="545" cy="322" r="4"/><circle cx="529" cy="398" r="4"/><circle cx="381" cy="422" r="4"/><circle cx="298" cy="405" r="4"/><circle cx="198" cy="356" r="4"/><circle cx="283" cy="235" r="4"/><circle cx="340" cy="193" r="4"/><circle cx="468" cy="177" r="4"/><circle cx="536" cy="243" r="4"/></g>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">CHAT / SERVER / BACKUPS</text><text x="720" y="560" text-anchor="end">APPLIANCE 02</text></g>
+</svg>

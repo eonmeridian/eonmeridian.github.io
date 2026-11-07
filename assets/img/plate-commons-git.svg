@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Generated diagram plate for GIT / TOKEN / TOOLS">
+<g fill="none" stroke="#7f7b73" stroke-width="1">
+<line x1="587" y1="306" x2="507" y2="395"/>
+<line x1="587" y1="306" x2="221" y2="216"/>
+<line x1="587" y1="306" x2="359" y2="169"/>
+<line x1="587" y1="306" x2="537" y2="220"/>
+<line x1="507" y1="395" x2="221" y2="216"/>
+<line x1="507" y1="395" x2="359" y2="169"/>
+<line x1="507" y1="395" x2="460" y2="162"/>
+<line x1="380" y1="457" x2="221" y2="216"/>
+<line x1="380" y1="457" x2="460" y2="162"/>
+<line x1="311" y1="394" x2="214" y2="350"/>
+<line x1="214" y1="350" x2="221" y2="216"/>
+<line x1="214" y1="350" x2="460" y2="162"/>
+<line x1="214" y1="350" x2="537" y2="220"/>
+<line x1="359" y1="169" x2="460" y2="162"/>
+<line x1="359" y1="169" x2="537" y2="220"/>
+<circle cx="400" cy="300" r="247" stroke-dasharray="4 8"/>
+</g>
+<g fill="#171715"><circle cx="587" cy="306" r="4"/><circle cx="507" cy="395" r="4"/><circle cx="380" cy="457" r="4"/><circle cx="311" cy="394" r="4"/><circle cx="214" cy="350" r="4"/><circle cx="221" cy="216" r="4"/><circle cx="359" cy="169" r="4"/><circle cx="460" cy="162" r="4"/><circle cx="537" cy="220" r="4"/></g>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">GIT / TOKEN / TOOLS</text><text x="720" y="560" text-anchor="end">COMMONS 01</text></g>
+</svg>
