@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>vault: Eon Meridian</title>
+<meta name="description" content="vault answers link and tag questions about a folder of Markdown notes from the command line." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">89 / project</div>
+    <h1>vault</h1>
+    <div class="smallcaps" style="margin-top:9px">A command line for the links and tags in a Markdown research vault</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / command line</div>
+</section>
+
+<p class="lead">vault answers link and tag questions about a folder of Markdown notes from the command line. It uses only the Python standard library, so it runs without a virtual environment. Most commands print one <code>path:line:</code> line per hit, with paths relative to the vault root, so results read like grep.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-vault.svg" alt="A command line for the links and tags in a Markdown research vault" loading="lazy" /></div>
+      <figcaption class="smallcaps">A command line for the links and tags in a Markdown research vault</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>Commands</h2>
+<ul>
+<li>`backlinks <note>`: notes that `[[link]]` to the note</li>
+<li>`links <file>`: the `[[wikilinks]]` in one file</li>
+<li><code>broken [folder]</code>: wikilinks with no matching note</li>
+<li>`tag <tag> [folder]`: notes carrying `#tag` or the tag in their `tags:` frontmatter</li>
+<li><code>threads</code>: the top-level folders, most recently touched first</li>
+<li><code>dupes [folder]</code>: Markdown files with identical content</li>
+</ul>
+<h2>How it reads links</h2>
+<p>A wikilink's target is taken without any <code>#heading</code> or <code>|alias</code> part. A backlink matches on the note's name, with or without <code>.md</code>, or on a path that ends in that name. A link counts as broken when neither a note of that name nor a note at that path exists anywhere in the vault. Files and folders whose names start with a dot are skipped.</p>
+<h2>Tags, threads and duplicates</h2>
+<p>A tag is found inline as <code>#tag</code>, or in frontmatter as either <code>tags: [a, b]</code> or a <code>tags:</code> list with one item per line, and it does not match longer words that contain it. <code>threads</code> prints each top-level folder with the date of its newest note and its number of notes. <code>dupes</code> groups files by a SHA-256 hash of their contents and prints each group that has more than one file. Folder and file arguments can be absolute, relative to the current folder, or relative to the vault, and the vault root can be set with an environment variable.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Commands</span><br>backlinks, links, broken, tag, threads, dupes</div>
+    <div class="side"><span class="smallcaps">Written in</span><br>Python, standard library only</div>
+    <div class="side"><span class="smallcaps">Output</span><br>path:line per hit, like grep</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../research-manager/">← research-manager</a></span>
+  <span><a href="../videodownload/">videodownload →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

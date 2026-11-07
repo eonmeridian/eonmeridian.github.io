@@ -170,6 +170,17 @@ PLATES = [
     ("the-rev", "MINISTRY / RITE / CORPUS", "SANCTUARY 02", "orbit"),
     ("herbal-science", "HERB / PLATE / LIGHT", "BENCH 01", "strata"),
     ("language-technology-human", "LANGUAGE / WRITING / JUDGMENT", "COURSE 03", "lattice"),
+    ("diagram-studio", "TEXT / MEMBRANE / PLATE", "PLATE 01", "orbit"),
+    ("human-in-the-loop", "POLICY / ESCALATION / CARD", "AGENT 04", "lattice"),
+    ("fetch-sandbox", "FETCH / ALLOWLIST / CAP", "SANDBOX 01", "mesh"),
+    ("trend-oracle", "TREND / REPORT / VIDEO", "PRESS 02", "wave"),
+    ("sacred-salesman", "PRACTICE / DECK / CLIP", "PRACTICE 01", "orbit"),
+    ("enclave", "TEXT / VECTOR / ROUTE", "APPLIANCE 03", "mesh"),
+    ("pdfseq", "PDF / ORDER / BOOKMARK", "TOOL 09", "strata"),
+    ("videodownload", "VIDEO / AUDIO / ADDRESS", "TOOL 10", "wave"),
+    ("vault", "LINK / TAG / NOTE", "VAULT 02", "mesh"),
+    ("movies", "FRAME / SCORE / BELL", "RENDER 01", "wave"),
+    ("briefs", "QUEUE / GATE / HANDOFF", "QUEUE 01", "strata"),
 
 ]
 

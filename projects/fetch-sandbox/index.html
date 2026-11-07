@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fetch Sandbox: Eon Meridian</title>
+<meta name="description" content="Fetch Sandbox was designed as the fourth layer of a defense against instructions hidden in fetched web content: a fetcher inside a micro virtual machine that reaches only allowlisted domains, caps decompressed size and runs as a non-root user." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">45 / project</div>
+    <h1>Fetch Sandbox</h1>
+    <div class="smallcaps" style="margin-top:9px">A sandboxed web fetcher, the fourth layer of a defense against instructions hidden in fetched pages</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>system design / security</div>
+</section>
+
+<p class="lead">Fetch Sandbox was designed as the fourth layer of a defense against instructions hidden in fetched web content: a fetcher inside a micro virtual machine that reaches only allowlisted domains, caps decompressed size and runs as a non-root user. It was to offer the agent a single tool, a safe URL fetch, which takes a URL, a byte limit and a timeout and returns the status, the headers and the body as Markdown.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-fetch-sandbox.svg" alt="A sandboxed web fetcher, the fourth layer of a defense against instructions hidden in fetched pages" loading="lazy" /></div>
+      <figcaption class="smallcaps">A sandboxed web fetcher, the fourth layer of a defense against instructions hidden in fetched pages</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>The other three layers</h2>
+<p>The first three layers are permission deny rules, a hook that catches patterns such as piping to a shell or writes to git hooks, and having fetched HTML read by separate helper agents so the main one only sees structured JSON.</p>
+<h2>Invariants</h2>
+<ul>
+<li>a micro virtual machine boundary, never a plain container</li>
+<li>outbound traffic only to allowlisted domains</li>
+<li>a decompression cap of 10 to 50 MB</li>
+<li>a single tool surface, never raw HTTP library access</li>
+<li>a non-root user inside the virtual machine</li>
+</ul>
+<h2>Allowlist</h2>
+<p>A host was to be allowed only when its registrable domain exactly matches an allowlist entry, with no wildcard patterns, substrings or plain suffix matching. After that check the name was to be resolved, the request refused if the address is private, loopback, link-local, multicast or reserved, and the connection made to the checked address, a defense against DNS rebinding. The planned tests covered subdomain and substring tricks, rebinding to loopback, private IPv4 addresses, IPv6 link-local, the cloud metadata address, trailing dots, letter case, punycode and IP addresses written as decimal numbers.</p>
+<h2>Decompression cap</h2>
+<p>The cap was to count bytes after decompression, never compressed or chunked bytes, and never infer the decompressed size from Content-Length. A gzip or brotli bomb was to be cut off at 50 MB as it streams. The first smoke test was to pass an allowlisted fetch, block a fetch outside the list and abort a gzip bomb at the cap.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Planned boundary</span><br>a micro virtual machine, non-root user</div>
+    <div class="side"><span class="smallcaps">Planned cap</span><br>10 to 50 MB, counted after decompression</div>
+    <div class="side"><span class="smallcaps">Planned tool</span><br>one: a safe URL fetch</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../earshot/">← Earshot</a></span>
+  <span><a href="../geomancy/">Geomancy →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Human in the Loop: Eon Meridian</title>
+<meta name="description" content="Human in the Loop is a design for a system that carries out scientific experiments and engineering workflows end to end, and hands a step to a person only when a physical, legal, financial or ethical constraint requires it." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">50 / project</div>
+    <h1>Human in the Loop</h1>
+    <div class="smallcaps" style="margin-top:9px">A design for a system that runs scientific and engineering work and hands a step to a person only when it has to</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>system design</div>
+</section>
+
+<p class="lead">Human in the Loop is a design for a system that carries out scientific experiments and engineering workflows end to end, and hands a step to a person only when a physical, legal, financial or ethical constraint requires it. The design automates what is reversible and observable and escalates the rest.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-human-in-the-loop.svg" alt="A design for a system that runs scientific and engineering work and hands a step to a person only when it has to" loading="lazy" /></div>
+      <figcaption class="smallcaps">A design for a system that runs scientific and engineering work and hands a step to a person only when it has to</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>Action classes</h2>
+<p>Every action was to be classified before it runs:</p>
+<ul>
+<li>AUTO: safe for the system to run on its own</li>
+<li>CONFIRM: needs explicit approval from a person</li>
+<li>HUMAN_ONLY: must be done by a person</li>
+<li>FORBIDDEN: must not be run</li>
+</ul>
+<p>By default, banking, legal agreements, identity verification, purchases above a threshold, hardware and wet-lab work, production deployments and external communications are human-only.</p>
+<h2>Escalation requests</h2>
+<p>When a step needs a person, the system was designed to write a request in a fixed form: the task, why the system cannot go on, numbered steps, what it has already prepared, and what it will do once the step is done. Each request has to be readable in under two minutes, ask no open-ended questions and say what happens next.</p>
+<h2>Parts</h2>
+<ul>
+<li>Orchestrator: the execution loop, state machine, retries and escalation</li>
+<li>Planner: turns a goal into a task graph with dependencies and checkpoints</li>
+<li>Executors: code, analysis and simulations</li>
+<li>Validator: checks outputs and finds inconsistencies</li>
+<li>Documentation: writes structured records</li>
+<li>Human interface: turns state into escalation requests</li>
+<li>Policy engine: classifies actions and blocks unsafe ones</li>
+<li>Memory: persistent, resumable state</li>
+</ul>
+<p>Each task records its goal, status, dependencies, action class, whether it needs a person, its outputs, assumptions and risks, and every record is versioned, timestamped and linked. The planned build order was the policy engine, the task and state schema, the orchestrator loop, the escalation system, tool adapters, and then scenario tests.</p>
+<h2>Applied to PAOM</h2>
+<p>A second design applies the same approach to PAOM (Print All Over Me), the print-on-demand fashion marketplace Eon founded. In it, the system produces design variations and the designer supplies taste and approval. Design generation, colorway variants, print-readiness checks (resolution, bleed, color profile, repeat tile), listing copy, demand forecasts and pricing within a band the designer sets would run automatically. A new design ready for listing, a possible IP match, a quality dispute and a new product category go to a person, and custom text and partnership terms stay human-only. Each approval was designed as a single card showing the variant, the style it came from, a forecast and a price, with approve, edit and reject, and what happens after approval.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Action classes</span><br>AUTO, CONFIRM, HUMAN_ONLY, FORBIDDEN</div>
+    <div class="side"><span class="smallcaps">Applied to</span><br>PAOM, a print-on-demand fashion marketplace</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../herbal-science/">← Herbal Science</a></span>
+  <span><a href="../language-technology-human/">Language, Literature, and Technology →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

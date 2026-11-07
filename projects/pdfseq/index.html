@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>pdfseq: Eon Meridian</title>
+<meta name="description" content="pdfseq merges the numbered PDFs in a folder into one PDF, in numeric order." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">87 / project</div>
+    <h1>pdfseq</h1>
+    <div class="smallcaps" style="margin-top:9px">Merges a folder of numbered PDFs into one PDF, in numeric order, with a bookmark per file</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / command line</div>
+</section>
+
+<p class="lead">pdfseq merges the numbered PDFs in a folder into one PDF, in numeric order. A file counts when its name starts with a number, as in "1 - A.pdf", "10-b.pdf" or "3- c.pdf"; files are sorted by that number, so 2 comes before 10, and each one gets a bookmark of its number and the rest of the file name, such as "2. middle".</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-pdfseq.svg" alt="Merges a folder of numbered PDFs into one PDF, in numeric order, with a bookmark per file" loading="lazy" /></div>
+      <figcaption class="smallcaps">Merges a folder of numbered PDFs into one PDF, in numeric order, with a bookmark per file</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>Use</h2>
+<ul>
+<li><code>pdfseq DIR</code> writes the merged PDF next to the folder, named after it</li>
+<li><code>pdfseq DIR -o out.pdf</code> writes it somewhere else</li>
+<li><code>pdfseq DIR --list</code> prints the order and writes nothing</li>
+</ul>
+<p>Files whose names do not start with a number, and hidden files, are ignored. If two files share a number it prints a warning naming them. A file it cannot read is skipped and named, and the merge carries on; encrypted files with an empty password are opened. It prints each file's page count as it goes and the total at the end. The script is a single Python file that declares its own dependency, which a script runner fetches on first use.</p>
+<h2>Tests</h2>
+<p>The test builds a folder of blank sample PDFs named 0, 2 and 10 plus one unnumbered file, then checks that the order is 0, 2, 10, that the result has 6 pages, that the three bookmarks point at the right pages, and that a folder with no numbered PDFs is refused. On a real folder of course readings it merged 26 files into 574 pages, about 100 MB, with the page count equal to the sum of the inputs and the order and bookmarks checked by hand.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">In</span><br>a folder of PDFs whose names start with a number</div>
+    <div class="side"><span class="smallcaps">Out</span><br>one PDF with one bookmark per file</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../nixos-sync/">← nixos-sync</a></span>
+  <span><a href="../research-manager/">research-manager →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

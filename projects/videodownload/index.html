@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>videodownload: Eon Meridian</title>
+<meta name="description" content="videodownload is a single Python script that downloads videos from many video sites." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">90 / project</div>
+    <h1>videodownload</h1>
+    <div class="smallcaps" style="margin-top:9px">A command-line script that saves videos, or just their audio, from many video sites</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / command line</div>
+</section>
+
+<p class="lead">videodownload is a single Python script that downloads videos from many video sites. It takes one or more video or playlist addresses and saves each file as its title followed by its id, in a <code>downloads</code> folder unless another is given.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-videodownload.svg" alt="A command-line script that saves videos, or just their audio, from many video sites" loading="lazy" /></div>
+      <figcaption class="smallcaps">A command-line script that saves videos, or just their audio, from many video sites</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>Options</h2>
+<ul>
+<li><code>-q 720</code> caps the height, for example at 720 or 1080 lines</li>
+<li><code>--audio-only</code> keeps only the sound, as a 192 kbps MP3</li>
+<li><code>--subtitles</code> also fetches English subtitles, including automatic ones</li>
+<li><code>--list-formats</code> shows the formats on offer and downloads nothing</li>
+<li><code>--cookies-from-browser BROWSER</code> uses a local browser's cookies, for age-restricted or members-only videos the user already has access to</li>
+</ul>
+<h2>Downloads</h2>
+<p>When separate video and audio are merged, the result is MP4, preferring MP4 video with M4A audio; otherwise it falls back to the best single stream on offer. Each download retries up to 5 times, fetches 4 fragments at once, resumes where it stopped, and skips files that are already there. A failed download prints the reason and exits with an error.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">In</span><br>one or more video or playlist addresses</div>
+    <div class="side"><span class="smallcaps">Out</span><br>video (MP4 where possible), or MP3 audio, with optional English subtitles</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../vault/">← vault</a></span>
+  <span><a href="../../index.html#work">index →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

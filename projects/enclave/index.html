@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>enclave: Eon Meridian</title>
+<meta name="description" content="enclave is a small Python service that does two jobs for other programs: it turns text into embeddings, and it generates chat replies, either with a model running on this machine or with a hosted model." />
+<link rel="stylesheet" href="../../assets/site.css?v=a7c845cac1" />
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+</head>
+<body>
+<div class="site" id="top">
+<header class="mast">
+  <div>
+    <a class="brand" href="../../index.html">EON MERIDIAN</a>
+    <div class="roles">artist · writer · technologist · herbalist</div>
+  </div>
+  <nav class="nav">
+    <a href="../../index.html#work">work</a>
+    <a href="../../index.html#live">live</a>
+    <a href="../../index.html#writing">writing</a>
+    <a href="../../index.html#about">about</a>
+    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+  </nav>
+</header>
+<main>
+
+<section class="proj-head">
+  <div>
+    <div class="smallcaps">75 / project</div>
+    <h1>enclave</h1>
+    <div class="smallcaps" style="margin-top:9px">A local service that makes embeddings on this machine and routes text generation to a local or a hosted model</div>
+  </div>
+  <div class="proj-meta"><b>2026</b><br>software / local service</div>
+</section>
+
+<p class="lead">enclave is a small Python service that does two jobs for other programs: it turns text into embeddings, and it generates chat replies, either with a model running on this machine or with a hosted model.</p>
+
+
+<div class="plates">
+    <figure>
+      <div class="plate"><img src="../../assets/img/plate-enclave.svg" alt="A local service that makes embeddings on this machine and routes text generation to a local or a hosted model" loading="lazy" /></div>
+      <figcaption class="smallcaps">A local service that makes embeddings on this machine and routes text generation to a local or a hosted model</figcaption>
+    </figure>
+</div>
+
+<div class="proj-body">
+  <div class="prose">
+<h2>Two modes</h2>
+<p>The service has two privacy modes, local and auto, and local is the default. In local mode every chat request goes to the model on this machine, and a request that asks for the hosted model is refused with an error that says cloud routing is disabled. In auto mode each request chooses: it goes to the local model unless it sets a <code>cloud</code> flag, and the hosted model is used only when a key for it has been set. A system prompt is passed on only to the hosted model.</p>
+<h2>Embeddings stay local</h2>
+<p>Embeddings are always made on this machine and never sent to a hosted provider. The caller can pick the embedding model per request; four are listed, with vectors of 384 or 1024 dimensions. A request takes one text or a list of texts and returns the vectors, the model name and a count.</p>
+<h2>Interface</h2>
+<p>The service answers on three routes:</p>
+<ul>
+<li><code>/embed</code> for embeddings</li>
+<li><code>/chat</code> for replies, which also says which backend and model it routed to</li>
+<li><code>/health</code> for status: whether the local model server is reachable, whether a hosted key is set, and the current mode</li>
+</ul>
+<p>A refused hosted request comes back as HTTP 403. A browser page shows the status, refreshed every 10 seconds, beside forms for embeddings and chat. The tests run without a model server and check the health report, the error when embedding fails, and the refusal of a hosted request in local mode.</p>
+  </div>
+  <div>
+    <div class="side"><span class="smallcaps">Default</span><br>local only: requests for the hosted model are refused</div>
+    <div class="side"><span class="smallcaps">In</span><br>text, or a list of chat messages</div>
+    <div class="side"><span class="smallcaps">Out</span><br>embedding vectors, or a reply as JSON</div>
+  </div>
+</div>
+
+<div class="links">
+    <span class="off">Repository: private</span>
+  <a href="../../index.html#work">All work</a>
+</div>
+
+<nav class="prevnext">
+  <span><a href="../daimon-agent/">← daimon</a></span>
+  <span><a href="../eon-inventory/">eon-inventory →</a></span>
+</nav>
+
+</main>
+<footer class="footer">
+  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+</footer>
+</div>
+</body>
+</html>

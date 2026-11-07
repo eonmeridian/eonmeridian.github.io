@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-label="Generated diagram plate for LINK / TAG / NOTE">
+<g fill="none" stroke="#7f7b73" stroke-width="1">
+<line x1="612" y1="346" x2="306" y2="390"/>
+<line x1="612" y1="346" x2="196" y2="336"/>
+<line x1="612" y1="346" x2="217" y2="205"/>
+<line x1="541" y1="435" x2="333" y2="163"/>
+<line x1="541" y1="435" x2="450" y2="191"/>
+<line x1="394" y1="425" x2="306" y2="390"/>
+<line x1="394" y1="425" x2="196" y2="336"/>
+<line x1="394" y1="425" x2="333" y2="163"/>
+<line x1="306" y1="390" x2="217" y2="205"/>
+<line x1="306" y1="390" x2="545" y2="239"/>
+<line x1="196" y1="336" x2="545" y2="239"/>
+<line x1="217" y1="205" x2="333" y2="163"/>
+<line x1="217" y1="205" x2="450" y2="191"/>
+<line x1="450" y1="191" x2="545" y2="239"/>
+<circle cx="400" cy="300" r="244" stroke-dasharray="4 8"/>
+</g>
+<g fill="#171715"><circle cx="612" cy="346" r="4"/><circle cx="541" cy="435" r="4"/><circle cx="394" cy="425" r="4"/><circle cx="306" cy="390" r="4"/><circle cx="196" cy="336" r="4"/><circle cx="217" cy="205" r="4"/><circle cx="333" cy="163" r="4"/><circle cx="450" cy="191" r="4"/><circle cx="545" cy="239" r="4"/></g>
+<g font-family="Courier New, monospace" font-size="11" fill="#514e48"><text x="80" y="70">LINK / TAG / NOTE</text><text x="720" y="560" text-anchor="end">VAULT 02</text></g>
+</svg>
