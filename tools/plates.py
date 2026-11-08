@@ -174,7 +174,7 @@ PLATES = [
     ("fetch-sandbox", "FETCH / ALLOWLIST / CAP", "SANDBOX 01", "mesh"),
     ("trend-oracle", "TREND / REPORT / VIDEO", "PRESS 02", "wave"),
     ("sacred-salesman", "PRACTICE / DECK / CLIP", "PRACTICE 01", "orbit"),
-    ("enclave", "TEXT / VECTOR / ROUTE", "APPLIANCE 03", "mesh"),
+    ("web-passthrough", "TEXT / VECTOR / ROUTE", "APPLIANCE 03", "mesh"),
     ("pdfseq", "PDF / ORDER / BOOKMARK", "TOOL 09", "strata"),
     ("videodownload", "VIDEO / AUDIO / ADDRESS", "TOOL 10", "wave"),
     ("vault", "LINK / TAG / NOTE", "VAULT 02", "mesh"),

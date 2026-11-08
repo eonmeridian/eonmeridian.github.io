@@ -182,7 +182,7 @@ THEMES = [
         "caer-stack", "meridian", "palimpsest", "research-manager", "daimon-agent", "corpusmith",
         "vetiver", "the-aion-apparatus", "haunted-geography", "agent-factory", "assay",
         "awakening-agent", "vetiver-sources", "mattermost-stack", "work-harness", "space-lab",
-        "fetch-sandbox", "enclave", "vault", "briefs"]),
+        "fetch-sandbox", "web-passthrough", "vault", "briefs"]),
     ("care", "Care, commons & ventures", [
         "mugworts", "peat-and-repeat", "ethical-imagination", "kokowa", "paom",
         "unpaid-labor-coin", "sanctuary-cell-division", "the-rev", "herbal-science", "compute-club",
