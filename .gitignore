@@ -15,3 +15,6 @@ tools/.houserules-private
 __pycache__/
 # Private steering (Waiting on Eon); research-manager reads it from disk
 NEXT.md
+
+# A link into the private vault lives here; never publish it.
+/.claude/
