@@ -171,7 +171,6 @@ PLATES = [
     ("herbal-science", "HERB / PLATE / LIGHT", "BENCH 01", "strata"),
     ("language-technology-human", "LANGUAGE / WRITING / JUDGMENT", "COURSE 03", "lattice"),
     ("diagram-studio", "TEXT / MEMBRANE / PLATE", "PLATE 01", "orbit"),
-    ("human-in-the-loop", "POLICY / ESCALATION / CARD", "AGENT 04", "lattice"),
     ("fetch-sandbox", "FETCH / ALLOWLIST / CAP", "SANDBOX 01", "mesh"),
     ("trend-oracle", "TREND / REPORT / VIDEO", "PRESS 02", "wave"),
     ("sacred-salesman", "PRACTICE / DECK / CLIP", "PRACTICE 01", "orbit"),
