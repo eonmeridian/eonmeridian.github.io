@@ -483,7 +483,6 @@ def build_index():
 
   <section class="note about" id="about">
     <h2>About</h2>
-    <p>My life and work move between spiritual, somatic and herbal practice, and writing and music.</p>
     <p>I study and practice spiritual and embodied disciplines, work with plants and make herbal
     medicine, and write and compose. This site is an evolving record of that work.</p>
     <p class="venues">Shown at {", ".join(VENUE_STRIP)}.</p>
