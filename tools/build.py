@@ -463,7 +463,6 @@ def build_index():
       <h1>Eon Meridian</h1>
       <p class="roles-c">spiritual practice · herbal medicine · writing · music</p>
       <div class="slot">
-        <p class="tag">Old practices, new instruments.<span class="tag-2">Ritual technologies for futures held in common, connecting carbon, silicon and forms of life yet to come.</span></p>
         <figure class="lens" aria-hidden="true"><img alt="" /></figure>
       </div>
       <a class="sub" href="{SUBSTACK}" target="_blank" rel="noopener">Read on Substack ↗</a>
@@ -486,10 +485,9 @@ def build_index():
     <h2>About</h2>
     <p>My life and work move between spiritual, somatic and herbal practice, and writing and music.</p>
     <p>I study and practice spiritual and embodied disciplines, work with plants and make herbal
-    medicine, and write and compose. This site is an evolving record of that work. My technology
-    work lives at <a href="https://www.caerjar.com">Caerjar</a>.</p>
+    medicine, and write and compose. This site is an evolving record of that work.</p>
     <p class="venues">Shown at {", ".join(VENUE_STRIP)}.</p>
-    <p class="contact">Get in touch via Caerjar: <a href="mailto:hi@caerjar.com">hi@caerjar.com</a>
+    <p class="contact">Get in touch: <a href="mailto:eon@eonmeridian.com">eon@eonmeridian.com</a>
     <span class="place">New York</span></p>
   </section>
 
