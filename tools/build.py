@@ -23,12 +23,12 @@ MAST = """<header class="mast">
     <a href="{home}#live">live</a>
     <a href="{home}#writing">writing</a>
     <a href="{home}#about">about</a>
-    <a class="nav-out" href="https://substack.com/@33eon">substack ↗</a>
+    <a class="nav-out" href="https://eonmeridian.substack.com/">substack ↗</a>
   </nav>
 </header>"""
 
 FOOT = """<footer class="footer">
-  <span>Eon Meridian · <a href="https://substack.com/@33eon">Substack</a></span>
+  <span>Eon Meridian · <a href="https://eonmeridian.substack.com/">Substack</a></span>
 </footer>"""
 
 
@@ -149,7 +149,7 @@ VENUE_STRIP = [
     "Visions2030", "HERE Arts Center", "Sphinx", "NEW INC", "New Museum",
 ]
 
-SUBSTACK = "https://substack.com/@33eon"
+SUBSTACK = "https://eonmeridian.substack.com/"
 
 # Works someone can open and use right now. Fly apps here stop when idle and start on a visit;
 # never list one whose fly.toml keeps a machine running (hauntology, as of 2026-11-02).
