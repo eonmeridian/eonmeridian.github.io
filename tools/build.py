@@ -16,7 +16,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 MAST = """<header class="mast">
   <div>
     <a class="brand" href="{home}">EON MERIDIAN</a>
-    <div class="roles">artist · writer · technologist · herbalist</div>
+    <div class="roles">spiritual practice · herbal medicine · writing · music</div>
   </div>
   <nav class="nav">
     <a href="{home}#work">work</a>
@@ -461,7 +461,7 @@ def build_index():
   <div class="dial" id="work" style="--lh:{pitch:.3f}cqw">
     <div class="centre">
       <h1>Eon Meridian</h1>
-      <p class="roles-c">artist · writer · technologist · herbalist</p>
+      <p class="roles-c">spiritual practice · herbal medicine · writing · music</p>
       <div class="slot">
         <p class="tag">Old practices, new instruments.<span class="tag-2">Ritual technologies for futures held in common, connecting carbon, silicon and forms of life yet to come.</span></p>
         <figure class="lens" aria-hidden="true"><img alt="" /></figure>
@@ -484,12 +484,10 @@ def build_index():
 
   <section class="note about" id="about">
     <h2>About</h2>
-    <p>Art, infrastructures and herbal practice at the intersections of memory, networks, value, care
-    and the more-than-human.</p>
-    <p>Eon Meridian is an artist, writer, technologist and herbalist working across computation,
-    medicinal plants, ritual, sound, diagrams and resilient infrastructure. This site is an evolving
-    record of works, collaborations, institutions and experiments. Its sibling,
-    <a href="https://www.caerjar.com">Caerjar</a>, is the vessel much of this work is built inside.</p>
+    <p>My life and work move between spiritual, somatic and herbal practice, and writing and music.</p>
+    <p>I study and practice spiritual and embodied disciplines, work with plants and make herbal
+    medicine, and write and compose. This site is an evolving record of that work. My technology
+    work lives at <a href="https://www.caerjar.com">Caerjar</a>.</p>
     <p class="venues">Shown at {", ".join(VENUE_STRIP)}.</p>
     <p class="contact">Get in touch via Caerjar: <a href="mailto:hi@caerjar.com">hi@caerjar.com</a>
     <span class="place">New York</span></p>
@@ -527,9 +525,7 @@ def build_index():
 </script>""" + WHEEL_JS
 
     ROOT.joinpath("index.html").write_text(page("Eon Meridian: Selected Work",
-        "Eon Meridian: artist, writer, technologist, herbalist. Old practices, new instruments: "
-        "ritual technologies for futures held in common. Art, infrastructures and herbal practice at the intersections of memory, "
-        "networks, value, care and the more-than-human.",
+        "Eon Meridian: spiritual, somatic and herbal practice, writing and music.",
         body, home="index.html", css="assets/site.css"))
 
 
