@@ -13,7 +13,7 @@ caption = "Obverse and reverse, struck: the milled edge, the legend ring, the re
 
 [[side]]
 label = "Pairs with"
-value = "<a href=\"../unpaid-labor-coin/\">Unpaid Labor Coin</a>, 2019"
+value = "Unpaid Labor Coin, 2019"
 +++
 A coin struck for prayer: an object that borrows the whole apparatus of money (the disc, the milled edge, the two faces, the promise), and applies it to the one exchange that was never supposed to carry a denomination.
 
@@ -22,7 +22,7 @@ A coin struck for prayer: an object that borrows the whole apparatus of money (t
 opposite arrangement: unaccounted, unwitnessed, and not owed back. Striking one as the other puts
 the two systems in the same hand and lets the mismatch do the work.</p>
 <p>It belongs to a line of work that holds that <b>everything has a value, though not necessarily a
-price</b>, and to a pair with the <a href="../unpaid-labor-coin/">Unpaid Labor Coin</a>, which
+price</b>, and to a pair with the Unpaid Labor Coin, which
 takes the same form to the other unpriced thing.</p>
 <p>Made during a fellowship and residency at the <b>Recurse Center</b>, where the surrounding
 question (what a currency is actually for) had a room full of people willing to argue about

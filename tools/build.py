@@ -188,16 +188,12 @@ THEMES = [
         "unpaid-labor-coin", "sanctuary-cell-division", "the-rev", "herbal-science", "compute-club",
         "commons-git", "commons-governance", "governance-service", "invite-service",
         "project-discovery", "grant-agent", "trend-oracle"]),
-    ("tools", "Small tools", [
-        "eon-inventory", "epub-to-pdf", "nixos-sync", "screenplay-formatter", "training",
-        "csv-to-applemusic", "coach", "spica", "moneymachine", "prediction", "cryptoagent",
-        "pdfseq", "videodownload"]),
 ]
 THEME_OF = {s: (k, label) for k, label, slugs in THEMES for s in slugs}
 
 # The dial's two fans, each read clockwise: the right from top to bottom, the left from bottom
 # to top. The sides hold about the same number of works so the spokes can share one spacing.
-DIAL = [["ritual", "sound", "care"], ["tools", "infra", "writing"]]
+DIAL = [["ritual", "care"], ["sound", "infra", "writing"]]
 assert sorted(DIAL[0] + DIAL[1]) == sorted(k for k, _, _ in THEMES)
 
 ORDER = [
