@@ -11,7 +11,6 @@ The portfolio is editorial (paper, monospace, serif headings, hairline rules).
 ```
 caerjar/
 ├── index.html            # Eon Meridian portfolio: hero, work cards, collaborations, about
-├── caerjar.html          # redirect to https://caerjar.github.io/ (kept so old links work)
 ├── projects/<slug>/      # one page per work, 21 of them
 │   └── index.html
 ├── assets/
