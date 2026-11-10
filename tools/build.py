@@ -488,7 +488,7 @@ def build_index():
     medicine, and write and compose. This site is an evolving record of that work.</p>
     <p class="venues">Shown at {", ".join(VENUE_STRIP)}.</p>
     <p class="contact">Get in touch: <a href="mailto:eon@eonmeridian.com">eon@eonmeridian.com</a>
-    <span class="place">New York</span></p>
+    <span class="place">Woodstock</span></p>
   </section>
 
 </main>
