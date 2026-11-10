@@ -1,8 +1,8 @@
 +++
 slug = "oracularity"
-title = "Oracularity"
+title = "Oracularity and Digitality"
 sub = "Computation read back through divination and the tarot"
-year = ""
+year = "2023 (talk) · 2024 (volume)"
 medium = "essay"
 venue = "Machine as Medium, Yale Center for Collaborative Arts and Media<br>Yale Journal of Technology and the Arts 12(1)"
 blurb = "An essay that traces computation back to divination: from reading signs to Turing's decision machine."

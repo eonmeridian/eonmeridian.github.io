@@ -147,6 +147,7 @@ FEATURED = [
 VENUE_STRIP = [
     "Ars Electronica", "Hackers On Planet Earth", "DWeb", "Recurse Center", "Banff Centre",
     "Visions2030", "HERE Arts Center", "Sphinx", "NEW INC", "New Museum",
+    "Yale CCAM", "Black Sky (Crete)",
 ]
 
 SUBSTACK = "https://eonmeridian.substack.com/"

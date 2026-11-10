@@ -4,7 +4,7 @@ title = "Mugworts Free Herbal Clinic"
 sub = "Care as collective infrastructure"
 year = ""
 medium = "herbalism / care / collective practice"
-venue = "DWeb NYC 2023 · DWeb Camp 2024<br>HOPE 2025, 2026<br>Herbal Theurgy at Black Sky, Crete, 2025"
+venue = "DWeb NYC 2023 · DWeb Camp 2024<br>Hackers On Planet Earth (HOPE) 2025, 2026<br>Herbal Theurgy at Black Sky, Crete, 2025"
 blurb = "A free herbal clinic: medicine as something a community makes and keeps, not something it buys."
 
 [[images]]
