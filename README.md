@@ -1,8 +1,8 @@
 # Eon Meridian
 
-> Old practices, new instruments. Ritual technologies for futures held in common: art, infrastructures and herbal practice at the intersections of memory, networks, value, care and the more-than-human.
+> Spiritual practice, plant medicine, writing and music.
 
-Portfolio site for **Eon Meridian**. The **Caerjar** landing page now lives in its own repo at https://caerjar.github.io/. Designed to live on GitHub Pages and grow into a place to publish code and writing.
+Portfolio site for **Eon Meridian**, served at https://eonmeridian.com/. The dial groups the works in four: Spiritual practices, Music, Plant medicine, Writing (`THEMES` in `tools/build.py`). Business and technical work lives on the Caerjar site, in its own repo at https://caerjar.github.io/.
 
 The portfolio is editorial (paper, monospace, serif headings, hairline rules).
 

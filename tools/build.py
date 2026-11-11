@@ -167,34 +167,24 @@ WRITING = ["ladder-for-constance", "lesbians-for-proust", "surregional-sangha"]
 
 # The index filters by theme. Every work on the site belongs to exactly one.
 THEMES = [
-    ("ritual", "Ritual & divination", [
+    ("spirit", "Spiritual practices", [
         "order-of-the-meridian", "six-rites", "sigil-studio", "divinatory-os", "breath", "dream",
-        "bardo", "daimon", "playing-together", "the-oracle-lab", "geomancy", "pgm-diagrams",
-        "prayer-coin", "daimon-og", "diagram-studio"]),
-    ("sound", "Sound & instruments", [
-        "diagrammatic-immanence", "sounds-like", "monochord", "newmusic", "bloomcast",
-        "palimpsest-studio", "earshot", "spoken-word", "recommender", "movies"]),
-    ("writing", "Writing, film & performance", [
+        "bardo", "the-oracle-lab", "geomancy", "pgm-diagrams", "prayer-coin", "diagram-studio",
+        "the-rev"]),
+    ("music", "Music", [
+        "diagrammatic-immanence", "sounds-like", "monochord", "newmusic", "palimpsest-studio"]),
+    ("plant", "Plant medicine", [
+        "mugworts", "herbal-theurgy", "herbal-medicine-for-self-sovereignty", "cultivation-station",
+        "herbal-science", "vetiver", "vetiver-sources"]),
+    ("writing", "Writing", [
         "ladder-for-constance", "lesbians-for-proust", "surregional-sangha", "oracularity",
-        "three-circuits-for-breath", "emu-butch", "botmatrix", "thirteen-bit",
-        "evertunes", "drone-cinematographer", "persona-forge", "fieldkit",
-        "language-technology-human", "sacred-salesman"]),
-    ("infra", "Infrastructure & research", [
-        "caer-stack", "meridian", "palimpsest", "research-manager", "daimon-agent", "corpusmith",
-        "vetiver", "the-aion-apparatus", "haunted-geography", "agent-factory", "assay",
-        "awakening-agent", "vetiver-sources", "mattermost-stack", "work-harness", "space-lab",
-        "fetch-sandbox", "web-passthrough", "vault", "briefs"]),
-    ("care", "Care, commons & ventures", [
-        "mugworts", "peat-and-repeat", "ethical-imagination", "kokowa", "paom",
-        "unpaid-labor-coin", "sanctuary-cell-division", "the-rev", "herbal-science", "compute-club",
-        "commons-git", "commons-governance", "governance-service", "invite-service",
-        "project-discovery", "grant-agent", "trend-oracle"]),
+        "emu-butch", "peat-and-repeat", "palimpsest", "spoken-word"]),
 ]
 THEME_OF = {s: (k, label) for k, label, slugs in THEMES for s in slugs}
 
 # The dial's two fans, each read clockwise: the right from top to bottom, the left from bottom
 # to top. The sides hold about the same number of works so the spokes can share one spacing.
-DIAL = [["ritual", "care"], ["sound", "infra", "writing"]]
+DIAL = [["spirit", "music"], ["plant", "writing"]]
 assert sorted(DIAL[0] + DIAL[1]) == sorted(k for k, _, _ in THEMES)
 
 ORDER = [
@@ -484,8 +474,13 @@ def build_index():
 
   <section class="note about" id="about">
     <h2>About</h2>
-    <p>I study and practice spiritual and embodied disciplines, work with plants and make herbal
-    medicine, and write and compose. This site is an evolving record of that work.</p>
+    <p>I study and practice spiritual and embodied disciplines: Kundalini yoga, Sat Nam Rasayan,
+    tai chi, qigong, family constellation, human design, tarot, astrology and syncretic divination.
+    I work with plants and make herbal medicine. I trained in the three-year clinical program at
+    Arborvitae School of Traditional Herbalism, I am the founding herbalist of Mugworts Free Herbal
+    Clinic, and I have brought herbal medicine to O+ Festival, DWeb and Hackers On Planet Earth.
+    Herbal Theurgy, a book, class and talk, joins plant medicine and ritual. I also write and
+    compose. This site is an evolving record of that work.</p>
     <p class="venues">Shown at {", ".join(VENUE_STRIP)}.</p>
     <p class="contact">Get in touch: <a href="mailto:eon@eonmeridian.com">eon@eonmeridian.com</a>
     <span class="place">Woodstock</span></p>

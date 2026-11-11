@@ -180,6 +180,9 @@ PLATES = [
     ("vault", "LINK / TAG / NOTE", "VAULT 02", "mesh"),
     ("movies", "FRAME / SCORE / BELL", "RENDER 01", "wave"),
     ("briefs", "QUEUE / GATE / HANDOFF", "QUEUE 01", "strata"),
+    ("herbal-theurgy", "PLANT / OPERATION / DIAGRAM", "THEURGY 01", "orbit"),
+    ("herbal-medicine-for-self-sovereignty", "BODY / NETWORK / MEDICINE", "TALK 01", "lattice"),
+    ("cultivation-station", "SEED / BED / SESSION", "STATION 01", "strata"),
 
 ]
 
