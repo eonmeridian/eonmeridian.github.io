@@ -127,7 +127,7 @@ PLATES = [
     ("oracularity", "SIGN / READING / DECISION", "PRINT 02", "lattice"),
     ("surregional-sangha", "PRACTICE / TEACHING / COMMUNITY", "PRINT 03", "orbit"),
     ("three-circuits-for-breath", "INHALE / HOLD / EXHALE", "PRINT 04", "wave"),
-    ("corpusmith", "FOLDER / PLAN / UNDO", "TOOL 01", "strata"),
+    ("folio", "FOLDER / PLAN / UNDO", "TOOL 01", "strata"),
     ("csv-to-applemusic", "TRACK / LIST / PLAYLIST", "TOOL 02", "wave"),
     ("daimon-agent", "TERMINAL / TAB / CONTAINER", "AGENT 01", "lattice"),
     ("daimon", "MIRROR / ORACLE / PRACTICE", "COMPANION 01", "orbit"),
