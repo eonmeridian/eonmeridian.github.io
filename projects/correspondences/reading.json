@@ -1,0 +1,205 @@
+{
+  "about": "Further reading for reading mode. Pointers only: a book, where in it to look, and one line in monochord's own words about what the book covers there. Never a quotation, never what the book says a symbol means. Not part of the graph, not in its content hash, and never a source for a pitch, a figure or a programme note. Every locus was drafted from memory and is checked: false until someone confirms it against a copy.",
+  "works": [
+    {
+      "id": "coppock-2014",
+      "author": "Austin Coppock",
+      "title": "36 Faces: The History, Astrology and Magic of the Decans",
+      "year": 2014,
+      "publisher": "Three Hands Press",
+      "rights": "in copyright",
+      "pointers": [
+        {
+          "target": "astro:decan/*",
+          "locus": "the chapter on this decan, in zodiacal order",
+          "why": "A chapter per decan, drawing its images from the Picatrix and older lists, beside its planetary ruler and Golden Dawn card.",
+          "checked": false
+        }
+      ]
+    },
+    {
+      "id": "brennan-2017",
+      "author": "Chris Brennan",
+      "title": "Hellenistic Astrology: The Study of Fate and Fortune",
+      "year": 2017,
+      "publisher": "Amor Fati Publications",
+      "rights": "in copyright",
+      "pointers": [
+        {
+          "target": "astro:sign/*",
+          "locus": "the chapters on the signs and on rulerships",
+          "why": "Sets out the sign rulerships, exaltations and triplicities that the graph does not yet carry, and where each comes from.",
+          "checked": false
+        },
+        {
+          "target": "astro:planet/*",
+          "locus": "the chapters on the planets and on rulerships",
+          "why": "The planets as the Hellenistic sources treat them, including the domicile and exaltation schemes.",
+          "checked": false
+        }
+      ]
+    },
+    {
+      "id": "pollack-1980",
+      "author": "Rachel Pollack",
+      "title": "Seventy-Eight Degrees of Wisdom",
+      "year": 1980,
+      "publisher": "Aquarian Press; later Weiser",
+      "rights": "in copyright",
+      "pointers": [
+        {
+          "target": "tarot:trump/*",
+          "locus": "Part One, the Major Arcana: the section on this card",
+          "why": "A long reading of each trump, card by card, from the Rider-Waite images.",
+          "checked": false
+        },
+        {
+          "target": "tarot:minor/*",
+          "locus": "Part Two, the Minor Arcana: this suit, this card",
+          "why": "Each small card and court card in turn, by suit.",
+          "checked": false
+        }
+      ]
+    },
+    {
+      "id": "crowley-1944",
+      "author": "Aleister Crowley",
+      "title": "The Book of Thoth",
+      "year": 1944,
+      "publisher": "O.T.O.; later Weiser",
+      "rights": "not treated as public domain here (out of copyright in the UK and EU, not clearly so in the US)",
+      "pointers": [
+        {
+          "target": "tarot:trump/*",
+          "locus": "Part II, the Atu: the entry for this trump",
+          "why": "Crowley on each trump. Where it differs from Liber 777, notably the Emperor and the Star, it is his later revision.",
+          "checked": false
+        }
+      ]
+    },
+    {
+      "id": "wilhelm-baynes-1950",
+      "author": "Richard Wilhelm, tr. Cary F. Baynes",
+      "title": "The I Ching or Book of Changes",
+      "year": 1950,
+      "publisher": "Princeton University Press, Bollingen Series XIX",
+      "rights": "in copyright",
+      "pointers": [
+        {
+          "target": "iching:hexagram/*",
+          "locus": "Book I, the Text: this hexagram",
+          "why": "Wilhelm's commentary on the judgement, image and each line, the reading most English speakers know.",
+          "checked": false
+        },
+        {
+          "target": "iching:trigram/*",
+          "locus": "the Introduction, on the eight trigrams",
+          "why": "The trigrams with their images, family members and attributes, as Wilhelm arranges them.",
+          "checked": false
+        }
+      ]
+    },
+    {
+      "id": "greer-2009",
+      "author": "John Michael Greer",
+      "title": "The Art and Practice of Geomancy",
+      "year": 2009,
+      "publisher": "Weiser",
+      "rights": "in copyright",
+      "pointers": [
+        {
+          "target": "geomancy:figure/*",
+          "locus": "the chapter on the sixteen figures: this figure",
+          "why": "Each figure with its planet, sign and element as the Renaissance manuals give them, and how it is read.",
+          "checked": false
+        }
+      ]
+    },
+    {
+      "id": "peterson-2001",
+      "author": "Joseph H. Peterson, ed.",
+      "title": "The Lesser Key of Solomon",
+      "year": 2001,
+      "publisher": "Weiser",
+      "rights": "in copyright (the edition; the underlying manuscripts are old)",
+      "pointers": [
+        {
+          "target": "cm:spirit/*",
+          "locus": "the Goetia: the entry under this spirit's name",
+          "why": "A critical edition of the Goetia with the seals Scot does not print. A different book: its list and order differ from Scot's.",
+          "checked": false
+        }
+      ]
+    },
+    {
+      "id": "godwin-1987",
+      "author": "Joscelyn Godwin",
+      "title": "Harmonies of Heaven and Earth",
+      "year": 1987,
+      "publisher": "Thames and Hudson; later Inner Traditions",
+      "rights": "in copyright",
+      "pointers": [
+        {
+          "target": "music:*",
+          "locus": "the part on the harmony of the spheres",
+          "why": "How the planets, modes and Muses were tied to intervals from Pythagoras to Kepler, the tradition Agrippa's chapter draws on.",
+          "checked": false
+        }
+      ]
+    },
+    {
+      "id": "godwin-1993",
+      "author": "Joscelyn Godwin, ed.",
+      "title": "The Harmony of the Spheres: A Sourcebook of the Pythagorean Tradition in Music",
+      "year": 1993,
+      "publisher": "Inner Traditions",
+      "rights": "in copyright (the translations)",
+      "pointers": [
+        {
+          "target": "music:*",
+          "locus": "the readings from antiquity to the Renaissance",
+          "why": "Translated passages from the sources behind Agrippa's music, including Boethius and Gafurius, with notes.",
+          "checked": false
+        }
+      ]
+    },
+    {
+      "id": "regardie-1937",
+      "author": "Israel Regardie",
+      "title": "The Golden Dawn",
+      "year": 1937,
+      "publisher": "Aries Press; later Llewellyn",
+      "rights": "in copyright",
+      "pointers": [
+        {
+          "target": "qbl:*",
+          "locus": "the knowledge lectures on the Tree of Life",
+          "why": "The Golden Dawn Tree, its sephiroth, paths and letters, the scheme Liber 777 tabulates.",
+          "checked": false
+        },
+        {
+          "target": "tarot:*",
+          "locus": "Book T and the tarot material",
+          "why": "The Golden Dawn attributions of the trumps and small cards, including the decan assignment.",
+          "checked": false
+        }
+      ]
+    },
+    {
+      "id": "ra-uru-hu-2011",
+      "author": "Lynda Bunnell and Ra Uru Hu",
+      "title": "The Definitive Book of Human Design",
+      "year": 2011,
+      "publisher": "HDC Publishing",
+      "rights": "in copyright",
+      "pointers": [
+        {
+          "target": "hd:gate/*",
+          "locus": "the section on the 64 gates: this gate",
+          "why": "The gate names and keynotes that divinatory-os deliberately leaves out, as the system's own source gives them.",
+          "checked": false
+        }
+      ]
+    }
+  ]
+}

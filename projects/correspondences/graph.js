@@ -213,6 +213,19 @@ export class GraphPass {
     /// Set while the hand is on the camera. The auto-swing yields rather than fighting
     /// it — a camera that argues with a drag is worse than one that never moves.
     this.manual = false;
+    /// Whether the idle drift runs. Off, the camera holds still unless you move it. The
+    /// drift's clock only advances while it is on, so turning it back on resumes from
+    /// where it stopped rather than jumping to where it would have been.
+    this.drift = true;
+    this.driftTime = 0;
+    this._lastTime = null;
+    /// First person: `null` while orbiting, else `{ pos, yaw, pitch }`. In walk mode the
+    /// eye is yours -- you move through the armillary among the sounding shapes, and the
+    /// audio listener stands where you stand (`eye`, `forward`, `up` are published below).
+    this.walk = null;
+    this.eye = [0, 0, this.radius];
+    this.forward = [0, 0, -1];
+    this.up = [0, 1, 0];
     this.count = 0;
     this.contextCount = 0;
     this.edgeCount = 0;
@@ -233,6 +246,44 @@ export class GraphPass {
     this.angle -= dx * 2.4;
     this.aim = this.angle; // stop the easing from pulling back to the last selection
     this.elevation = Math.max(-1.15, Math.min(1.15, this.elevation + dy * 1.8));
+  }
+
+  /// Step into the atlas where the camera is, facing the middle.
+  enterWalk() {
+    const [x, y, z] = this.eye;
+    this.walk = { pos: [x, y, z], yaw: Math.atan2(-x, -z), pitch: -Math.atan2(y, Math.hypot(x, z)) };
+  }
+
+  /// Back to the orbit, at the distance you walked to (clamped to the orbit's range).
+  leaveWalk() {
+    if (!this.walk) return;
+    const [x, y, z] = this.walk.pos;
+    this.angle = this.aim = Math.atan2(x, z);
+    this.radius = Math.max(2.2, Math.min(12, Math.hypot(x, y, z)));
+    this.elevation = Math.max(-1.15, Math.min(1.15, Math.asin(y / (Math.hypot(x, y, z) || 1))));
+    this.walk = null;
+  }
+
+  /// Turn your head while walking: horizontal is yaw, vertical is pitch.
+  look(dx, dy) {
+    if (!this.walk) return;
+    this.walk.yaw -= dx * 2.4;
+    this.walk.pitch = Math.max(-1.4, Math.min(1.4, this.walk.pitch + dy * 1.8));
+  }
+
+  /// Move while walking, in units per second: forward along the gaze, sideways, and up.
+  move(forward, right, up, dt) {
+    if (!this.walk) return;
+    const w = this.walk;
+    const cp = Math.cos(w.pitch);
+    const f = [Math.sin(w.yaw) * cp, Math.sin(w.pitch), Math.cos(w.yaw) * cp];
+    const r = [Math.cos(w.yaw), 0, -Math.sin(w.yaw)];
+    for (let i = 0; i < 3; i++) {
+      w.pos[i] += (f[i] * forward + r[i] * right + (i === 1 ? up : 0)) * dt;
+    }
+    // Not so far that the cosmos is a dot, not so near the middle that lookAt degenerates.
+    const d = Math.hypot(...w.pos);
+    if (d > 14) for (let i = 0; i < 3; i++) w.pos[i] *= 14 / d;
   }
 
   /// Wheel: in far enough to stand among the rings, out far enough to see the cosmos.
@@ -391,19 +442,45 @@ export class GraphPass {
     while (delta < -Math.PI) delta += Math.PI * 2;
     this.angle += delta * 0.045;
 
-    // The idle drift stops under the hand. Drifting while somebody is aiming the camera
-    // makes a careful angle impossible to hold.
-    const a = this.angle + (this.manual ? 0 : stage.time * 0.012);
-    const r = this.radius;
-    const cosEl = Math.cos(this.elevation);
-    const eye = [
-      Math.sin(a) * r * cosEl,
-      Math.sin(this.elevation) * r + (this.manual ? 0 : Math.sin(stage.time * 0.031) * 0.25),
-      Math.cos(a) * r * cosEl,
-    ];
+    // The idle drift stops under the hand, and when it is switched off. Drifting while
+    // somebody is aiming the camera makes a careful angle impossible to hold.
+    const dt = this._lastTime === null ? 0 : Math.max(0, stage.time - this._lastTime);
+    this._lastTime = stage.time;
+    const drifting = this.drift && !this.manual && !this.walk;
+    if (drifting) {
+      this.driftTime += dt;
+      // The drift turns the real azimuth, and the aim with it, so there is one angle.
+      // Added only at draw time, it was invisible to `faceToward` and `leaveWalk`: after
+      // minutes of drift, clicking a symbol no longer turned it into view.
+      this.angle += dt * 0.012;
+      this.aim += dt * 0.012;
+    }
+
+    let eye;
+    let target;
+    if (this.walk) {
+      const w = this.walk;
+      const cp = Math.cos(w.pitch);
+      eye = [...w.pos];
+      this.forward = [Math.sin(w.yaw) * cp, Math.sin(w.pitch), Math.cos(w.yaw) * cp];
+      target = [eye[0] + this.forward[0], eye[1] + this.forward[1], eye[2] + this.forward[2]];
+    } else {
+      const a = this.angle;
+      const r = this.radius;
+      const cosEl = Math.cos(this.elevation);
+      eye = [
+        Math.sin(a) * r * cosEl,
+        Math.sin(this.elevation) * r + (drifting ? Math.sin(this.driftTime * 0.031) * 0.25 : 0),
+        Math.cos(a) * r * cosEl,
+      ];
+      target = this.target;
+      const len = Math.hypot(eye[0] - target[0], eye[1] - target[1], eye[2] - target[2]) || 1;
+      this.forward = [(target[0] - eye[0]) / len, (target[1] - eye[1]) / len, (target[2] - eye[2]) / len];
+    }
+    this.eye = eye;
     const viewProj = multiply(
-      perspective(0.86, aspect, 0.1, 40),
-      lookAt(eye, this.target)
+      perspective(0.86, aspect, 0.05, 40),
+      lookAt(eye, target)
     );
     // Published for `Rings`, which must use *this* camera rather than recompute one:
     // two cameras drifting apart by a frame would draw the guide circles slightly off

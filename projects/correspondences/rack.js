@@ -21,8 +21,18 @@
 // line `audio.js` draws and it is drawn in the same place here: the graph decides what a
 // correspondence *is*, the composer decides what it is played on and how loud. The rack
 // is labelled `authored` in the corner so nobody has to take my word for it.
+//
+// # Two controls that do touch pitch, and are labelled where it is heard
+//
+// **tonic** moves every pitch together; it was always mine and always said so. **pitch**
+// sets one symbol's pitch by hand, to the cent -- a microtone is just a value between
+// keys. A hand-set pitch reports `authored:hand` everywhere a pitch is shown or counted,
+// so turning this knob on the Diapente cannot make your fifth read as Agrippa's.
+// **graph** gives the symbol back to the layers in `tuning.js`.
 
 import { knob } from './knob.js';
+import { noteName } from './tuning.js';
+import { CHAINS } from './string.js';
 import { VOICES } from './voices.js';
 
 export class Rack {
@@ -32,8 +42,11 @@ export class Rack {
    * @param {Instrument} instrument for the mix
    * @param {(piece: Piece, what: string) => void} act  the shared verbs
    */
-  constructor(host, surface, instrument, act) {
+  constructor(host, surface, instrument, act, onTuning = () => {}) {
     this.host = host;
+    this.tuning = instrument.tuning;
+    /// Told whenever a pitch changes, so panels that show pitch can redraw.
+    this.onTuning = onTuning;
     this.surface = surface;
     this.instrument = instrument;
     this.act = act;
@@ -94,6 +107,32 @@ export class Rack {
       onInput: (v) => { const p = this.surface.selected; if (p) p.gain = v; },
     });
 
+    // Cents above the open string, so a hand-set pitch rides the open-string knob with
+    // everything else. The string's three octaves, and no further (string.js).
+    this.pitch = knob({
+      label: 'pitch', min: 0, max: 3599, value: 0, reset: 0, step: 1,
+      format: (v) => noteName(this.tuning.tonicCents + v),
+      onInput: (v) => {
+        const p = this.surface.selected;
+        if (!p) return;
+        this.tuning.hand.set(p.address, v);
+        this.sync();
+        this.onTuning();
+      },
+    });
+    this.graphBtn = document.createElement('button');
+    this.graphBtn.className = 'chip wide';
+    this.graphBtn.textContent = 'graph';
+    this.graphBtn.title = 'give this symbol its pitch back from the graph';
+    this.graphBtn.onclick = () => {
+      const p = this.surface.selected;
+      if (!p) return;
+      this.tuning.hand.delete(p.address);
+      this.shown = null; // re-read the knob from the layers
+      this.sync();
+      this.onTuning();
+    };
+
     this.muteBtn = document.createElement('button');
     this.muteBtn.className = 'chip wide';
     this.muteBtn.onclick = () => { this.act(this.surface.selected, 'mute'); this.sync(); };
@@ -104,7 +143,8 @@ export class Rack {
     this.dropBtn.onclick = () => { this.act(this.surface.selected, 'drop'); this.sync(); };
 
     this.forPiece.append(
-      this.who, this.voices, this.rate, this.level.el, this.muteBtn, this.dropBtn);
+      this.who, this.voices, this.rate, this.level.el, this.pitch.el, this.graphBtn,
+      this.muteBtn, this.dropBtn);
 
     // ── the mix ────────────────────────────────────────────────────────────
     const mix = document.createElement('div');
@@ -112,6 +152,20 @@ export class Rack {
     const tag = document.createElement('div');
     tag.className = 'rackwho';
     tag.innerHTML = '<b>the mix</b><span>authored</span>';
+
+    // The open string, F2 to C#3, continuous: it can sit between keys like anything else.
+    // Every pitch is a stop on this string (string.js), so this moves all of them.
+    this.tonic = knob({
+      label: 'open', min: 2900, max: 3700, value: this.tuning.tonicCents,
+      reset: this.tuning.tonicCents, step: 1,
+      format: (v) => noteName(v),
+      onInput: (v) => {
+        this.tuning.tonicCents = v;
+        this.instrument.retune?.();
+        this.pitch.set(this.pitch.get(), false); // repaint: its readout is tonic-relative
+        this.onTuning();
+      },
+    });
 
     // Defaults match what `Instrument.start` built, so opening the rack changes nothing.
     this.room = knob({
@@ -128,7 +182,34 @@ export class Rack {
       format: (v) => `${Math.round(200 * Math.pow(100, v))}Hz`,
       onInput: () => this._fx(),
     });
-    mix.append(tag, this.room.el, this.echo.el, this.warmth.el);
+    // How many fifths the chain runs before it repeats. Past 12 the neighbours sit a
+    // Pythagorean comma apart: these are the microtones (string.js).
+    this.chain = document.createElement('div');
+    this.chain.className = 'chips';
+    this.chain.setAttribute('role', 'group');
+    this.chain.setAttribute('aria-label', 'fifths in the chain');
+    for (const n of CHAINS) {
+      const b = document.createElement('button');
+      b.className = 'chip';
+      b.textContent = `${n} fifths`;
+      b.dataset.chain = n;
+      b.setAttribute('aria-pressed', String(n === this.tuning.chain));
+      b.onclick = () => {
+        this.tuning.chain = n;
+        for (const c of this.chain.children) c.setAttribute('aria-pressed', String(c === b));
+        this.shown = null;
+        this.sync();
+        this.onTuning();
+      };
+      this.chain.append(b);
+    }
+    // The other strings: resonators at the first stops of the open string, which ring only
+    // when the mix sounds near them. Off at 0.
+    this.sympathy = knob({
+      label: 'strings', min: 0, max: 1, value: 0.3, reset: 0.3,
+      onInput: () => this._fx(),
+    });
+    mix.append(tag, this.tonic.el, this.chain, this.room.el, this.echo.el, this.warmth.el, this.sympathy.el);
 
     h.append(this.forPiece, mix);
     this.sync();
@@ -137,6 +218,7 @@ export class Rack {
   _fx() {
     this.instrument.setFx({
       room: this.room.get(), echo: this.echo.get(), warmth: this.warmth.get(),
+      sympathy: this.sympathy.get(),
     });
   }
 
@@ -152,7 +234,7 @@ export class Rack {
       for (const b of this.voices.querySelectorAll('.chip')) b.setAttribute('aria-pressed', 'false');
       this.rateOut.textContent = '—';
       this.muteBtn.textContent = 'mute';
-      for (const b of [this.muteBtn, this.dropBtn]) b.disabled = true;
+      for (const b of [this.muteBtn, this.dropBtn, this.graphBtn]) b.disabled = true;
       this.shown = null;
       return;
     }
@@ -167,8 +249,17 @@ export class Rack {
     this.rateOut.textContent = `${p.rate.toFixed(2)}×`;
     this.muteBtn.textContent = p.muted ? 'unmute' : 'mute';
 
+    const byHand = this.tuning.hand.has(p.address);
+    this.graphBtn.disabled = !byHand;
+    this.graphBtn.setAttribute('aria-pressed', String(!byHand));
+
     if (this.shown !== p) {
       this.level.set(p.gain, false);
+      // Show where the symbol sounds now, so the first turn starts from its pitch and not
+      // from the tonic. An unpitched symbol starts at the tonic: turning the knob is how it
+      // is given one.
+      const now = this.tuning.pitch(p.node);
+      this.pitch.set(now ? now.cents - this.tuning.tonicCents : 0, false);
       this.shown = p;
     }
   }

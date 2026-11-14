@@ -134,6 +134,19 @@ export function place(node, idx) {
   return pointOn(ringOf(system, kindOrder), t);
 }
 
+/// The ring a symbol sits on and where on it: what a placed piece orbits along. The
+/// same ring and starting point as `place`, so a piece sets off from its own symbol.
+/// `null` for a system the census does not list.
+export function orbitOf(node, idx) {
+  const system = idx.get(node.system);
+  if (!system) return null;
+  const kind = system.kinds.get(node.kind);
+  const count = kind ? kind.count : 1;
+  const ordinal = Number(node.attributes?.ordinal);
+  const t0 = Number.isFinite(ordinal) ? (ordinal - 1) / count : hash01(node.address);
+  return { ring: ringOf(system, kind ? kind.order : 0), t0 };
+}
+
 /// The centroid of a set of placed nodes — where the camera looks when you stand in a
 /// neighbourhood.
 export function centroid(positions) {

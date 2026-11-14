@@ -21,6 +21,20 @@
 
 import { figureOf, stepsOf } from './figures.js';
 import { DEFAULT_VOICE } from './voices.js';
+import { pointOn } from './layout.js';
+
+/// Where a piece is drawn on screen: at its orbit when orbits are shown (`sx`, `sy`, set
+/// by the page each frame), otherwise where it was put on the surface. `null` when it is
+/// behind the eye. Every pass draws through this, so a shape, its glyph and its bonds
+/// cannot end up in three different places.
+export function screenOf(piece) {
+  if (piece.hidden) return null;
+  return { x: piece.sx ?? piece.x, y: piece.sy ?? piece.y, scale: (piece.sscale ?? 0.11) / 0.11 };
+}
+
+/// How many turns of its figure a piece takes to go once round its orbit. Slow enough to
+/// follow, and tied to the spin, so freezing the spin stops the orbit too.
+export const TURNS_PER_ORBIT = 48;
 
 /// Rates that are simple ratios of each other, so pieces phase rather than smear.
 ///
@@ -112,6 +126,17 @@ export class Piece {
 
   /// Advance the spin. Returns the step indices crossed since the last call, in order,
   /// so no event is dropped when a frame is long or a rate is high.
+  /// Where the piece is in the armillary, or `null` if it has no orbit.
+  ///
+  /// A piece travels its own symbol's ring -- its system's tilt, its kind's radius --
+  /// starting where the symbol sits and advancing as the piece plays. Its path is the
+  /// layout's, never a place anyone chose, so where a shape is in space still says
+  /// something about what it is.
+  worldPos() {
+    if (!this.orbit) return null;
+    return pointOn(this.orbit.ring, this.orbit.t0 + this.turns / TURNS_PER_ORBIT);
+  }
+
   advance(dt) {
     this.turns += dt * this.rate;
     this.phase = this.turns % 1;
@@ -159,21 +184,27 @@ export class Surface {
 
   /// Somewhere that is not on top of something else. A ring that grows as it fills, so
   /// the first few land where they can be seen rather than stacking at the origin.
+  ///
+  /// Neighbouring spots sit just outside `resonance.js`'s capture ring. Closer, and two
+  /// corresponding shapes would catch on the first pixel of a drag, before the hand had
+  /// asked anything; the pull has to be something you move *into*.
   freeSpot() {
     const i = this.pieces.length;
     const ring = Math.floor(i / 6);
     const a = (i % 6) * (Math.PI / 3) + ring * 0.4;
-    const r = 0.42 + ring * 0.22;
+    const r = 0.62 + ring * 0.26;
     return { x: Math.cos(a) * r, y: Math.sin(a) * r * 0.62 };
   }
 
-  /// The piece under a point in surface coordinates, nearest first.
+  /// The piece under a point in surface coordinates, nearest first. Where a piece is
+  /// drawn at its orbit (`sx`, `sy`), that is where it is hit.
   at(x, y, radius = 0.13) {
     let best = null;
     let bestD = radius * radius;
     for (const p of this.pieces) {
-      const dx = p.x - x;
-      const dy = p.y - y;
+      if (p.hidden) continue;
+      const dx = (p.sx ?? p.x) - x;
+      const dy = (p.sy ?? p.y) - y;
       const d = dx * dx + dy * dy;
       if (d <= bestD) {
         bestD = d;

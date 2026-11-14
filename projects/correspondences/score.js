@@ -93,7 +93,7 @@ export class ScoreView {
     const pieces = this.surface.pieces;
     if (pieces.length === 0) {
       ctx.fillStyle = DIM;
-      ctx.font = 'italic 15px "Iowan Old Style", Palatino, Georgia, serif';
+      ctx.font = '15px "IBM Plex Sans", system-ui, sans-serif';
       ctx.fillText('Nothing placed. Click a symbol in the atlas.', 24, 44);
       return;
     }
@@ -141,7 +141,7 @@ export class ScoreView {
         ctx.globalAlpha = 1;
 
         ctx.fillStyle = DIM;
-        ctx.font = 'italic 11px "Iowan Old Style", Palatino, Georgia, serif';
+        ctx.font = '11px "IBM Plex Sans", system-ui, sans-serif';
         const why = pitch
           ? `held — ${piece.node.source_title} prints no figure`
           : `silent — ${piece.node.source_title} prints no figure, and nothing proportions it`;
@@ -182,7 +182,7 @@ export class ScoreView {
     // The caption says so for a reader who has not been told; see `diagnostic.js`.
     if (DIAGNOSTIC) {
       ctx.fillStyle = DIM;
-      ctx.font = 'italic 11px "Iowan Old Style", Palatino, Georgia, serif';
+      ctx.font = '11px "IBM Plex Sans", system-ui, sans-serif';
       ctx.fillText(
         'one stave per shape · each turns at its own rate, so there is no shared bar line',
         16,

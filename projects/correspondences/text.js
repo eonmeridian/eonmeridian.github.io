@@ -30,6 +30,17 @@ const PLANET = {
   mercury: '☿', moon: '☽', 'north-node': '☊', 'south-node': '☋',
 };
 
+/// A planet's character, in text presentation, or `null` for an id with none.
+export const planetGlyph = (id) => (PLANET[id] ? PLANET[id] + VS15 : null);
+
+const SIGN = {
+  aries: '♈', taurus: '♉', gemini: '♊', cancer: '♋', leo: '♌', virgo: '♍',
+  libra: '♎', scorpio: '♏', sagittarius: '♐', capricorn: '♑', aquarius: '♒', pisces: '♓',
+};
+
+/// A sign's character, in text presentation, or `null`.
+export const signGlyph = (id) => (SIGN[id] ? SIGN[id] + VS15 : null);
+
 /// Trumps carry `letter = "aleph"`; the letters themselves carry the glyph. Resolved at
 /// build time from the corpus so nothing here duplicates what the graph already holds.
 export function letterGlyphs(corpus) {
@@ -86,8 +97,8 @@ export class TextAtlas {
     // truncated name is a different name.
     let px = Math.floor(this.cell * size);
     const family = serif
-      ? '"Iowan Old Style", Palatino, Georgia, serif'
-      : 'ui-monospace, Menlo, monospace';
+      ? '"IBM Plex Sans", system-ui, sans-serif'
+      : '"IBM Plex Mono", ui-monospace, Menlo, monospace';
     do {
       ctx.font = `${px}px ${family}`;
       if (ctx.measureText(text).width <= this.cell * 0.88 || px <= 8) break;

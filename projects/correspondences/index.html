@@ -5,6 +5,50 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>monochord</title>
 <link rel="stylesheet" href="monochord.css">
+<!-- Every module the page imports, and the corpus, fetched at once rather than one import
+     level at a time: four levels deep, that was four round-trips before the atlas could
+     start. tests/preload.test.mjs holds this list equal to what is actually imported. -->
+<link rel="icon" href="data:,">
+<link rel="preload" href="pkg/monochord_wasm_bg.wasm" as="fetch" type="application/wasm" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-sans-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="modulepreload" href="audio.js">
+<link rel="modulepreload" href="bondpass.js">
+<link rel="modulepreload" href="card.js">
+<link rel="modulepreload" href="constellations.js">
+<link rel="modulepreload" href="diagnostic.js">
+<link rel="modulepreload" href="diagrams.js">
+<link rel="modulepreload" href="facts.js">
+<link rel="modulepreload" href="field.js">
+<link rel="modulepreload" href="figures.js">
+<link rel="modulepreload" href="graph.js">
+<link rel="modulepreload" href="knob.js">
+<link rel="modulepreload" href="layout.js">
+<link rel="modulepreload" href="note.js">
+<link rel="modulepreload" href="piecepass.js">
+<link rel="modulepreload" href="pieces.js">
+<link rel="modulepreload" href="pkg/monochord_wasm.js">
+<link rel="modulepreload" href="rack.js">
+<link rel="modulepreload" href="reading.js">
+<link rel="modulepreload" href="resonance.js">
+<link rel="modulepreload" href="rings.js">
+<link rel="modulepreload" href="routes.js">
+<link rel="modulepreload" href="scene/gl.js">
+<link rel="modulepreload" href="scene/math.js">
+<link rel="modulepreload" href="scene/motes.js">
+<link rel="modulepreload" href="scene/post.js">
+<link rel="modulepreload" href="score.js">
+<link rel="modulepreload" href="seal.js">
+<link rel="modulepreload" href="sequencer.js">
+<link rel="modulepreload" href="sigil.js">
+<link rel="modulepreload" href="strudel.js">
+<link rel="modulepreload" href="text.js">
+<link rel="modulepreload" href="textpass.js">
+<link rel="modulepreload" href="tree.js">
+<link rel="modulepreload" href="tuning.js">
+<link rel="modulepreload" href="string.js">
+<link rel="modulepreload" href="voices.js">
 <style>
   html, body { margin: 0; height: 100%; overflow: hidden; background: var(--field); }
   /* `touch-action: none` or the browser claims every drag for scroll and pinch for page
@@ -17,16 +61,16 @@
     font: 0.72rem/1.5 var(--mono); letter-spacing: 0.08em;
   }
   #where { top: 22px; left: 24px; max-width: 34ch; }
-  #where .label { font: italic 1.35rem/1.25 var(--serif); letter-spacing: 0; display: block; }
+  #where .label { font: 500 1.35rem/1.25 var(--text); letter-spacing: 0; display: block; }
   #where .addr { color: var(--meridian); }
-  #where .gloss { color: var(--dim); letter-spacing: 0; font-family: var(--serif); font-style: italic; }
+  #where .gloss { color: var(--dim); letter-spacing: 0; font-family: var(--text); }
 
   #piece {
     bottom: 120px; right: 24px; text-align: right; max-width: 34ch;
   }
-  #piece .head { font: italic 1.05rem var(--serif); letter-spacing: 0; }
+  #piece .head { font: 500 1.05rem var(--text); letter-spacing: 0; }
   #piece .addr { color: var(--meridian); }
-  #piece .gloss { color: var(--dim); font-family: var(--serif); font-style: italic; letter-spacing: 0; }
+  #piece .gloss { color: var(--dim); font-family: var(--text); letter-spacing: 0; }
   #piece button {
     background: transparent; border: 1px solid rgba(244,244,242,0.18); border-radius: 3px;
     color: var(--ink); font: 0.68rem var(--mono); padding: 1px 6px; cursor: pointer;
@@ -81,8 +125,11 @@
     padding: 8px 12px 12px;
     overflow-x: auto; -webkit-overflow-scrolling: touch;
   }
+  /* Wraps rather than spills: with pitch and graph added, the per-shape row is wider than
+     an 800px panel, and `#rack`'s horizontal scroll put `remove` off the edge, where a
+     control you cannot see is a control that does not exist. */
   .rackrow {
-    display: flex; align-items: center; gap: 14px;
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap; row-gap: 8px;
     padding: 6px 0; min-height: 62px;
   }
   .rackrow.mix { border-top: 1px dashed rgba(244,244,242,0.10); }
@@ -191,7 +238,12 @@
   #hits button:hover { color: var(--meridian); }
   #hits .a { color: var(--dim); }
 
-  #neighbours { position: fixed; z-index: 2; top: 40%; left: 24px; max-width: 30ch; }
+  /* Bounded above the corpus line (`#graph`, bottom 76px, two lines): a long list scrolls
+     rather than running under it. A short one looks the same as before. */
+  #neighbours {
+    position: fixed; z-index: 2; top: 40%; bottom: 124px; left: 24px; max-width: 30ch;
+    overflow-y: auto; scrollbar-width: thin;
+  }
   #neighbours button {
     display: block; background: transparent; border: 0; cursor: pointer;
     color: var(--ink); padding: 3px 0; text-align: left;
@@ -201,11 +253,148 @@
   #neighbours .rel { color: var(--dim); }
   #neighbours .contested { color: var(--mark); }
 
+  /* The paths list: walk on the name, ask on the book. Two targets per row, because
+     "take me there" and "who says so" are different questions. */
+  #neighbours .row { display: flex; align-items: baseline; gap: 8px; }
+  #neighbours .row button.walk { flex: 1 1 auto; }
+  #neighbours .withheld { color: var(--dim); }
+  #neighbours .routes-to { flex-wrap: wrap; gap: 2px 8px; margin-bottom: 6px; }
+  #neighbours .routes-to button { display: inline; color: var(--dim); border-bottom: 1px dotted rgba(139,139,147,0.5); padding: 1px 0; }
+
+  /* A route card: each hop lights while it sounds, and the arrival is where you can go. */
+  #card .routebar { display: flex; align-items: center; gap: 10px; margin: 6px 0 2px; }
+  #card .routebar button {
+    background: transparent; border: 1px solid rgba(244,244,242,0.25); color: var(--ink);
+    font: 0.66rem var(--mono); padding: 3px 8px; cursor: pointer;
+  }
+  #card .routebar button[aria-pressed="true"] { border-color: var(--meridian); color: var(--meridian); }
+  #card .routebar .hops { color: var(--dim); font-size: 0.64rem; }
+  #card .route { border-top: 1px solid rgba(244,244,242,0.09); padding: 6px 0; }
+  #card .hop { font: 0.92rem/1.4 var(--text); letter-spacing: 0; padding-left: 6px; border-left: 2px solid transparent; }
+  #card .hop .rel { font: 0.64rem var(--mono); font-style: normal; color: var(--dim); }
+  #card .hop .rel.contested { color: var(--mark); }
+  #card .hop b { font-weight: normal; }
+  #card .hop .by { font: 0.6rem var(--mono); font-style: normal; color: var(--dim); }
+  #card .hop button.arrive {
+    background: transparent; border: 0; padding: 0; cursor: pointer; color: var(--ink);
+    font: inherit; border-bottom: 1px dotted rgba(244,244,242,0.4);
+  }
+  #card .hop button.arrive:hover { color: var(--meridian); }
+  #card .hop.now, #card .route.now .rest { border-left-color: var(--meridian); }
+  #card .route.now .rest { color: var(--ink); }
+  #card .rest {
+    color: var(--dim); font: 0.85rem/1.35 var(--text); letter-spacing: 0;
+    padding-left: 6px; border-left: 2px solid transparent;
+  }
+  #card .withheld-by { font-size: 0.64rem; color: var(--dim); margin-top: 3px; }
+  #card .withheld-by .why { font: 0.8rem/1.35 var(--text); letter-spacing: 0; margin-top: 2px; }
+  #neighbours button.who {
+    flex: 0 0 auto; color: var(--dim); font-size: 0.64rem; letter-spacing: 0.04em;
+    border-bottom: 1px dotted rgba(139,139,147,0.5); padding: 3px 0;
+  }
+  #neighbours button.who:hover { color: var(--meridian); }
+
+  /* ---- the source card ---- */
+  #card {
+    position: fixed; z-index: 6; top: 76px; right: 24px;
+    width: min(44ch, 44vw); max-height: calc(100vh - 76px - 250px); overflow-y: auto;
+    background: rgba(7,7,11,0.95); border: 1px solid rgba(244,244,242,0.16);
+    padding: 12px 16px 14px; color: var(--ink);
+    font: 0.7rem/1.5 var(--mono); letter-spacing: 0.04em;
+    -webkit-overflow-scrolling: touch;
+  }
+  #card[hidden] { display: none; }
+  #card .close {
+    position: sticky; top: 0; float: right; margin: -4px -6px 0 8px;
+    min-width: 36px; min-height: 36px; background: rgba(7,7,11,0.95);
+    border: 1px solid rgba(244,244,242,0.18); border-radius: 3px;
+    color: var(--dim); font: 0.9rem var(--mono); cursor: pointer;
+  }
+  #card .close:hover { color: var(--meridian); border-color: var(--meridian); }
+  #card .pair { font: 500 1.05rem/1.3 var(--text); letter-spacing: 0; margin-bottom: 4px; }
+  #card .pair b, #card .says b { font-weight: normal; color: var(--ink); }
+  #card .section { margin-top: 10px; color: var(--dim); letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.6rem; }
+  #card .section b { text-transform: none; letter-spacing: 0.02em; color: var(--ink); font-weight: normal; }
+  #card .addr { color: var(--meridian); text-transform: none; letter-spacing: 0.04em; }
+  #card .claim { border-top: 1px solid rgba(244,244,242,0.09); padding: 9px 0 6px; }
+  #card .says { font: 0.98rem/1.35 var(--text); letter-spacing: 0; }
+  #card .says .rel { font: 0.66rem var(--mono); font-style: normal; color: var(--dim); letter-spacing: 0.06em; }
+  #card .stroke { vertical-align: middle; margin-right: 8px; }
+  #card .label { color: var(--dim); margin: 2px 0 4px; }
+  #card .book { font: 0.92rem/1.35 var(--text); letter-spacing: 0; }
+  #card .locus { color: var(--meridian); }
+  #card .locus.none { color: var(--dim); }
+  #card .kind, #card .edition { color: var(--dim); }
+  #card .about { font: 0.86rem/1.45 var(--text); letter-spacing: 0; margin: 6px 0 2px; color: var(--ink); }
+  #card .rivals { margin: 6px 0 0 4px; padding-left: 10px; border-left: 1px dashed var(--mark); }
+  #card .rivals .head { color: var(--mark); letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.6rem; margin-top: 4px; }
+  #card .plate { margin: 8px 0 2px; }
+  #card .plate img { width: 100%; display: block; border: 1px solid rgba(244,244,242,0.12); }
+  #card .plate figcaption { font: 0.8rem/1.4 var(--text); letter-spacing: 0; color: var(--dim); margin-top: 4px; }
+  #card .more { color: var(--dim); margin-top: 8px; }
+  /* The symbol card. The figure sits in the corner at a size the eye can count marks at;
+     on the small panel it shrinks so the facts start above the fold. */
+  #card .figure { float: right; width: 96px; height: 96px; margin: 0 0 6px 10px; color: var(--ink); }
+  #card .silence { color: var(--dim); font: 0.8rem/1.4 var(--text); letter-spacing: 0; margin-bottom: 6px; }
+  #card .what { color: var(--dim); }
+  #card .identity { font: 0.92rem/1.35 var(--text); letter-spacing: 0; margin: 4px 0 2px; }
+  #card .words {
+    margin: 6px 0 4px; padding-left: 10px; border-left: 2px solid rgba(244,244,242,0.18);
+    font: 0.9rem/1.5 var(--text); letter-spacing: 0; color: var(--ink);
+  }
+  #card .fact { border-top: 1px solid rgba(244,244,242,0.06); }
+  #card .fact > summary { cursor: pointer; padding: 5px 0; list-style: none; font: 0.9rem/1.35 var(--text); letter-spacing: 0; }
+  #card .fact > summary::-webkit-details-marker { display: none; }
+  #card .fact > summary b { font-weight: normal; }
+  #card .fact .rel, #card .fact .who { font: 0.64rem var(--mono); font-style: normal; color: var(--dim); letter-spacing: 0.06em; }
+  #card .fact .who { border-bottom: 1px dotted rgba(139,139,147,0.5); }
+  #card .fact .gloss { color: var(--dim); }
+  #card .fact[open] > summary { color: var(--meridian); }
+  #card .rights { text-transform: none; letter-spacing: 0.02em; color: var(--mark); }
+  #card .pointer { border-top: 1px solid rgba(244,244,242,0.09); padding: 7px 0 4px; }
+  #card .pointer .why { font: 0.86rem/1.4 var(--text); letter-spacing: 0; margin: 2px 0; }
+  #card .unchecked { color: var(--mark); border: 1px solid var(--mark); padding: 0 4px; font-size: 0.58rem; letter-spacing: 0.1em; }
+  #where .label { cursor: pointer; }
+
+  /* ---- the Tree and the wheel ---- */
+  #diagram {
+    position: fixed; z-index: 6; inset: 5vh 5vw 64px; overflow: auto;
+    background: rgba(7,7,11,0.96); border: 1px solid rgba(244,244,242,0.16);
+    padding: 10px 14px; color: var(--ink);
+  }
+  #diagram[hidden] { display: none; }
+  #diagram header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  #diagram .dtab, #diagram .close {
+    min-height: 36px; padding: 0 12px; background: transparent; color: var(--dim);
+    border: 1px solid rgba(244,244,242,0.18); border-radius: 3px; font: 0.7rem var(--mono); cursor: pointer;
+  }
+  #diagram .dtab[aria-pressed="true"] { color: var(--meridian); border-color: var(--meridian); }
+  #diagram .close { margin-left: auto; font-size: 0.9rem; }
+  #diagram .dhint { color: var(--dim); font: 0.64rem var(--mono); letter-spacing: 0.08em; }
+  #diagram svg { display: block; margin: 0 auto; width: 100%; max-height: calc(90vh - 120px); }
+  #diagram .hit { cursor: pointer; }
+  #diagram .hit:hover .sephira, #diagram .hit:hover .sign, #diagram .hit:hover .decan { stroke: var(--meridian); }
+  #diagram .sephira { fill: var(--field); stroke: var(--ink); stroke-width: 1.2; }
+  #diagram .num { fill: var(--ink); font: 15px var(--text); text-anchor: middle; }
+  #diagram .name { fill: var(--dim); font: 10px var(--text); text-anchor: middle; }
+  #diagram .letter { fill: var(--ink); font: 13px var(--text); }
+  #diagram .trump { fill: var(--dim); font: 9px var(--mono); }
+  #diagram .sign, #diagram .decan { fill: var(--field); stroke: rgba(244,244,242,0.35); stroke-width: 1; }
+  #diagram .decan.split { stroke: var(--mark); }
+  #diagram .glyph { fill: var(--ink); font: 18px var(--text); text-anchor: middle; }
+  #diagram .ruler { fill: var(--ink); font: 12px var(--text); text-anchor: middle; }
+  #diagram .card { fill: var(--dim); font: 8px var(--mono); text-anchor: middle; }
+  #diagram .figure { fill: var(--dim); font: 9px var(--text); text-anchor: middle; }
+  #diagram .hole .figure { text-anchor: start; fill: var(--ink); }
+  #diagram rect.hole { fill: none; stroke: var(--dim); stroke-dasharray: 3 3; }
+  #diagram .credit { fill: var(--dim); font: 9px var(--mono); text-anchor: middle; }
+  @media (max-width: 900px), (max-height: 560px) { #diagram { inset: 0 0 56px; } }
+
   #hint {
     position: fixed; z-index: 3; inset: 0; display: grid; place-items: center;
     background: rgba(7,7,11,0.82); cursor: pointer;
   }
-  #hint p { font: italic 1.3rem var(--serif); color: var(--ink); max-width: 30ch; text-align: center; }
+  #hint p { font: 1.3rem var(--text); color: var(--ink); max-width: 30ch; text-align: center; }
   #hint small { display: block; margin-top: 1.2rem; font: 0.72rem var(--mono); color: var(--dim); letter-spacing: 0.16em; }
 
   /* ------------------------------------------------------------------ *
@@ -283,6 +472,10 @@
     #where { z-index: 8; background: rgba(7,7,11,0.86); padding: 6px 10px 8px; }
     #where .drift { display: none; }
     #neighbours button { min-height: 40px; padding: 8px 0; }
+    /* A sheet over the transport. Full width, because a citation clipped to a column
+       is a citation half-read. */
+    #card { top: auto; left: 0; right: 0; bottom: 56px; width: auto; max-height: 58vh; z-index: 8; }
+    #card .figure { width: 64px; height: 64px; }
   }
 </style>
 </head>
@@ -302,7 +495,7 @@
   <canvas id="scoreview"></canvas>
   <div id="rack"></div>
 </div>
-<div id="pane" hidden><header><b>the piece, as Strudel</b><span id="panehint">S closes · select the text to copy</span></header><pre id="patch"></pre><pre id="note"></pre></div>
+<div id="pane" hidden><header><b>Strudel patch</b><span id="panehint">S closes · select the text to copy</span></header><pre id="patch"></pre><pre id="note"></pre></div>
 <div id="keys" class="panel">M mute · S score · P the piece</div>
 
 <!-- The transport. Same verbs the keys had, reachable with a thumb. `aria-pressed` is
@@ -311,14 +504,22 @@
   <button class="tbtn" id="tnear" aria-pressed="false" title="neighbours">paths</button>
   <button class="tbtn" id="tmute" aria-pressed="false" title="mute">mute</button>
   <button class="tbtn" id="tscore" aria-pressed="false" title="score">score</button>
+  <button class="tbtn" id="tread" aria-pressed="false" title="further reading, not in the public domain">read</button>
+  <button class="tbtn" id="tmap" aria-pressed="false" title="the Tree of Life and the wheel of decans">map</button>
+  <button class="tbtn" id="tspec" aria-pressed="false" title="hide speculative correspondences">spec</button>
+  <button class="tbtn" id="tstill" aria-pressed="false" title="stop every rotation: the shapes' spin and the camera's drift (T)">still</button>
+  <button class="tbtn" id="torbit" aria-pressed="false" title="each shape travels its own symbol's ring in 3D (O)">orbit</button>
+  <button class="tbtn" id="twalk" aria-pressed="false" title="walk through the atlas and hear the piece from where you stand (F)">walk</button>
   <span id="tnow"></span>
   <button class="tbtn" id="tslower" title="slower">&minus;</button>
   <button class="tbtn" id="tfaster" title="faster">+</button>
   <button class="tbtn" id="tdrop" title="remove">&times;</button>
 </div>
 <div id="piece" class="panel"></div>
+<div id="diagram" hidden role="dialog" aria-label="diagrams"><header><button class="dtab" data-view="tree" aria-pressed="true">the Tree</button><button class="dtab" data-view="wheel" aria-pressed="false">the wheel</button><span class="dhint">tap to stand there</span><button class="close" id="diagramclose" aria-label="close">&times;</button></header><div id="diagrambody"></div></div>
+<div id="card" hidden role="dialog" aria-label="sources"><button class="close" id="cardclose" aria-label="close">&times;</button><div id="cardbody"></div></div>
 
-<div id="hint"><p>The atlas, as an instrument.<small>click to begin — audio needs a gesture</small></p></div>
+<div id="hint"><p>The atlas, as an instrument.<small>tap to start sound</small></p></div>
 
 <script type="module">
 import init, { Corpus } from './pkg/monochord_wasm.js';
@@ -327,7 +528,7 @@ import { Motes } from './scene/motes.js';
 import { Field } from './field.js';
 import { Post } from './scene/post.js';
 import { GraphPass } from './graph.js';
-import { index, place, centroid, rings } from './layout.js';
+import { index, place, centroid, rings, orbitOf } from './layout.js';
 import { Rings } from './rings.js';
 import { Tuning } from './tuning.js';
 import { Instrument } from './audio.js';
@@ -341,6 +542,13 @@ import { Rack } from './rack.js';
 import { DIAGNOSTIC } from './diagnostic.js';
 import { toStrudel } from './strudel.js';
 import { programmeNote } from './note.js';
+import { Resonance, labelsOf } from './resonance.js';
+import { BondPass } from './bondpass.js';
+import { edgeCard, factClaim, meetingCard, rivalsOf, symbolCard } from './card.js';
+import { RoutePlayer, routeCard, scheduleOf } from './routes.js';
+import { setSealLinks } from './seal.js';
+import { readingHtml, readingOn, setReading } from './reading.js';
+import { treeModel, treeSvg, wheelModel, wheelSvg } from './diagrams.js';
 
 const el = (id) => document.getElementById(id);
 
@@ -376,6 +584,19 @@ addEventListener('unhandledrejection', (ev) => fault('a promise', ev.reason));
 
 await init();
 const corpus = new Corpus();
+
+/// `corpus.traverse`, parsed once per address. The graph is compiled into the module and
+/// cannot change while the page is open, so a result never goes stale. Frozen, so a
+/// caller that mutated a shared answer would fail loudly instead of corrupting the cache.
+const traversed = new Map();
+function traverseOf(address) {
+  let edges = traversed.get(address);
+  if (!edges) {
+    edges = Object.freeze(JSON.parse(corpus.traverse(address)).map(Object.freeze));
+    traversed.set(address, edges);
+  }
+  return edges;
+}
 const version = JSON.parse(corpus.version());
 const census = JSON.parse(corpus.census());
 const idx = index(census);
@@ -392,11 +613,35 @@ for (const s of census) {
 // was read; two entries now, and they are the only pitches here that are not mine.
 const proportions = JSON.parse(corpus.proportions());
 
-// D3. Mine, and the panel says so.
-const tuning = new Tuning({ tonicCents: 5000, proportions });
+// The open string, A2 110 Hz (string.js). Mine, the panel says so, and the tonic knob moves it.
+const tuning = new Tuning({ proportions });
 const instrument = new Instrument(tuning);
 const surface = new Surface();
 const sequencer = new Sequencer(surface, instrument, tuning);
+
+// Which pieces correspond, by the kernel's answer and nothing else. See `resonance.js`.
+/// Whether speculative correspondences are hidden: a lens over what the atlas draws, walks
+/// and catches on, never a change to the graph. Off by default, and the transport says when
+/// it is on, so a neighbourhood seen through it is never mistaken for the whole of one.
+let hideSpeculative = false;
+const shown = (e) => !hideSpeculative || e.confidence !== 'speculative';
+
+/// `between`, through the lens: a route that exists only by a speculative hop does not pull.
+function meetingOf(a, b) {
+  const m = JSON.parse(corpus.between(a, b));
+  if (!hideSpeculative) return m;
+  return {
+    ...m,
+    direct: m.direct.filter(shown),
+    channels: m.channels
+      .map((ch) => ({ ...ch, from_a: ch.from_a.filter(shown), from_b: ch.from_b.filter(shown) }))
+      .filter((ch) => ch.from_a.length && ch.from_b.length),
+  };
+}
+const resonance = new Resonance(meetingOf);
+
+// The registry, whole, for the source card.
+const sources = new Map(JSON.parse(corpus.sources()).map((src) => [src.id, src]));
 
 // No sky. machinic-hymns' is a horizon under a sun, built for a room with a wall in
 // it; its god rays are the best thing on that screen and the wrong thing on this one.
@@ -412,6 +657,8 @@ const piecePass = stage.add(new PiecePass(surface));
 // Glyphs, and names inside empty frames. After the shapes, so text sits over them.
 const atlas = new TextAtlas(stage.gl);
 stage.add(new TextPass(surface, atlas, letterGlyphs(corpus)));
+// Latched pairs: their routes, the symbols channels run through, the offered next steps.
+const bondPass = stage.add(new BondPass(resonance, (n) => silentKinds.has(`${n.system}:${n.kind}`)));
 // `onStep` is assigned once, below, where the lucidity it also drives is defined.
 
 // The spin, and the sound it makes.
@@ -432,6 +679,8 @@ setInterval(() => {
   const now = performance.now();
   const dt = Math.min(0.25, (now - last) / 1000);
   last = now;
+  // Bonds first, so a phase brought into step is read by this same tick.
+  resonance.tick(dt, surface.pieces);
   sequencer.tick(dt);
 }, 16);
 stage.setPost(new Post());
@@ -463,6 +712,9 @@ const LUCID_FULL = 5;      // shapes at which the room is fully awake
 
 stage.lucidity = LUCID_FLOOR;
 let shimmer = 0;           // decays; each articulated step tops it back up
+/// The catch. One pulse per latch, the same pulse for every label: it says that two
+/// shapes met, and nothing about how well supported the meeting is.
+let bloom = 0;
 
 sequencer.onStep = (piece) => {
   piecePass.flare(piece);
@@ -484,12 +736,103 @@ stage.onFrame = (dt) => {
   // shape articulating from a shape holding — but as a shimmer on top, worth one voice
   // at most, rather than as the whole signal.
   shimmer = Math.max(0, shimmer - dt * 0.9);
-  const want = LUCID_FLOOR + (LUCID_CEIL - LUCID_FLOOR) *
-    Math.min(1, (voices + shimmer) / LUCID_FULL);
+  bloom = Math.max(0, bloom - dt * 0.7);
+  const want = Math.min(1, LUCID_FLOOR + (LUCID_CEIL - LUCID_FLOOR) *
+    Math.min(1, (voices + shimmer) / LUCID_FULL) + bloom * 0.12);
   // Slew, never jump. The optics are a room waking up, and a room that snapped between
   // two states every time a note landed would read as a flicker, not as breath.
   stage.lucidity += (want - stage.lucidity) * Math.min(1, dt * 1.4);
+
+  moveWalker(dt);
+  placeOnOrbits();
+  // The listener stands where the eye is, facing where it faces.
+  instrument.listen(graph.eye, graph.forward);
+  for (const id of [...instrument.panners.keys()]) {
+    if (!surface.pieces.some((p) => p.id === id)) instrument.forget(id);
+  }
 };
+
+// ---- rotation, orbits, and walking through ----
+//
+// Three switches, each also a key. **still** (T) stops every rotation: the shapes' spin,
+// which is also the rhythm, and the camera's idle drift. Drones keep sounding.
+// **orbit** (O) draws each shape at its place on its own symbol's ring, travelling as it
+// plays (`Piece.worldPos`), instead of on the flat surface in front of the atlas.
+// **walk** (F) puts you inside: WASD or the arrows move, Q and E sink and rise, a drag
+// turns your head, and every shape is a sound source where it is -- near is loud, and it
+// moves across your ears as you pass. Walking turns orbits and spatial sound on with it.
+
+let showOrbits = false;
+const held = new Set();
+const MOVES = new Set(['w', 'a', 's', 'd', 'q', 'e', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright']);
+
+function setStill(on) {
+  sequencer.spinning = !on;
+  graph.drift = !on;
+  el('tstill').setAttribute('aria-pressed', String(on));
+}
+
+function setOrbits(on) {
+  showOrbits = on;
+  el('torbit').setAttribute('aria-pressed', String(on));
+  if (!on) {
+    for (const p of surface.pieces) {
+      delete p.sx; delete p.sy; delete p.sscale; delete p.hidden;
+    }
+  }
+}
+
+function setWalk(on) {
+  if (on) {
+    graph.enterWalk();
+    setOrbits(true);
+    instrument.setSpatial(true);
+  } else {
+    graph.leaveWalk();
+    instrument.setSpatial(false);
+    held.clear();
+  }
+  el('twalk').setAttribute('aria-pressed', String(on));
+}
+
+function moveWalker(dt) {
+  if (!graph.walk || held.size === 0) return;
+  const speed = 1.6;
+  const f = (held.has('w') || held.has('arrowup') ? 1 : 0) - (held.has('s') || held.has('arrowdown') ? 1 : 0);
+  const r = (held.has('d') || held.has('arrowright') ? 1 : 0) - (held.has('a') || held.has('arrowleft') ? 1 : 0);
+  const u = (held.has('e') ? 1 : 0) - (held.has('q') ? 1 : 0);
+  graph.move(f * speed, r * speed, u * speed, dt);
+}
+
+/// Each shape at its orbit, projected through the same camera the atlas is drawn with, and
+/// sized by how near it is. Behind the eye it is hidden rather than drawn mirrored.
+function placeOnOrbits() {
+  if (!showOrbits || !stage.camera) return;
+  const m = stage.camera;
+  const aspect = canvas.width / Math.max(1, canvas.height);
+  const ax = aspect > 1 ? 1 / aspect : 1;
+  const ay = aspect > 1 ? 1 : aspect;
+  for (const p of surface.pieces) {
+    const at = p.worldPos();
+    if (!at) continue;
+    const [x, y, z] = at;
+    const cx = m[0] * x + m[4] * y + m[8] * z + m[12];
+    const cy = m[1] * x + m[5] * y + m[9] * z + m[13];
+    const cw = m[3] * x + m[7] * y + m[11] * z + m[15];
+    if (cw <= 0.05) { p.hidden = true; continue; }
+    p.hidden = false;
+    p.sx = cx / cw / ax;
+    p.sy = cy / cw / ay;
+    p.sscale = 0.11 * Math.max(0.35, Math.min(2.5, 4 / cw));
+  }
+}
+
+el('tstill').onclick = () => setStill(sequencer.spinning);
+el('torbit').onclick = () => { if (!graph.walk) setOrbits(!showOrbits); };
+el('twalk').onclick = () => setWalk(!graph.walk);
+
+addEventListener('keyup', (ev) => held.delete(ev.key.toLowerCase()));
+addEventListener('blur', () => held.clear());
 
 stage.start();
 
@@ -500,6 +843,9 @@ stage.start();
 // Deterministic by construction: `place` is a pure function of system, kind and
 // ordinal, so this is the same armillary every load.
 const world = [];
+/// Every symbol by address, for naming the far end of an edge and for placing a symbol
+/// the surface offers.
+const nodes = new Map();
 for (const system of census) {
   for (const k of system.kinds) {
     let symbols;
@@ -509,6 +855,7 @@ for (const system of census) {
       continue; // a declared kind holding nothing is a fact, not a failure
     }
     for (const node of symbols) {
+      nodes.set(node.address, node);
       world.push({
         pos: place(node, idx),
         noFigure: silentKinds.has(`${system.id}:${k.kind}`),
@@ -516,6 +863,16 @@ for (const system of census) {
     }
   }
 }
+// A Scot spirit shows the seal of the Goetia spirit it shares a name with -- the graph's
+// join (`derivation/goetia-scot-names`), not a guess made here. See `seal.js`.
+const sealLinks = new Map();
+for (const node of nodes.values()) {
+  if (node.system !== 'cm' || node.kind !== 'spirit') continue;
+  const link = traverseOf(node.address).find((e) => e.relation === 'shares_name_with');
+  if (link) sealLinks.set(node.address, nodes.get(link.to));
+}
+setSealLinks((address) => sealLinks.get(address) ?? null);
+
 graph.setContext(stage, world);
 
 el('graph').innerHTML =
@@ -524,10 +881,152 @@ el('graph').innerHTML =
 
 /// The key legend, written once. The markup carries the same text so the bar is not
 /// blank before this runs; `P` is only offered when the pane it opens exists.
-const LEGEND = `M mute · S score${DIAGNOSTIC ? ' · P the piece' : ''}`;
+const LEGEND = `M mute · S score · T still · O orbit · F walk${DIAGNOSTIC ? ' · P the piece' : ''}`;
 el('keys').textContent = LEGEND;
 
 let here = null;
+
+// ---- the source card ----
+
+/// Reading mode's pointers. Fetched, not imported, so a missing or broken file costs the
+/// further-reading section and nothing else -- the graph never depends on it.
+let readingWorks = [];
+fetch('./reading.json')
+  .then((r) => r.json())
+  .then((j) => { readingWorks = j.works ?? []; })
+  .catch(() => {});
+
+const noFigure = new Map();
+for (const s of census) for (const k of s.kinds) if (k.no_figure) noFigure.set(`${s.id}:${k.kind}`, k.no_figure);
+const systemLabel = new Map(census.map((s) => [s.id, s.label]));
+const escHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+}[c]));
+
+const cardCtx = {
+  source: (id) => sources.get(id),
+  label: (addr) => nodes.get(addr)?.label ?? addr,
+  rivals: (e) => rivalsOf(e, traverseOf),
+  // For the symbol card.
+  lookup: (addr) => nodes.get(addr),
+  traverse: traverseOf,
+  silence: (node) => noFigure.get(`${node.system}:${node.kind}`) ?? null,
+  system: (id) => systemLabel.get(id) ?? id,
+  short: (id) => shortSource(id),
+  reading: (node) => (readingOn() ? readingHtml(node, readingWorks, escHtml) : ''),
+};
+
+/// Which symbol the card is showing, if it is a symbol card, so reading mode can redraw it.
+let cardSymbol = null;
+
+function openCard(html, symbol = null, { route: isRoute = false } = {}) {
+  if (!isRoute) { routes.stop(); route = null; }
+  cardSymbol = symbol;
+  el('cardbody').innerHTML = html;
+  el('card').hidden = false;
+  el('card').scrollTop = 0;
+}
+function closeCard() { routes.stop(); route = null; el('card').hidden = true; cardSymbol = null; }
+
+/// The way from where you stand to a whole system, as the kernel's score, played.
+/// `route` is what the card shows; `routes` is what is sounding. See `web/routes.js`.
+let route = null;
+const routes = new RoutePlayer(instrument, {
+  onStep: (e) => {
+    const body = el('cardbody');
+    for (const n of body.querySelectorAll('.now')) n.classList.remove('now');
+    const at = e.step === null
+      ? body.querySelector(`.route[data-v="${e.voice}"]`)
+      : body.querySelector(`.hop[data-v="${e.voice}"][data-s="${e.step}"]`);
+    at?.classList.add('now');
+    at?.scrollIntoView({ block: 'nearest' });
+  },
+  onEnd: () => { for (const n of el('cardbody').querySelectorAll('.now')) n.classList.remove('now'); showRoute(); },
+});
+
+function openRoute(target, hops = 3) {
+  if (!here) return;
+  const origin = nodes.get(here.centre);
+  if (!origin) return;
+  routes.stop();
+  route = { origin, target, hops, score: JSON.parse(corpus.score([origin.address], target, hops)) };
+  playRoute();
+}
+
+function playRoute() {
+  if (!route) return;
+  // The system button is itself a gesture, so it may be the one that wakes the audio.
+  if (!instrument.ctx) el('hint')?.click();
+  const pitchOf = (a) => { const n = nodes.get(a); return n ? tuning.pitch(n) : null; };
+  routes.play(scheduleOf(route.score, pitchOf));
+  showRoute();
+}
+
+function showRoute() {
+  if (!route) return;
+  const top = el('card').scrollTop;
+  openCard(routeCard(route.score, route.origin, cardCtx, { playing: routes.playing }), null, { route: true });
+  el('card').scrollTop = top;
+  const body = el('cardbody');
+  body.querySelector('.rplay').onclick = () => {
+    if (routes.playing) { routes.stop(); showRoute(); } else playRoute();
+  };
+  for (const b of body.querySelectorAll('.rhop')) b.onclick = () => openRoute(route.target, Number(b.dataset.hops));
+  for (const b of body.querySelectorAll('.arrive')) b.onclick = () => standAt(b.dataset.to);
+}
+
+/// The card for a symbol: its figure, what it is, its source's words, what the graph says.
+function showSymbol(address) {
+  const node = nodes.get(address);
+  if (node) openCard(symbolCard(node, cardCtx), address);
+}
+
+// A fact's claim is built the first time its row opens (see `factClaim`). `toggle` does
+// not bubble, so this listens in the capture phase.
+el('cardbody').addEventListener('toggle', (ev) => {
+  const d = ev.target;
+  if (!d.open || !d.matches?.('details.fact[data-fact]') || d.dataset.built) return;
+  const node = cardSymbol && nodes.get(cardSymbol);
+  if (!node) return;
+  d.insertAdjacentHTML('beforeend', factClaim(node, Number(d.dataset.fact), cardCtx));
+  d.dataset.built = '1';
+}, true);
+
+/// Tapping the name of where you stand opens its card. On the 800x480 panel this is the
+/// only way it opens, because there it is a bottom sheet over half the atlas.
+el('where').addEventListener('click', (ev) => {
+  if (ev.target.closest('.label') && here) showSymbol(here.centre);
+});
+
+function toggleReading() {
+  const on = !readingOn();
+  setReading(on);
+  el('tread').setAttribute('aria-pressed', String(on));
+  if (cardSymbol && !el('card').hidden) {
+    const top = el('card').scrollTop;
+    showSymbol(cardSymbol);
+    el('card').scrollTop = top;
+  }
+}
+el('cardclose').onclick = closeCard;
+
+/// A book, named short enough to sit at the end of a row: its author's surname and year,
+/// or "rule" for a derivation, which has no author because it is not a text.
+function shortSource(id) {
+  const src = sources.get(id);
+  if (!src) return id;
+  if (src.kind === 'derivation') return 'rule';
+  // The name before a particle, or the last one: "Agrippa von Nettesheim" is Agrippa.
+  // Where only initials come before the particle -- "L. W. de Laurence" -- the particle
+  // belongs to the surname, which is "de Laurence", not "W.".
+  const lead = src.author ? src.author.split(/,/)[0] : '';
+  const parts = lead.split(/ (von|van|de|di) /);
+  const name = !src.author ? null
+    : parts.length > 2 && /^([A-Z]\.\s*)+$/.test(parts[0].trim()) ? `${parts[1]} ${parts[2].split(' ')[0]}`
+    : parts[0].split(' ').pop();
+  const who = name ?? src.title.split(' ').slice(0, 2).join(' ');
+  return src.year ? `${who} ${src.year}` : who;
+}
 
 /// What licenses this pitch, said plainly.
 ///
@@ -566,7 +1065,9 @@ function pitchLine(pitch) {
 /// The selected piece: what it is, what it will play, and whose silence it is if it
 /// cannot be played at all.
 function describe(piece) {
-  if (!piece) { el('piece').innerHTML = ''; return; }
+  // Cleared, the transport must say so too: returning before `syncTransport` left it
+  // naming a shape that had just been removed, with its buttons live.
+  if (!piece) { el('piece').innerHTML = ''; syncTransport(); return; }
   const silence = piece.playable
     ? ''
     : `<div class="gloss">no figure to read — ${piece.node.system}:${piece.node.kind} is a kind ` +
@@ -598,9 +1099,19 @@ function act(piece, what) {
   if (what === 'drop') { surface.remove(piece); describe(null); return; }
   if (what === 'mute') piece.muted = !piece.muted;
   if (what === 'faster' || what === 'slower') {
-    const i = RATES.indexOf(piece.rate);
+    // Step from the piece's own rate. Latched, that is its `baseRate` and the group then
+    // settles to its slowest member again; writing `rate` alone would be undone by the
+    // next settle.
+    const own = piece.baseRate ?? piece.rate;
+    const i = RATES.indexOf(own);
     const at = i < 0 ? RATES.indexOf(1) : i;
-    piece.rate = RATES[Math.max(0, Math.min(RATES.length - 1, at + (what === 'faster' ? 1 : -1)))];
+    const next = RATES[Math.max(0, Math.min(RATES.length - 1, at + (what === 'faster' ? 1 : -1)))];
+    if (resonance.bondOf(piece)) {
+      piece.baseRate = next;
+      resonance.settle();
+    } else {
+      piece.rate = next;
+    }
   }
   describe(piece);
 }
@@ -615,6 +1126,29 @@ function syncTransport() {
   el('tnear').setAttribute('aria-pressed', String(!el('neighbours').hidden));
 }
 
+/// Every readout of pitch for where you stand: the centre's line and the account.
+///
+/// Its own function because pitch can now change without moving -- the tonic knob and a
+/// hand-set pitch both call this -- and re-standing to refresh would place a second copy
+/// of the shape and replay the neighbourhood.
+function showPitches() {
+  if (!here) return;
+  const centre = here.nodes.find((n) => n.address === here.centre);
+  const pitch = centre ? tuning.pitch(centre) : null;
+  el('where').innerHTML =
+    `<span class="label">${centre?.label ?? here.centre}</span>` +
+    `<span class="addr">${here.centre}</span>` +
+    pitchLine(pitch);
+
+  // The account: how much of what you are hearing is yours.
+  const tally = tuning.account(here.nodes);
+  el('tuning').innerHTML =
+    `tonic <b>${tuning.tonicHz.toFixed(2)} Hz</b> — mine<br>` +
+    `<span class="cited">${tally.cited} cited</span> · ` +
+    `<span class="authored">${tally['authored:degree'] + tally['authored:hand']} authored</span> · ` +
+    `${tally.unpitched} unpitched`;
+}
+
 /// Stand somewhere: draw its cited neighbourhood, and sustain it.
 const standAt = guard('standing somewhere', function standAt(address, { play = true, place_ = true } = {}) {
   let hood;
@@ -625,6 +1159,7 @@ const standAt = guard('standing somewhere', function standAt(address, { play = t
     return;
   }
   here = hood;
+  routes.stop();
 
   const positions = new Map();
   const nodes = hood.nodes.map((n) => {
@@ -636,6 +1171,23 @@ const standAt = guard('standing somewhere', function standAt(address, { play = t
       noFigure: silentKinds.has(`${n.system}:${n.kind}`),
     };
   });
+
+  // Through the speculative lens, if it is on: its edges go, and so does any neighbour
+  // that only a speculative edge reached. The count is shown in the paths list.
+  const hiddenCount = hood.edges.length - hood.edges.filter(shown).length;
+  if (hiddenCount) {
+    const kept = hood.edges.filter(shown);
+    const reached = new Set([hood.centre, ...kept.flatMap((e) => [e.from, e.to])]);
+    hood = { ...hood, edges: kept, nodes: hood.nodes.filter((n) => reached.has(n.address)) };
+    here = hood;
+    nodes.length = 0;
+    positions.clear();
+    for (const n of hood.nodes) {
+      const pos = place(n, idx);
+      positions.set(n.address, pos);
+      nodes.push({ pos, distance: n.distance, noFigure: silentKinds.has(`${n.system}:${n.kind}`) });
+    }
+  }
 
   // Only edges the kernel returned, and both endpoints are guaranteed present because
   // `neighbourhood` returns the induced subgraph.
@@ -650,41 +1202,67 @@ const standAt = guard('standing somewhere', function standAt(address, { play = t
   graph.faceToward(positions.get(hood.centre) ?? centroid([...positions.values()]));
 
   const centre = hood.nodes.find((n) => n.address === hood.centre);
-  const pitch = centre ? tuning.pitch(centre) : null;
-  el('where').innerHTML =
-    `<span class="label">${centre?.label ?? hood.centre}</span>` +
-    `<span class="addr">${hood.centre}</span>` +
-    pitchLine(pitch);
+  showPitches();
 
   // Placing is what makes the walk a composition: the trail you leave is the piece.
   if (place_ && centre) {
     const piece = surface.place(centre, {
       silentKind: silentKinds.has(`${centre.system}:${centre.kind}`) ? centre.kind : null,
     });
+    piece.orbit = orbitOf(centre, idx);
     describe(piece);
+    // Arriving somewhere new brings up what it is. Not on the small panel, where the card
+    // would cover the atlas you just walked into; there, tap the name.
+    if (!matchMedia('(max-width: 900px), (max-height: 560px)').matches) showSymbol(centre.address);
   }
 
-  // The account: how much of what you are hearing is yours.
-  const tally = tuning.account(hood.nodes);
-  el('tuning').innerHTML =
-    `tonic <b>${tuning.tonicHz.toFixed(2)} Hz</b> — mine<br>` +
-    `<span class="cited">${tally.cited} cited</span> · ` +
-    `<span class="authored">${tally['authored:degree']} authored</span> · ` +
-    `${tally.unpitched} unpitched`;
 
   // Walk to play: the edges out of here, each labelled, each playable.
   const out = hood.edges.filter((e) => e.from === hood.centre || e.to === hood.centre);
-  el('neighbours').innerHTML = out
+  // What a source read here and wrote down as not on its page. Listed with the paths, and
+  // sounded on arrival as the withheld rest, so it is neither dropped nor made a path.
+  const withheld = JSON.parse(corpus.gaps(hood.centre));
+  // `neighbourhood` edges are stored as asserted, so an edge *into* here carries the other
+  // end's verb: from the Moon, `aquarius-3 ruled_by moon` printed "ruled_by Aquarius 3",
+  // which says the Moon is ruled by Aquarius. Every row is turned to read from here, the
+  // way `traverse` names it ("rules Aquarius 3"), before it is drawn.
+  const fromHere = traverseOf(hood.centre);
+  const walkedOf = (e) => (e.from === hood.centre ? e
+    : fromHere.find((t) => t.to === e.from && t.source_id === e.source_id && t.locus === e.locus) ?? e);
+  el('neighbours').innerHTML =
+    // The way from here to each system, in census order, first so it stays in one place
+    // however long the paths are. Not ranked: every system is offered, this one's own too.
+    `<div class="row routes-to"><span class="rel">the way to</span> ` +
+    census.map((sy) => `<button class="to-system" data-system="${sy.id}">${escHtml(sy.id)}</button>`).join(' ') +
+    `</div>` +
+    out
     .map((e, i) => {
       const other = e.from === hood.centre ? e.to : e.from;
       const node = hood.nodes.find((n) => n.address === other);
       const cls = e.confidence === 'contested' ? ' contested' : '';
-      return `<button data-to="${other}" data-i="${i}">` +
-        `<span class="rel${cls}">${e.relation}</span> ${node?.label ?? other}</button>`;
+      return `<div class="row"><button class="walk" data-to="${other}" data-i="${i}">` +
+        `<span class="rel${cls}">${walkedOf(e).relation}</span> ${node?.label ?? other}</button>` +
+        `<button class="who" data-i="${i}" title="who says so">${shortSource(e.source_id)}</button></div>`;
     })
-    .join('');
+    .join('') +
+    withheld
+      .map((g) => `<div class="row withheld" title="${escHtml(`${g.locus ? `${g.locus}: ` : ''}${g.reason}`)}">` +
+        `${escHtml(g.relation)} no ${escHtml(g.expected_kind)} · ${escHtml(shortSource(g.source_id))} withholds</div>`)
+      .join('') +
+    (hiddenCount
+      ? `<div class="row hidden-note">${hiddenCount} speculative correspondence${hiddenCount === 1 ? '' : 's'} hidden · <button class="unspec" id="unspec">show</button></div>`
+      : '');
+  el('unspec')?.addEventListener('click', () => setSpeculative(false));
 
-  for (const b of el('neighbours').querySelectorAll('button')) {
+  for (const b of el('neighbours').querySelectorAll('button.to-system')) {
+    b.onclick = () => openRoute(b.dataset.system, route?.target === b.dataset.system ? route.hops : 3);
+  }
+
+  for (const b of el('neighbours').querySelectorAll('button.who')) {
+    b.onclick = () => openCard(edgeCard(walkedOf(out[Number(b.dataset.i)]), cardCtx));
+  }
+
+  for (const b of el('neighbours').querySelectorAll('button.walk')) {
     b.onclick = () => {
       const e = out[Number(b.dataset.i)];
       // Moving articulates the hop, with its own label's timbre.
@@ -698,7 +1276,12 @@ const standAt = guard('standing somewhere', function standAt(address, { play = t
     };
   }
 
-  if (play && instrument.ctx) instrument.sustain(hood.nodes);
+  if (play && instrument.ctx) {
+    instrument.sustain(hood.nodes);
+    // The third audible state. Not a pitch and not a strike: an onset stopped at once,
+    // one per recorded silence, a beat apart so two refusals are heard as two.
+    withheld.forEach((_, i) => instrument.rest('withheld', instrument.now + 0.25 + i * 0.3));
+  }
 });
 
 // Reaching an address directly. Never ranked: the kernel returns address order and
@@ -731,10 +1314,41 @@ const canvas = el('scene');
 
 let orbiting = null;
 
+/// Bring an offered symbol onto the surface, already caught to the piece that offered it.
+function takeOffer(node, x, y, partner) {
+  const piece = surface.place(node, {
+    silentKind: silentKinds.has(`${node.system}:${node.kind}`) ? node.kind : null,
+  });
+  piece.orbit = orbitOf(node, idx);
+  piece.x = x;
+  piece.y = y;
+  resonance.latch(piece, partner);
+  describe(piece);
+  standAt(node.address, { place_: false });
+}
+
 canvas.addEventListener('pointerdown', guard('pointer', (ev) => {
+  // Only the first finger taps. A second is a pinch (the handler below), and read as a
+  // tap it placed an offered shape or stood somewhere mid-zoom.
+  if (!ev.isPrimary) return;
   const [x, y] = toSurface(ev);
-  const hit = surface.at(x, y);
   canvas.setPointerCapture(ev.pointerId);
+
+  // An offered next step, or the symbol a channel runs through: tapping either brings it
+  // onto the surface, caught to the shape it belongs to.
+  const ghost = showOrbits ? null : resonance.ghostAt(x, y);
+  if (ghost) {
+    const node = nodes.get(ghost.node.address) ?? ghost.node;
+    takeOffer(node, ghost.x, ghost.y, ghost.parent);
+    return;
+  }
+  const via = bondPass.vias.find((v) => Math.hypot(v.x - x, v.y - y) < 0.06);
+  if (via) {
+    takeOffer(nodes.get(via.node.address) ?? via.node, via.x, via.y, via.bond.a);
+    return;
+  }
+
+  const hit = surface.at(x, y);
 
   // Empty space turns the camera; a shape moves. `Surface.at` already draws that line.
   if (!hit) {
@@ -742,7 +1356,8 @@ canvas.addEventListener('pointerdown', guard('pointer', (ev) => {
     return;
   }
   surface.selected = hit;
-  dragging = { piece: hit, dx: hit.x - x, dy: hit.y - y };
+  // On its orbit a shape goes where its ring takes it; there is nothing to drag.
+  dragging = showOrbits ? null : { piece: hit, dx: hit.x - x, dy: hit.y - y };
   describe(hit);
   // Selecting a piece points the map at its symbol, without placing a second copy.
   standAt(hit.address, { place_: false });
@@ -750,21 +1365,31 @@ canvas.addEventListener('pointerdown', guard('pointer', (ev) => {
 
 canvas.addEventListener('pointermove', guard('pointer', (ev) => {
   if (orbiting) {
-    graph.orbit((ev.clientX - orbiting.x) / innerWidth, (ev.clientY - orbiting.y) / innerHeight);
+    const dx = (ev.clientX - orbiting.x) / innerWidth;
+    const dy = (ev.clientY - orbiting.y) / innerHeight;
+    if (graph.walk) graph.look(dx, -dy);
+    else graph.orbit(dx, dy);
     orbiting = { x: ev.clientX, y: ev.clientY };
     return;
   }
   if (!dragging) return;
   const [x, y] = toSurface(ev);
-  dragging.piece.x = x + dragging.dx;
-  dragging.piece.y = y + dragging.dy;
+  // Where the hand wants it, bent toward anything it corresponds to. See `resonance.js`:
+  // an unrelated piece bends nothing.
+  const at = resonance.pull(dragging.piece, x + dragging.dx, y + dragging.dy, surface.pieces);
+  dragging.piece.x = at.x;
+  dragging.piece.y = at.y;
 }));
 
-canvas.addEventListener('pointerup', (ev) => {
-  dragging = null;
-  orbiting = null;
-  if (canvas.hasPointerCapture(ev.pointerId)) canvas.releasePointerCapture(ev.pointerId);
-});
+// Up and cancel end a gesture alike: an interrupted touch (a system gesture, an alert)
+// only sends `pointercancel`, and left the camera orbiting with no finger down.
+for (const end of ['pointerup', 'pointercancel']) {
+  canvas.addEventListener(end, (ev) => {
+    dragging = null;
+    orbiting = null;
+    if (canvas.hasPointerCapture(ev.pointerId)) canvas.releasePointerCapture(ev.pointerId);
+  });
+}
 
 canvas.addEventListener('wheel', (ev) => {
   ev.preventDefault();
@@ -823,13 +1448,66 @@ for (const kind of ['pointerup', 'pointercancel', 'pointerleave']) {
 }
 
 
+/// The catch: two shapes that correspond, brought together.
+///
+/// Everything here is the same for every label except its *kind*. The strike, the
+/// sparks, the bloom are constants; the chord is sounded in each edge's own timbre, and
+/// the route is drawn in each edge's own stroke. A `speculative` meeting is exactly as
+/// loud and as bright as an `established` one, and sounds and looks like what it is.
+resonance.onLatch = guard('the catch', (bond) => {
+  bondPass.burst(bond);
+  bloom = 1;
+  shimmer = 1;
+
+  if (instrument.ctx) {
+    const at = instrument.now;
+    instrument.struck(at, 0.08, 0.7);
+    const labels = labelsOf(bond.meet);
+    const pitches = [bond.a, bond.b]
+      .map((p) => ({ p, pitch: tuning.pitch(p.node) }))
+      .filter((x) => x.pitch && !x.p.muted);
+    // Loudness is shared out, not stacked: two books agreeing is two voices at half each,
+    // so a meeting more sources attest is not a louder one.
+    const level = 1 / Math.max(1, labels.length);
+    labels.forEach((label, i) => {
+      const t = at + 0.06 + i * 0.07;
+      if (!pitches.length) instrument.struck(t, 0.14, level);
+      for (const { p, pitch } of pitches) {
+        instrument.tone(pitch.hz, label, t, 1.8, level * p.gain, p.voice);
+      }
+    });
+  }
+
+  openCard(meetingCard(bond.meet, cardCtx));
+
+  // Next steps: one cited edge out of the piece just caught, to somewhere not already
+  // on the surface. Kernel order, and the card says how many were not shown.
+  const placed = new Set(surface.pieces.map((p) => p.address));
+  const vias = new Set(bond.meet.channels.map((c) => c.via.address));
+  const seen = new Set();
+  const offers = [];
+  for (const e of traverseOf(bond.a.address)) {
+    if (placed.has(e.to) || vias.has(e.to) || seen.has(e.to)) continue;
+    const node = nodes.get(e.to);
+    if (!node) continue;
+    seen.add(e.to);
+    offers.push({ node, edge: e });
+  }
+  const { more } = resonance.offer(bond, offers);
+  if (more) {
+    el('cardbody').insertAdjacentHTML('beforeend',
+      `<div class="more">${more} more symbol${more === 1 ? '' : 's'} one step from ` +
+      `${bond.a.node.label} — the paths list has them all</div>`);
+  }
+});
+
 const score = new ScoreView(el('scoreview'), surface, tuning, el('scorepane'), (piece) => {
   // A stave was tapped. Everything that shows a selection is refreshed from the one
   // place, so the score, the piece panel, the rack and the transport cannot disagree
   // about which shape is in hand.
   describe(piece);
 });
-const rack = new Rack(el('rack'), surface, instrument, act);
+const rack = new Rack(el('rack'), surface, instrument, act, showPitches);
 // The score is a panel of rules and text, so it redraws on its own timer rather than
 // riding the WebGL frame — and on `setInterval`, for the same reason the sequencer does.
 setInterval(() => { score.draw(); if (score.visible) rack.sync(); }, 60);
@@ -860,25 +1538,87 @@ function fitDrawer() {
   n.style.top = `${Math.ceil(el('where').getBoundingClientRect().bottom) + 8}px`;
 }
 new ResizeObserver(fitDrawer).observe(el('where'));
-TIGHT.addEventListener('change', () => { el('neighbours').hidden = TIGHT.matches; fitDrawer(); });
+TIGHT.addEventListener('change', () => { el('neighbours').hidden = TIGHT.matches; fitDrawer(); syncTransport(); });
 
 /// The transport, wired to the same verbs the keys drive.
-el('tmute').onclick = () => {
+/// Mute and the score, each in one function that both its key and its button call. Wired
+/// twice, the M and S keys left their buttons showing the old state and the two paths
+/// disagreed about what else to do.
+function toggleMute() {
+  // Everything, at once. See `Instrument.mute`: a ramp on the master gain, so what was
+  // already scheduled is caught too.
   const muted = instrument.toggleMute();
   el('tmute').setAttribute('aria-pressed', String(muted));
   el('tmute').textContent = muted ? 'muted' : 'mute';
   el('keys').classList.toggle('muted', muted);
-  el('keys').textContent = muted ? `MUTED — M to unmute · S score` : LEGEND;
-};
-el('tscore').onclick = () => {
+  el('keys').textContent = muted
+    ? `MUTED — M to unmute · S score${DIAGNOSTIC ? ' · P the piece' : ''}`
+    : LEGEND;
+}
+function toggleScore() {
   score.toggle();
   el('tscore').setAttribute('aria-pressed', String(score.visible));
+  if (el('pane').hidden === false) el('pane').hidden = true;
+}
+el('tmute').onclick = toggleMute;
+el('tscore').onclick = toggleScore;
+/// The speculative lens. Re-stands where you are so the change is seen at once, and clears
+/// the snap's cache, whose answers were computed through the old lens.
+function setSpeculative(hide) {
+  hideSpeculative = hide;
+  el('tspec').setAttribute('aria-pressed', String(hide));
+  el('tspec').textContent = hide ? 'spec hidden' : 'spec';
+  resonance.cache.clear();
+  if (here) standAt(here.centre, { place_: false, play: false });
+}
+el('tspec').onclick = () => setSpeculative(!hideSpeculative);
+
+// ---- the Tree and the wheel ----
+
+const diagramApi = {
+  symbolsOf: (s, k) => JSON.parse(corpus.symbols_of(s, k)),
+  traverse: traverseOf,
+  gaps: (a) => JSON.parse(corpus.gaps(a)),
 };
+const glyphOfLetter = letterGlyphs(corpus);
+let diagramView = 'tree';
+const diagramSvg = {};
+function showDiagram(view = diagramView) {
+  diagramView = view;
+  if (!diagramSvg[view]) {
+    diagramSvg[view] = view === 'tree'
+      ? treeSvg(treeModel(diagramApi), { letterGlyph: (id) => glyphOfLetter.get(id) })
+      : wheelSvg(wheelModel(diagramApi), { cardName: (a) => nodes.get(a)?.label ?? a });
+  }
+  el('diagrambody').innerHTML = diagramSvg[view];
+  for (const t of el('diagram').querySelectorAll('.dtab')) {
+    t.setAttribute('aria-pressed', String(t.dataset.view === view));
+  }
+  el('diagram').hidden = false;
+  el('tmap').setAttribute('aria-pressed', 'true');
+}
+function hideDiagram() {
+  el('diagram').hidden = true;
+  el('tmap').setAttribute('aria-pressed', 'false');
+}
+el('tmap').onclick = () => (el('diagram').hidden ? showDiagram() : hideDiagram());
+el('diagramclose').onclick = hideDiagram;
+for (const t of el('diagram').querySelectorAll('.dtab')) t.onclick = () => showDiagram(t.dataset.view);
+// Tapping anything drawn stands there, and places it: the diagram is a way into the atlas.
+el('diagrambody').addEventListener('click', guard('the diagram', (ev) => {
+  const hit = ev.target.closest('[data-addr]');
+  if (!hit) return;
+  hideDiagram();
+  standAt(hit.dataset.addr);
+}));
+
 el('tnear').onclick = () => {
   const n = el('neighbours');
   n.hidden = !n.hidden;
   el('tnear').setAttribute('aria-pressed', String(!n.hidden));
 };
+el('tread').onclick = toggleReading;
+el('tread').setAttribute('aria-pressed', String(readingOn()));
 el('tslower').onclick = () => act(surface.selected, 'slower');
 el('tfaster').onclick = () => act(surface.selected, 'faster');
 el('tdrop').onclick = () => act(surface.selected, 'drop');
@@ -895,6 +1635,9 @@ function showPane() {
 
 addEventListener('keydown', guard('a key', (ev) => {
   if (ev.target instanceof HTMLInputElement) return; // typing in the search box
+  // Cmd/Ctrl/Alt chords are the browser's: Cmd+R reloaded the page *and* toggled reading
+  // mode (which persists), Ctrl+P opened the pane, Cmd+S toggled the score.
+  if (ev.metaKey || ev.ctrlKey || ev.altKey) return;
 
   if ((ev.key === 'Backspace' || ev.key === 'Delete') && surface.selected) {
     surface.remove(surface.selected);
@@ -902,24 +1645,23 @@ addEventListener('keydown', guard('a key', (ev) => {
     return;
   }
   const k = ev.key.toLowerCase();
-  if (k === 'm') {
-    // Everything, at once. See `Instrument.mute`: a ramp on the master gain, so what was
-    // already scheduled is caught too.
-    const muted = instrument.toggleMute();
-    el('keys').classList.toggle('muted', muted);
-    el('keys').textContent = muted
-      ? `MUTED — M to unmute · S score${DIAGNOSTIC ? ' · P the piece' : ''}`
-      : LEGEND;
+  // Walking claims the movement keys, so S walks backwards rather than opening the score.
+  if (graph.walk && MOVES.has(k)) {
+    held.add(k);
+    ev.preventDefault();
+    return;
   }
-  if (k === 's') {
-    score.toggle();
-    if (el('pane').hidden === false) el('pane').hidden = true;
-  }
+  if (k === 't') setStill(sequencer.spinning);
+  if (k === 'o' && !graph.walk) setOrbits(!showOrbits);
+  if (k === 'f') setWalk(!graph.walk);
+  if (k === 'm') toggleMute();
+  if (k === 's') toggleScore();
+  if (k === 'r') toggleReading();
   if (k === 'p' && DIAGNOSTIC) {
     if (el('pane').hidden) showPane();
     else el('pane').hidden = true;
   }
-  if (ev.key === 'Escape') el('pane').hidden = true;
+  if (ev.key === 'Escape') { el('pane').hidden = true; closeCard(); hideDiagram(); }
 }));
 
 /// A handle on the live instrument, for the console.
@@ -928,7 +1670,7 @@ addEventListener('keydown', guard('a key', (ev) => {
 /// a quiet piece — once from a renamed property, once from a sequencer that was not
 /// ticking — and in both cases the fastest question to answer was "is anything running at
 /// all", which needs a reference to ask. Nothing reads this; it exists to be poked.
-window.__mono = { surface, sequencer, instrument, tuning, graph, stage, corpus };
+window.__mono = { surface, sequencer, instrument, tuning, graph, stage, corpus, resonance };
 
 el('hint').onclick = () => {
   instrument.start();

@@ -11,6 +11,7 @@
 
 import { program, uniforms } from './scene/gl.js';
 import { figureOf, textOf } from './figures.js';
+import { screenOf } from './pieces.js';
 
 const VS = `#version 300 es
 // x,y centre; z scale; w rotation
@@ -104,13 +105,16 @@ export class TextPass {
     const gloss = [];
 
     for (const piece of this.surface.pieces) {
+      // Where the shape itself is drawn, so a glyph stays on its shape when orbiting.
+      const at = screenOf(piece);
+      if (!at) continue;
       const figure = piece.figure;
       const glyph = this.atlas.glyphFor(figure, this.letters);
 
       if (glyph) {
         const rect = this.atlas.slot(glyph, { size: 0.62 });
         if (!rect) continue;
-        places.push(piece.x, piece.y, 0.1, piece.phase * Math.PI * 2);
+        places.push(at.x, at.y, 0.1 * at.scale, piece.phase * Math.PI * 2);
         uvs.push(rect.u0, rect.v0, rect.u1, rect.v1);
         gloss.push(0);
         continue;
@@ -120,7 +124,7 @@ export class TextPass {
       if (!figure) {
         const rect = this.atlas.slot(piece.node.label, { serif: true, size: 0.3 });
         if (!rect) continue;
-        places.push(piece.x, piece.y, 0.085, 0);
+        places.push(at.x, at.y, 0.085 * at.scale, 0);
         uvs.push(rect.u0, rect.v0, rect.u1, rect.v1);
         gloss.push(1);
       }

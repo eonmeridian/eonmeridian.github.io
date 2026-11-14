@@ -57,7 +57,10 @@ function member(piece, tuning) {
   const head =
     `  // ${piece.address} · ${piece.node.label} · ${n} mark${n === 1 ? '' : 's'}` +
     ` · rate ${round(piece.rate)}× · ${pitch ? pitch.provenance : 'unpitched'}` +
-    (pitch && pitch.provenance === 'cited' ? ` · ${pitch.source} ${pitch.locus ?? ''}` : '');
+    (pitch && pitch.provenance === 'cited' ? ` · ${pitch.source} ${pitch.locus ?? ''}` : '') +
+    // The root's warrant is not the rows'. Said on the same line, so slicing one member
+    // out of the patch cannot carry a citation onto intervals it does not cover.
+    (pitch && tuning.pitchesOf(piece.node, piece.steps).length > 1 ? ' · rows above it authored:row' : '');
 
   if (piece.drones) {
     // A proportion with no figure: a pitch and no rhythm, which is a drone. Agrippa gives
@@ -79,8 +82,12 @@ function member(piece, tuning) {
   }
 
   // Every slot is written out. A rest is `~`; there are none here, because every mark in
-  // a figure sounds — a broken line is two marks, not a silence.
-  const slots = Array.from({ length: n }, () => (pitch ? round(pitch.hz) : '~')).join(' ');
+  // a figure sounds — a broken line is two marks, not a silence. Each slot is the pitch
+  // the instrument sounds for that mark, row by row, from the same `voicing` it plays.
+  const slots = tuning
+    .voicing(piece.node, piece.steps)
+    .map((p) => (p ? round(p.hz) : '~'))
+    .join(' ');
 
   if (!pitch) {
     // Arrived, and nothing licenses a pitch. Unpitched: filtered noise, struck.
@@ -114,7 +121,7 @@ function omissions(pieces, tuning) {
   const contested = pieces.some((p) => tuning.pitch(p.node)?.confidence === 'contested');
   if (contested) {
     lines.push('  //   a contested correspondence sounds here as one tone. In the');
-    lines.push('  //   instrument it is two, eighteen cents apart, beating — you are');
+    lines.push('  //   instrument it is two, fourteen cents apart, beating — you are');
     lines.push('  //   meant to hear two sources disagreeing.');
   }
   lines.push('  //   the five kinds of silence are one silence here. A page that');
@@ -128,14 +135,17 @@ function omissions(pieces, tuning) {
 /// The whole arrangement as a patch.
 export function toStrudel(surface, tuning, version) {
   const pieces = surface.pieces;
-  const cited = pieces.filter((p) => tuning.pitch(p.node)?.provenance === 'cited').length;
+  // Counted as distinct pitches, rows included, the same way the programme note counts —
+  // counting shapes would let one cited root stand for the six authored rows above it.
+  const sounded = pieces.flatMap((p) => tuning.pitchesOf(p.node, p.steps));
+  const cited = sounded.filter((p) => p.provenance === 'cited').length;
 
   const head = [
     '// monochord — emitted artifact, do not edit by hand.',
     `// graph        : ${version.hash}  ${version.symbols} symbols, ${version.edges} edges`,
     `// tonic        : ${round(tuning.tonicHz)} Hz — mine, not the tradition's`,
     `// shapes       : ${pieces.length}`,
-    `// cited pitches: ${cited} of ${pieces.length}`,
+    `// cited pitches: ${cited} of ${sounded.length}`,
     '//',
     '// Frequencies, not scale degrees, so the tuning survives: a cited fifth is 702',
     '// cents above the tonic and not a piano\'s 700.',

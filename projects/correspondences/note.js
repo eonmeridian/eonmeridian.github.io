@@ -40,7 +40,7 @@ export function restsOn(surface, tuning) {
     const node = piece.node;
     const pitch = tuning.pitch(node);
 
-    if (piece.playable) {
+    if (piece.playable && piece.figure?.warrant !== 'authored' && piece.figure?.warrant !== 'second-source') {
       note(node.source_id, node.source_title, 'figures');
     } else {
       // No figure. The page was read and prints none — Scot's sixty-eight spirits, and
@@ -60,10 +60,16 @@ export function restsOn(surface, tuning) {
 /// The note as text, ready to sit beside a recording.
 export function programmeNote(surface, tuning, version) {
   const pieces = surface.pieces;
-  const pitched = pieces.map((p) => tuning.pitch(p.node));
-  const cited = pitched.filter((p) => p && p.provenance === 'cited').length;
-  const authored = pitched.filter((p) => p && p.provenance !== 'cited').length;
-  const unpitched = pitched.filter((p) => !p).length;
+  // Distinct pitches, not shapes: a hexagram sounds six, its root and five rows above it,
+  // and all six are counted. Counting shapes hid the rows, and the rows are the largest
+  // authored claim the instrument makes.
+  const sounded = pieces.flatMap((p) => tuning.pitchesOf(p.node, p.steps));
+  const cited = sounded.filter((p) => p.provenance === 'cited').length;
+  const degrees = sounded.filter((p) => p.provenance === 'authored:degree').length;
+  const rows = sounded.filter((p) => p.provenance === 'authored:row').length;
+  const hand = sounded.filter((p) => p.provenance === 'authored:hand').length;
+  const authored = sounded.length - cited;
+  const unpitched = pieces.filter((p) => !tuning.pitch(p.node)).length;
 
   const lines = [
     `monochord — ${pieces.length} shape${pieces.length === 1 ? '' : 's'}, ` +
@@ -85,7 +91,22 @@ export function programmeNote(surface, tuning, version) {
     lines.push(`    ${parts.join(' · ')}${locus}`);
   }
 
-  if (authored) lines.push('  my own scale — the rest');
+  if (hand) lines.push(`  my own hand — ${hand} pitch${hand === 1 ? '' : 'es'} set one symbol at a time`);
+  // Figures of mine, on symbols whose source prints none: a name traced on a square, a
+  // proportion laid out as marks. The source's silence is still listed above under its
+  // book; this line owns the figure that was drawn anyway.
+  const seals = pieces.filter((p) => p.figure?.warrant === 'second-source').length;
+  if (seals) {
+    lines.push(`  another book's seals — ${seals} from the Goetia (de Laurence 1916, after Mathers 1904), on spirits their own source prints none for`);
+  }
+  const sigils = pieces.filter((p) => p.figure?.warrant === 'authored').length;
+  if (sigils) {
+    lines.push(`  my own sigils — ${sigils} drawn where the source prints none, by a rule of mine`);
+  }
+  if (degrees) lines.push(`  my own scale — ${degrees} degree${degrees === 1 ? '' : 's'} read off an ordinal`);
+  if (rows) {
+    lines.push(`  my own figures — ${rows} row${rows === 1 ? '' : 's'} pitched above a root, which no source does`);
+  }
 
   lines.push('');
   // Stated plainly. A piece that is almost entirely authored is a piece about my scale,

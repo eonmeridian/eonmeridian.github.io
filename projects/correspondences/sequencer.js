@@ -43,6 +43,9 @@ export class Sequencer {
     this.instrument = instrument;
     this.tuning = tuning;
     this.running = false;
+    /// The spin, which is also the rhythm and the orbit. Off: every piece holds where it
+    /// is, articulated notes stop, drones keep sounding. On again: it resumes from there.
+    this.spinning = true;
     /// Set by the renderer so a sounded step can be lit on the shape that made it.
     this.onStep = null;
   }
@@ -76,6 +79,15 @@ export class Sequencer {
       if (!wanted.has(id)) this.instrument.droneOff(id);
     }
 
+    // Every sounding piece at its place, so the listener hears it from there.
+    if (this.instrument.spatial) {
+      for (const piece of this.surface.pieces) {
+        const at = piece.worldPos();
+        if (at) this.instrument.place(piece.id, at);
+      }
+    }
+
+    if (!this.spinning) return;
     for (const piece of this.surface.pieces) {
       const crossed = piece.advance(dt);
       if (!crossed.length || piece.muted) continue;
@@ -117,7 +129,7 @@ export class Sequencer {
     const pitch = this.tuning.row(root, step ? step.row : 0);
 
     if (!pitch) {
-      this.instrument.struck(at, 0.18, piece.gain);
+      this.instrument.struck(at, 0.18, piece.gain, piece.id);
       return;
     }
 
@@ -135,7 +147,7 @@ export class Sequencer {
     // `piece.gain` was documented as the composer's level and then not passed — `struck`
     // took it and `tone` did not, so the mix worked on unpitched shapes and silently did
     // nothing on every pitched one.
-    this.instrument.tone(pitch.hz, label, at, dur, piece.gain, piece.voice);
+    this.instrument.tone(pitch.hz, label, at, dur, piece.gain, piece.voice, piece.id);
   }
 
   start() {

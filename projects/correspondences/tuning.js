@@ -30,9 +30,9 @@
 //    now that Agrippa covers the two he gives; the Diatessaron is deliberately *not* put
 //    back this way, because the graph records a gap where the book is silent and filling
 //    it from memory is exactly what that gap exists to prevent.
-// 3. **`authored:degree`** — an `ordinal` read as a scale degree. Plainly mine: no
-//    tradition says the seventh trump is a minor third. It is what makes the other 417
-//    symbols playable at all.
+// 3. **`authored:degree`** — an `ordinal` read as a stop on the string: the (n-1)th fifth
+//    of the chain (`string.js`). The rule is mine; its two generators are Agrippa's. It is
+//    what makes the other 1083 symbols playable at all.
 //
 // Anything no layer covers stays **unpitched** — not a rest. The CLI insists on the
 // distinction and so does this: *"an arrival with no cited ratio is not a rest: the
@@ -57,33 +57,38 @@ export function driftFrom12tet(cents) {
   return cents - Math.round(cents / 100) * 100;
 }
 
-/// A seven-degree just scale, for the authored layer.
-///
-/// Ratios rather than equal steps, because the cited layer is ratios and switching to
-/// irrational intervals for my own material would be a different sound for no reason.
-/// Mine, and labelled so wherever it is heard.
-const DEGREES = [
-  [1, 1],
-  [9, 8],
-  [5, 4],
-  [4, 3],
-  [3, 2],
-  [5, 3],
-  [15, 8],
-];
+const NAMES = ['C', 'C♯', 'D', 'E♭', 'E', 'F', 'F♯', 'G', 'A♭', 'A', 'B♭', 'B'];
 
-const centsOf = (num, den) => 1200 * Math.log2(num / den);
+/// A pitch as the nearest key plus how far off it is: `D4`, `E4 −14¢`.
+///
+/// For reading a knob, never for choosing a pitch. The key is a landmark and the cents
+/// are the pitch, for the same reason the panel shows drift: rounding to the landmark is
+/// the error this file exists to avoid.
+export function noteName(cents) {
+  const key = Math.round(cents / 100);
+  const off = Math.round(cents - key * 100);
+  const name = `${NAMES[((key % 12) + 12) % 12]}${Math.floor(key / 12)}`;
+  return off ? `${name} ${off > 0 ? '+' : '−'}${Math.abs(off)}¢` : name;
+}
+
+// The authored layers take their pitches from one rule, the string: see `string.js`.
+// (Until 2026-11-14 this was a seven-degree just scale, 1:1 9:8 5:4 4:3 3:2 5:3 15:8.)
+import { OPEN_CENTS, DEFAULT_CHAIN, ordinalStop, rowStop, ratioText, lengthText, fold } from './string.js';
 
 export class Tuning {
   /**
    * @param {object} opts
-   * @param {number} opts.tonicCents  mine. Default D3.
-   * @param {number} opts.octaves     how far the degree layer spreads
+   * @param {number} opts.tonicCents  the open string. Mine. Default A2 (3300¢, 110 Hz).
+   * @param {number} opts.chain       fifths in the chain before it repeats (string.js)
    * @param {Array}  opts.proportions from `Corpus.proportions()`
    */
-  constructor({ tonicCents = 5000, octaves = 3, proportions = [] } = {}) {
+  constructor({ tonicCents = OPEN_CENTS, chain = DEFAULT_CHAIN, proportions = [] } = {}) {
     this.tonicCents = tonicCents;
-    this.octaves = octaves;
+    this.chain = chain;
+    /// Pitches set by hand, as cents above the tonic, keyed by address. Mine, and the
+    /// most openly so of any layer: not a rule applied to the graph but a choice made
+    /// about one symbol. Stored relative to the tonic so turning the tonic moves them too.
+    this.hand = new Map();
     // Keyed by the interval the proportion is *of*, so a symbol can ask directly.
     this.cited = new Map();
     for (const p of proportions) {
@@ -121,13 +126,17 @@ export class Tuning {
   /// not the interval I put between its lines.
   row(base, index) {
     if (!base || index === 0) return base;
-    const [num, den] = DEGREES[index % DEGREES.length];
-    const octave = Math.floor(index / DEGREES.length);
-    const cents = base.cents + centsOf(num, den) + octave * 1200;
+    // A row climbs the chain from wherever the root stands. A hand-set or cited root has no
+    // chain position of its own, so its rows count fifths from the open string's.
+    const root = base.stop ?? { k: 0, a: 0, b: 0, cents: fold(base.cents - this.tonicCents) };
+    const stop = rowStop(root, index);
+    const cents = this.tonicCents + stop.cents;
     return {
       cents,
       hz: centsToHz(cents),
-      ratio: `${num}:${den}${octave ? ` ×2^${octave}` : ''} above ${base.ratio}`,
+      ratio: ratioText(stop),
+      length: lengthText(stop),
+      stop,
       // The root may be cited; the step above it never is.
       provenance: 'authored:row',
       rootProvenance: base.provenance,
@@ -137,20 +146,65 @@ export class Tuning {
     };
   }
 
+  /// The pitch of each step of a figure, in order: what the instrument actually sounds.
+  ///
+  /// The one place a figure's marks are pitched. The sequencer, the Strudel patch and the
+  /// programme note all read from here, so the piece that leaves cannot quietly be a
+  /// different piece from the one you heard. Entries are `null` when the symbol is unpitched.
+  voicing(node, steps) {
+    const root = this.pitch(node);
+    return steps.map((step) => this.row(root, step.row));
+  }
+
+  /// Every distinct pitch a shape sounds: its root, then one per row above it.
+  ///
+  /// A broken line's two marks are one pitch, so this counts rows and not marks. A shape
+  /// with no steps (a drone) sounds its root alone. Empty when the symbol is unpitched.
+  pitchesOf(node, steps) {
+    const root = this.pitch(node);
+    if (!root) return [];
+    const rows = [...new Set(steps.map((s) => s.row))].filter((r) => r > 0).sort((a, b) => a - b);
+    return [root, ...rows.map((r) => this.row(root, r))];
+  }
+
   /// What licenses a pitch for this symbol, if anything.
   ///
   /// Returns `{ cents, hz, ratio, provenance, source, locus, drift }` or `null` for
   /// unpitched. `provenance` is never absent: a note whose warrant is unknown is the thing
   /// this file exists to prevent.
   pitch(node) {
-    // Layer 1. The graph's own proportion, over a cited edge, from a named page.
-    const cited = this.cited.get(node.address);
-    if (cited) {
-      const cents = this.tonicCents + cited.cents;
+    // Layer 0. A pitch set by hand. It outranks a citation because the composer asked for
+    // it -- and it says so, so a hand-set Diapente cannot pass for Agrippa's 3:2. Any cents
+    // value: a microtone is just a number here, the same as everywhere else in this file.
+    if (this.hand.has(node.address)) {
+      const above = this.hand.get(node.address);
+      const cents = this.tonicCents + above;
       return {
         cents,
         hz: centsToHz(cents),
+        ratio: `${above >= 0 ? '+' : ''}${Math.round(above)}¢`,
+        provenance: 'authored:hand',
+        source: null,
+        locus: null,
+        drift: driftFrom12tet(cents),
+      };
+    }
+
+    // Layer 1. The graph's own proportion, over a cited edge, from a named page.
+    const cited = this.cited.get(node.address);
+    if (cited) {
+      // Both cited ratios are members of the string's rule (2:1 and 3:2), folded the same way.
+      const cents = this.tonicCents + fold(cited.cents);
+      // Its place on the chain: the power of 3 in the ratio (3:2 is one fifth, 2:1 none).
+      let a = 0;
+      for (let n = cited.num * cited.den; n % 3 === 0; n /= 3) a++;
+      const stop = { k: a, a, b: Math.round(a * Math.log2(3) - fold(cited.cents) / 1200), cents: fold(cited.cents) };
+      return {
+        stop,
+        cents,
+        hz: centsToHz(cents),
         ratio: `${cited.num}:${cited.den}`,
+        length: `${cited.den}/${cited.num}`,
         provenance: 'cited',
         source: cited.source_id,
         title: cited.source_title,
@@ -164,17 +218,14 @@ export class Tuning {
     // note: a proportion the graph records as *absent* must not be quietly supplied here.)
     const ordinal = Number(node.attributes?.ordinal);
     if (Number.isFinite(ordinal) && ordinal >= 1) {
-      const i = Math.round(ordinal) - 1;
-      const [num, den] = DEGREES[i % DEGREES.length];
-      // Centred on the tonic rather than climbing away from it. Spreading upward only
-      // put a symbol with a high ordinal near 3.5 kHz, which is a whistle rather than a
-      // note; the register now runs an octave either side of where I set the tonic.
-      const octave = (Math.floor(i / DEGREES.length) % this.octaves) - 1;
-      const cents = this.tonicCents + centsOf(num, den) + octave * 1200;
+      const stop = ordinalStop(ordinal, this.chain);
+      const cents = this.tonicCents + stop.cents;
       return {
         cents,
         hz: centsToHz(cents),
-        ratio: `${num}:${den}${octave ? ` ×2^${octave}` : ''}`,
+        ratio: ratioText(stop),
+        length: lengthText(stop),
+        stop,
         provenance: 'authored:degree',
         source: null,
         locus: null,
@@ -192,10 +243,11 @@ export class Tuning {
   /// `authored:degree` is a piece about my scale, not about Agrippa — and now that two
   /// pitches are genuinely cited, the difference is visible rather than theoretical.
   account(nodes) {
-    const tally = { cited: 0, 'authored:degree': 0, unpitched: 0 };
+    const tally = { cited: 0, 'authored:degree': 0, 'authored:hand': 0, unpitched: 0 };
     for (const node of nodes) {
       const p = this.pitch(node);
-      tally[p ? p.provenance : 'unpitched'] += 1;
+      const k = p ? p.provenance : 'unpitched';
+      tally[k] = (tally[k] ?? 0) + 1;
     }
     return tally;
   }

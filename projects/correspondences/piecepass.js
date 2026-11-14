@@ -10,6 +10,7 @@
 
 import { program, uniforms } from './scene/gl.js';
 import { emptyFrame, segmentsOf } from './figures.js';
+import { screenOf } from './pieces.js';
 
 const VS = `#version 300 es
 // x0,y0,x1,y1 of one segment in figure-local space (-1..1)
@@ -124,6 +125,9 @@ export class PiecePass {
     const states = [];
 
     for (const piece of pieces) {
+      // Behind the eye while walking: not drawn, rather than drawn mirrored.
+      const at = screenOf(piece);
+      if (!at) continue;
       const selected = this.surface.selected === piece ? 1 : 0;
       const lit = this.lit.get(piece.id) ?? 0;
       const silent = piece.playable ? 0 : 1;
@@ -133,7 +137,9 @@ export class PiecePass {
 
       for (const seg of shape) {
         segs.push(seg[0], seg[1], seg[2], seg[3]);
-        places.push(piece.x, piece.y, 0.11, piece.phase * Math.PI * 2);
+        // At its orbit when orbits are shown (projected by the caller, and scaled by how
+        // near it is), otherwise where it was put on the surface.
+        places.push(at.x, at.y, 0.11 * at.scale, piece.phase * Math.PI * 2);
         states.push(selected, lit, silent);
       }
     }
